@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/installation.css') }}">
+{% endblock %}
+
+{% block title %}{% trans %}installation.title{% endtrans %}{% endblock %}
+
+{% block body %}
+    <div class="installation-container">
+        <form method="post" action="{{ url('installation_execute') }}">
+            <div class="card shadow centered position-absolute top-50 start-50 translate-middle">
+                <div class="card-header">
+                    <h1>{% trans %}installation.title{% endtrans %}</h1>
+                </div>
+                <div class="card-body">
+                    <h3>{% trans %}installation.databaseInformation{% endtrans %}</h3>
+                    <div class="mb-3">
+                        <label for="databaseName"
+                               class="form-label">{% trans %}installation.databaseName{% endtrans %}</label>
+                        <input type="text"
+                               required="required"
+                               class="form-control"
+                               id="databaseName"
+                               name="databaseName"
+                               value="{% if databaseName is defined %}{{ databaseName }}{% endif %}"
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="databaseUsername"
+                               class="form-label">{% trans %}installation.databaseUsername{% endtrans %}</label>
+                        <input type="text"
+                               required="required"
+                               class="form-control"
+                               id="databaseUsername"
+                               name="databaseUsername"
+                               value="{% if databaseUsername is defined %}{{ databaseUsername }}{% endif %}"
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="databasePassword"
+                               class="form-label">{% trans %}installation.databasePassword{% endtrans %}</label>
+                        <input type="password"
+                               required="required"
+                               class="form-control"
+                               id="databasePassword"
+                               name="databasePassword"
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="databaseHost"
+                               class="form-label">{% trans %}installation.databaseHost{% endtrans %}</label>
+                        <input type="text"
+                               required="required"
+                               class="form-control"
+                               id="databaseHost"
+                               name="databaseHost"
+                               value="{% if databaseHost is defined %}{{ databaseHost }}{% endif %}"
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="databasePort"
+                               class="form-label">{% trans %}installation.databasePort{% endtrans %}</label>
+                        <input type="number"
+                               required="required"
+                               class="form-control"
+                               id="databasePort"
+                               name="databasePort"
+                               value="{% if databasePort is defined %}{{ databasePort }}{% endif %}"
+                        />
+                    </div>
+
+                    <h3>{% trans %}installation.userInformation{% endtrans %}</h3>
+                    <div class="mb-3">
+                        <label for="userEmail"
+                               class="form-label">{% trans %}installation.userEmail{% endtrans %}</label>
+                        <input type="email"
+                               required="required"
+                               class="form-control"
+                               id="userEmail"
+                               name="userEmail"
+                               value="{% if userEmail is defined %}{{ userEmail }}{% endif %}"
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="userPassword"
+                               class="form-label">{% trans %}installation.userPassword{% endtrans %}</label>
+                        <input type="password"
+                               required="required"
+                               class="form-control"
+                               id="userPassword"
+                               name="userPassword"
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="userPasswordConfirm"
+                               class="form-label">{% trans %}installation.userPasswordConfirm{% endtrans %}</label>
+                        <input type="password"
+                               required="required"
+                               class="form-control"
+                               id="userPasswordConfirm"
+                               name="userPasswordConfirm"
+                        />
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <input type="submit" value="{% trans %}installation.installNow{% endtrans %}"
+                           class="btn btn-primary">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,6 @@
+.installation-container .card  { min-width:  90%; }
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .installation-container .card { min-width: 550px;}
+}
