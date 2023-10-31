@@ -1,0 +1,7 @@
+.log-container {
+    overflow: hidden;
+    overflow-y: scroll;
+    width: 700px;
+    min-width: 700px;
+    max-width: 700px;
+}

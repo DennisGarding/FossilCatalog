@@ -1,0 +1,44 @@
+installation:
+  errors:
+    databaseCreate: Cannot create Database
+    envFileNotCreated: Could not create .env file
+    tablesFileNotFound: The *.sql file for creating the tables was not found
+    tablesCreate: There was an issue during the tablet installation
+    defaultsFileNotFound: The *.sql file for creating the default data was not found
+    defaultsCreate: There was an issue during the installation of the default data
+    userCreate: There was an issue during the installation of the User
+    lockFileCreate: Could not create .install.lock file
+
+  title: Welcome to the Fossil-Catalog Installation
+
+  databaseInformation: Information about the database
+  userInformation: Your login information
+
+  databaseName: Database name
+  databaseUsername: User name
+  databasePassword: Password
+  databaseHost: Host
+  databasePort: Port
+  userEmail: Email
+  userPassword: Password
+  userPasswordConfirm: Confirm the password
+  installNow: Install now
+  toLogin: To login
+
+  installationInProgress: Installation in progress. <br><br>... Please wait.
+
+  tryToCreateDatabase: We're trying to set up the database
+  databaseCreated: The database was successfully created
+
+  tryToCreateTablesText: We're trying to set up the database tables
+  tablesCreated: The database tables was successfully created
+
+  tryToCreateDefaultData: We're trying to set up the default data
+  defaultsCreated: The default data was successfully created
+
+  tryToCreateUser: We're trying to set up User for login
+  userCreated: The User was successfully created
+  userExists: The User already exits
+
+  tryToCreateLockFile: We're trying to create .install.lock file
+  lockFileCreated: The .install.lock file was successfully created

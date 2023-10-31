@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="{{ asset('bootstrap/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('bootstrap/bootstrap-icons-1.10.5/font/bootstrap-icons.css') }}">
+        <script type="application/javascript" src="{{ asset('bootstrap/Bootstrap.js') }}"></script>
+
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/Base/TextLog.css') }}">
+        {% endblock %}
+
+
+        {% block javascripts %}
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+    </body>
+</html>
