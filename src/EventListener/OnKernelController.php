@@ -19,6 +19,8 @@ class OnKernelController
         'installation_create_default_data',
         'installation_create_user',
         'installation_create_installation_lock',
+        'app_install_collect_information',
+        'app_install_execute',
     ];
 
     public function __construct(
@@ -36,7 +38,7 @@ class OnKernelController
             return;
         }
 
-        $controller = $event->getController();
+      $controller = $event->getController();
         if (is_array($controller)) {
             $event->stopPropagation();
             $event->setController(function () {
