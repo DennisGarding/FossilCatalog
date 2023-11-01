@@ -81,6 +81,12 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "execute-tests": [
+            "php bin/phpunit"
+        ],
+        "phpstan": [
+            "./vendor/bin/phpstan analyse"
         ]
     },
     "conflict": {

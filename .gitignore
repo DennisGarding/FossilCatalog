@@ -12,3 +12,6 @@
 
 .phpunit.result.cache
 install.lock
+
+.idea
+.env

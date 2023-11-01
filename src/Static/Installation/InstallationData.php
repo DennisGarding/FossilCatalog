@@ -4,6 +4,7 @@ namespace App\Static\Installation;
 
 use App\Static\Validation\ValidationResult;
 use App\Static\Validation\Validator;
+use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
@@ -92,6 +93,9 @@ class InstallationData
         return $this->validationResult;
     }
 
+    /**
+     * @return array<string,array<int,Constraint>>
+     */
     public static function getValidation(): array
     {
         return [
