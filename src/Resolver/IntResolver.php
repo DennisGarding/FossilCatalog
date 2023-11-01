@@ -6,6 +6,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class IntResolver
 {
+    /**
+     * @param array<mixed>  $requestData
+     */
     public static function resolve(array $requestData, string $key): ?int
     {
         if (!array_key_exists($key, $requestData)) {

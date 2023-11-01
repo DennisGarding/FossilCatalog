@@ -21,7 +21,7 @@ class Validator
 
     /**
      * @param array<string, mixed>                 $data
-     * @param array<string, array<int, Constraint> $validationConstraints
+     * @param array<string, array<int, Constraint>> $validationConstraints
      */
     public static function validate(array $data, array $validationConstraints): ValidationResult
     {
@@ -34,9 +34,9 @@ class Validator
             if ($violation->count() > 0) {
                 ++$counter;
                 $violations[$key] = implode('<br />',
-                    array_map(static function ($violation) use (&$counter) {
+                    array_map(static function ($violation) {
                         return $violation->getMessage();
-                    }, $violation->getIterator()->getArrayCopy())
+                    }, $violation->getIterator()->getArrayCopy()) // @phpstan-ignore-line
                 );
             }
         }
