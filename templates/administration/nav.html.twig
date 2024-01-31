@@ -1,0 +1,125 @@
+{% block navbar %}
+    <div class="container navbarContainer clearfix">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+
+            <div class="container-fluid">
+                <a class="navbar-brand"
+                   href="{{ url('app_admin_overview') }}">{% trans %}admin.baseTitle{% endtrans %}</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="{{ url('app_admin_fossil_list') }}" class="nav-link" aria-current="page" href="#">
+                                <i class="bi bi-list"></i> {% trans %}admin.nav.catalog{% endtrans %}
+                            </a>
+                        </li>
+
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+                                    <i class="bi-gear"></i> {% trans %}admin.nav.settings{% endtrans %}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="{{ url('app_admin_fossil_form_field') }}">
+                                            <i class="bi bi-card-list"></i> {% trans %}admin.nav.fossilForm{% endtrans %}
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item" href="{{ url('app_admin_category') }}">
+                                            <i class="bi bi-diagram-3"></i> {% trans %}admin.nav.categories{% endtrans %}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ url('app_admin_tags') }}">
+                                            <i class="bi bi-tags"></i> {% trans %}admin.nav.tags{% endtrans %}</a>
+                                    </li>
+
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item" href="{{ url('app_admin_system') }}">
+                                            <i class="bi bi-layers"></i> {% trans %}admin.system.title{% endtrans %}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ url('app_admin_series') }}">
+                                            <i class="bi bi-layers-half"></i> {% trans %}admin.series.title{% endtrans %}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ url('app_admin_stage') }}">
+                                            <i class="bi bi-layers-fill"></i> {% trans %}admin.stage.title{% endtrans %}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+                                    <i class="bi-device-hdd"></i> {% trans %}admin.nav.backup{% endtrans %}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="{{ url('app_admin_overview') }}">
+                                            <i class="bi-box-arrow-up-right"></i> {% trans %}admin.nav.export{% endtrans %}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ url('app_admin_overview') }}">
+                                            <i class="bi-box-arrow-in-down-left"></i> {% trans %}admin.nav.import{% endtrans %}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <li class="log-out-button" style="position: absolute; right: 10px">
+                            <a class="nav-link" aria-current="page"
+                               href="{{ url('app_admin_overview') }}">{% trans %}admin.nav.logOut{% endtrans %}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="toast-container-lane">
+                <div class="toast-container p-3">
+                    {% include 'administration/FlashMessage/flash-message-switch.html.twig' %}
+
+                    <template id="toast-template-item">
+                        <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header">
+                                <strong class="me-auto toast-title"></strong>
+                                <button type="button" class="btn-close toast-close-button" data-bs-dismiss="toast"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body toast-content">
+
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

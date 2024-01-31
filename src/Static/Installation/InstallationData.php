@@ -5,6 +5,7 @@ namespace App\Static\Installation;
 use App\Static\Validation\ValidationResult;
 use App\Static\Validation\Validator;
 use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
@@ -28,6 +29,8 @@ class InstallationData
     private string $userPasswordConfirm;
 
     private string $appSecret;
+
+    private string $language;
 
     private ValidationResult $validationResult;
 
@@ -93,6 +96,11 @@ class InstallationData
         return $this->validationResult;
     }
 
+    public function getLanguage(): string
+    {
+        return $this->language;
+    }
+
     /**
      * @return array<string,array<int,Constraint>>
      */
@@ -108,6 +116,7 @@ class InstallationData
             'userPassword' => [new NotBlank(), new Type(Validator::TYPE_STRING)],
             'userPasswordConfirm' => [new NotBlank(), new Type(Validator::TYPE_STRING)],
             'appSecret' => [new NotBlank(), new Type(Validator::TYPE_STRING), new Length(['min' => 32])],
+            'language' => [new NotBlank(), new Choice(['choices' => ['en', 'de']])],
         ];
     }
 
@@ -126,6 +135,9 @@ class InstallationData
             'userPassword' => $this->userPassword,
             'userPasswordConfirm' => $this->userPasswordConfirm,
             'appSecret' => $this->appSecret,
+            'language' => $this->language,
         ];
     }
+
+
 }

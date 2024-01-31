@@ -1,0 +1,68 @@
+.searchResultContainer {
+    height: 600px;
+    min-height: 600px;
+    max-height: 600px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.page-loading-indicator {
+    visibility: hidden;
+}
+
+div.show-loading-indicator {
+    opacity:    0.5;
+    background: #000;
+    width:      100%;
+    height:     100%;
+    z-index:    10;
+    top:        0;
+    left:       0;
+    position:   fixed;
+    visibility: visible;
+}
+
+div.show-loading-indicator .spinner-border {
+    position: fixed;
+    z-index: 999;
+    overflow: visible;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+}
+
+.container .card .card-body .fossil-list-table .fossil-list-image-column .list-image {
+    display: block;
+    width: 90px;
+    height: 90px;
+}
+
+/** Multi Select **/
+.multi-select-wrapper .list-group {
+    position: absolute;
+    max-height: 350px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 0;
+    border-radius: 0;
+    z-index: 999;
+}
+
+.multi-select-wrapper .search-field .field-list {
+    border-bottom: 1px;
+}
+
+.multi-select-wrapper .search-field {
+    position: relative;
+}
+
+.multi-select-wrapper .search-field .multi-select-chevron-down {
+    position: absolute;
+    right: 10px;
+    top: 8px;
+}
+

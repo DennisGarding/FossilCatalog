@@ -1,0 +1,49 @@
+<table class="table table-striped table-hover fossil-list-table">
+    <thead>
+    <tr>
+        <th scope="col"></th>
+        {% for formField in formFields %}
+            {% if formField.showInOverview %}
+                <th scope="col">{{ formField.fieldLabel }}</th>
+            {% endif %}
+        {% endfor %}
+        <th class="fossil-list-action-column">Aktionen</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for fossil in fossilList %}
+        <tr class="fossil-row">
+            <td class="fossil-list-image-column">
+                <a href="{{ url('app_admin_fossil_details', {'fossilId': fossil.id}) }}">
+                    <img class="list-image"
+                         src="{% if fossil.images|length > 0 %}{{ asset(fossil.images|first.relativeThumbnailPath) }}{% else %}{{ asset('images/no-image.png') }}{% endif %}">
+                </a>
+            </td>
+            {% for formField in formFields %}
+                {% if formField.showInOverview %}
+                    <th scope="col">{{ fossil[formField.fieldName] }}</th>
+                {% endif %}
+            {% endfor %}
+            <td>
+                <a href="{{ url('app_admin_fossil_details', {'fossilId': fossil.id}) }}"
+                   class="float-left btn btn-primary">
+                    <i class="bi-search"></i>
+                </a>
+
+                <a href="{{ url('app_admin_edit_fossil', {'fossilId': fossil.id}) }}"
+                   class="float-left ms-1 btn btn-secondary">
+                    <i class="bi-pencil"></i>
+                </a>
+
+                <a href="{{ url('app_admin_fossil_delete', {'fossilId': fossil.id}) }}"
+                   class="float-left ms-1 btn btn-danger"
+                   data-delete-fossil="true"
+                   data-fossil-id="{{ fossil.id }}"
+                   data-fossil-number="{{ fossil.number }}">
+                    <i class="bi-trash3"></i>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

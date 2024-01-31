@@ -1,0 +1,21 @@
+{% for flashMessage in app.flashes('info') %}
+    {% include 'administration/FlashMessage/flash-message.html.twig' with {'flashMessageType': 'info', 'flashMessageValue': flashMessage } %}
+{% endfor %}
+
+{% for flashMessage in app.flashes('success') %}
+    {% include 'administration/FlashMessage/flash-message.html.twig' with {'flashMessageType': 'success', 'flashMessageValue': flashMessage } %}
+{% endfor %}
+
+{% for flashMessage in app.flashes('warning') %}
+    {% include 'administration/FlashMessage/flash-message.html.twig' with {'flashMessageType': 'warning', 'flashMessageValue': flashMessage } %}
+{% endfor %}
+
+{% for flashMessage in app.flashes('error') %}
+    {% include 'administration/FlashMessage/flash-message.html.twig' with {'flashMessageType': 'error', 'flashMessageValue': flashMessage } %}
+{% endfor %}
+
+{% for flashMessage in app.flashes('debug') %}
+    {% if(app.request.server.get('APP_ENV') == 'dev') %}
+        {% include 'administration/FlashMessage/flash-message.html.twig' with {'flashMessageType': 'debug', 'flashMessageValue': flashMessage } %}
+    {% endif %}
+{% endfor %}

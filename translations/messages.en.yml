@@ -1,44 +1,434 @@
 installation:
-  errors:
-    databaseCreate: Cannot create Database
-    envFileNotCreated: Could not create .env file
-    tablesFileNotFound: The *.sql file for creating the tables was not found
-    tablesCreate: There was an issue during the tablet installation
-    defaultsFileNotFound: The *.sql file for creating the default data was not found
-    defaultsCreate: There was an issue during the installation of the default data
-    userCreate: There was an issue during the installation of the User
-    lockFileCreate: Could not create .install.lock file
+    system:
+        quartaer: Quaternary
+        neogen: Neogene
+        paleogen: Paleogene
+        cretaceous: Cretaceous
+        jurassic: Jurassic
+        triassic: Triassic
+        permian: Permian
+        carboniferous: Carboniferous
+        devonian: Devonian
+        silurian: Silurian
+        ordovician: Ordovician
+        cambrian: Cambrian
+        precambrian: Precambrian
+    series:
+        holocene: Holocene
+        pleistocene: Pleistocene
+        pliocene: Pliocene
+        miocene: Miocene
+        oligocene: Oligocene
+        eocene: Eocene
+        paleocene: Paleocene
+        upperCretaceous: Upper Cretaceous
+        lowerCretaceous: Lower Cretaceous
+        upperJurassic: Upper Jurassic
+        middleJurassic: Middle Jurassic
+        lowerJurassic: Lower Jurassic
+        upperTriassic: Upper Triassic
+        middleTriassic: Middle Triassic
+        lowerTriassic: Lower Triassic
+        lopingian: Lopingian
+        guadalupian: Guadalupian
+        cisuralian: Cisuralian
+        pennsylvanian: Pennsylvanian
+        mississippian: Mississippian
+        upperDevonian: Upper Devonian
+        middleDevonian: Middle Devonian
+        lowerDevonian: Lower Devonian
+        pridoli: Pridoli
+        ludlow: Ludlow
+        wenlock: Wenlock
+        llandovery: Llandovery
+        upperOrdovician: Upper Ordovician
+        middleOrdovician: Middle Ordovician
+        lowerOrdovician: Lower Ordovician
+        furongian: Furongian
+        miaolingian: Miaolingian
+        2ndSeries: 2nd Series
+        terreneuvian: Terreneuvian
+    stage:
+        meghalayan: Meghalayan
+        northgrippian: Northgrippian
+        greenlandian: Greenlandian
+        tarantian: Tarantian
+        ionian: Ionian
+        calabrian: Calabrian
+        gelasian: Gelasian
+        piacenzian: Piacenzian
+        zanclean: Zanclean
+        messinian: Messinian
+        tortonian: Tortonian
+        serravallian: Serravallian
+        langhian: Langhian
+        burdigalian: Burdigalian
+        aquitanian: Aquitanian
+        chattian: Chattian
+        rupelian: Rupelian
+        priabonian: Priabonian
+        bartonian: Bartonian
+        lutetian: Lutetian
+        ypresian: Ypresian
+        thanetian: Thanetian
+        selandian: Selandian
+        danian: Danian
+        maestrichtian: Maestrichtian
+        campanian: Campanian
+        santonian: Santonian
+        coniacian: Coniacian
+        turonian: Turonian
+        cenomanian: Cenomanian
+        albian: Albian
+        aptian: Aptian
+        barremian: Barremian
+        hauterivian: Hauterivian
+        valanginian: Valanginian
+        berriasian: Berriasian
+        tithonian: Tithonian
+        kimmeridgian: Kimmeridgian
+        oxfordian: Oxfordian
+        callovian: Callovian
+        bathonian: Bathonian
+        bajocian: Bajocian
+        aalenian: Aalenian
+        toarcian: Toarcian
+        pliensbachian: Pliensbachian
+        sinemurian: Sinemurian
+        hettangian: Hettangian
+        rhaetian: Rhaetian
+        norian: Norian
+        carnian: Carnian
+        ladinian: Ladinian
+        anisian: Anisian
+        olenekian: Olenekian
+        induan: Induan
+        changhsingian: Changhsingian
+        wuchiapingian: Wuchiapingian
+        capitanian: Capitanian
+        wordian: Wordian
+        roadian: Roadian
+        kungurian: Kungurian
+        artinskian: Artinskian
+        sakmarian: Sakmarian
+        asselian: Asselian
+        gzhelian: Gzhelian
+        kasimovian: Kasimovian
+        moscovian: Moscovian
+        bashkirian: Bashkirian
+        serpukhovian: Serpukhovian
+        visean: Visean
+        tournaisian: Tournaisian
+        famennian: Famennian
+        frasnian: Frasnian
+        givetian: Givetian
+        eifelian: Eifelian
+        emsian: Emsian
+        pratigian: Pratigian
+        lochkovian: Lochkovian
+        pridoli: Pridoli
+        ludfordian: Ludfordian
+        gorstian: Gorstian
+        homerian: Homerian
+        sheinwoodian: Sheinwoodian
+        telychian: Telychian
+        aeronian: Aeronian
+        rhuddanian: Rhuddanian
+        hirnantian: Hirnantian
+        katian: Katian
+        sandbian: Sandbian
+        darriwilian: Darriwilian
+        dapingian: Dapingian
+        floian: Floian
+        tremadocian: Tremadocian
+        10thStage: 10th Stage
+        jiangshanian: Jiangshanian
+        paibian: Paibian
+        guzhangian: Guzhangian
+        drumian: Drumian
+        wuliuan: Wuliuan
+        4thStage: 4th Stage
+        3rdStage: 3rd Stage
+        2ndStage: 2nd Stage
+        fortunian: Fortunian
 
-  title: Welcome to the Fossil-Catalog Installation
+    errors:
+        databaseCreate: Cannot create Database
+        envFileNotCreated: Could not create .env file
+        tablesFileNotFound: The *.sql file for creating the tables was not found
+        tablesCreate: There was an issue during the tablet installation
+        defaultsFileNotFound: The *.sql file for creating the default data was not found
+        defaultsCreate: There was an issue during the installation of the default data
+        userCreate: There was an issue during the installation of the User
+        lockFileCreate: Could not create .install.lock file
+        translationFileCreate: Could not create translation files
 
-  databaseInformation: Information about the database
-  userInformation: Your login information
+    title: Welcome to the Fossil-Catalog Installation
 
-  databaseName: Database name
-  databaseUsername: User name
-  databasePassword: Password
-  databaseHost: Host
-  databasePort: Port
-  userEmail: Email
-  userPassword: Password
-  userPasswordConfirm: Confirm the password
-  installNow: Install now
-  toLogin: To login
+    databaseInformation: Information about the database
+    userInformation: Your login information
+    selectLanguage: Select language
+    language: Language
+    languages:
+        en: English
+        de: German
 
-  installationInProgress: Installation in progress. <br><br>... Please wait.
+    databaseName: Database name
+    databaseUsername: User name
+    databasePassword: Password
+    databaseHost: Host
+    databasePort: Port
+    userEmail: Email
+    userPassword: Password
+    userPasswordConfirm: Confirm the password
+    installNow: Install now
+    toLogin: To login
 
-  tryToCreateDatabase: We're trying to set up the database
-  databaseCreated: The database was successfully created
+    installationInProgress: Installation in progress. <br><br>... Please wait.
 
-  tryToCreateTablesText: We're trying to set up the database tables
-  tablesCreated: The database tables was successfully created
+    tryToCreateDatabase: We're trying to set up the database
+    databaseCreated: The database was successfully created
 
-  tryToCreateDefaultData: We're trying to set up the default data
-  defaultsCreated: The default data was successfully created
+    tryToCreateTablesText: We're trying to set up the database tables
+    tablesCreated: The database tables was successfully created
 
-  tryToCreateUser: We're trying to set up User for login
-  userCreated: The User was successfully created
-  userExists: The User already exits
+    tryToCreateDefaultData: We're trying to set up the default data
+    defaultsCreated: The default data was successfully created
 
-  tryToCreateLockFile: We're trying to create .install.lock file
-  lockFileCreated: The .install.lock file was successfully created
+    tryToCreateUser: We're trying to set up User for login
+    userCreated: The User was successfully created
+    userExists: The User already exits
+
+    tryToCreateLockFile: We're trying to create .install.lock file
+    lockFileCreated: The .install.lock file was successfully created
+
+    tryToCreateTranslationFile: We're trying to create the translation file
+    translationFileCreated: The translation files was successfully created
+
+base:
+    delete: Delete
+    edit: Edit
+    filter: Filter
+    list: List
+    name: Name
+    active: Active
+    action: Actions
+    pleaseSelect: Please select ...
+    searchTerm: Search term ...
+    button:
+        save: Save
+        cancel: Cancel
+        search: Search
+        filter: Filter
+        clearFilter: Clear Filter
+        create: Create new
+    booleanField:
+        trueValue: Yes
+        falseValue: No
+    detailRenderer:
+        formFieldIsNoteDefined: Variable "fossilFormFields" is not defined
+        groupNameIsNoteDefined: Variable "groupName" is not defined
+
+admin:
+    genericError: An error occurred.
+    genericSaved: Saved successfully.
+    genericDeleted: Deleted successfully.
+    genericPropertyRequired:
+    genericNoIdProvided: No ID provided.
+
+    fossil:
+        title: Fossils
+        detailsTitle: Fossil Details
+        createPdf: Create PDF
+        createTitle: Create your new Fossil
+        deleteFossilTitle: Delete Fossil
+        deleteFossilMessage: Do you really want to delete the Fossil? To confirm, please type the Fossil number <b>(%s)</b> in the input field below.
+        deletedMessage: Fossil with number %s successfully deleted
+
+        groups:
+            general: General
+            discoveryInformation: Discovery Information
+            stratigraphy: Stratigraphy
+            taxonomy: Taxonomy
+            images: Images
+            other: Other
+
+        form:
+            category: Category
+            tags: Tags
+            images: Images
+
+        error:
+            couldNotInstanceFossil: Could not instance Fossil. If you try to update a Fossil, please check if the ID is correct.
+            couldNotSaveFossil: Could not save Fossil.
+            couldNotUploadImages: Could not upload provided Images.
+            couldNotFindFossilWithEmptyId: Could not find Fossil with empty ID. Please provide a valid ID.
+            couldNotFindFossilWithId: Could not find Fossil with ID %s
+            numberDoesNotMatch: The provided Fossil number does not match the Fossil number of the Fossil you want to delete.
+
+    formFields:
+        showOnlyCustomFields: Show only custom fields
+        create: Create new
+        successfullyDeleted: Form Field successfully deleted
+        messages:
+            deleteQuestion: Do you really want to delete the Form Field?
+        filter:
+            all: All
+            customFields: Custom Fields
+            defaultFields: Default Fields
+        error:
+            couldNotCreateFormField: Could not create Form Field
+            couldNotFindFormField: Could not find Form Field with Id %s
+            couldNotDeleteFormFieldDefault: Could not delete Form Field because its a default
+            couldNotDeleteFormFieldError: Could not delete Form Field. Message... %s
+            emptyId: Please provide a Field ID
+            emptyName: Please provide a Field Name
+            emptyLabel: Please provide a Field Label
+            emptyType: Please provide a Field Type
+            emptyGroup: Please provide a Field Group
+            emptyShowInOverview: Please provide a value for Show in Overview
+            emptyActive: Please provide a value for Active
+            emptyAllowEmpty: Please provide a value for Allow Empty
+        form:
+            fieldNameHelpTest: Allowed characters are lower case letters from "a-z"
+        types:
+            text: Text
+            textarea: Textarea
+            number: Number
+            date: Date
+            boolean: Boolean
+        groups:
+            general: General
+            discovery: Discovery
+            stratigraphy: Stratigraphy
+            taxonomy: Taxonomy
+            image: Image
+            other: Other
+        table:
+            order: Order
+            fieldName: Field Name
+            fieldLabel: Field Label
+            type: Type
+            group: Group
+            allowEmpty: Allow Blank
+            active: Active
+            inOverview: Show in List
+            action: Action
+        title: Fossil form Fields
+        number: Number
+        showInGallery: Show Fossil in Gallery
+        dateOfDiscovery: Date of Discovery
+        foundInCountry: Found in Country
+        findingPlace: Finding Place
+        coordinates: Coordinates
+        findingNotes: Finding Notes
+        system: System
+        series: Series
+        stage: Stage
+        formation: Formation
+        member: Member
+        stratigraphicNotes: Stratigraphic Notes
+        empire: Empire
+        tribe: Tribe
+        class: Class
+        order: Order
+        family: Family
+        genius: Genius
+        species: Species
+        subspecies: Subspecies
+        size: Size
+        taxonomyNotes: Taxonomy Notes
+
+    nav:
+        catalog: Catalog
+        settings: Settings
+        fossilForm: Fossil-Form
+        tags: Tags
+        categories: Categories
+        backup: Backup
+        export: Export
+        import: Import
+        logOut: Log out
+    baseTitle: Fossil-Catalog
+    overviewTitle: Overview
+
+    category:
+        form:
+            categoryName: Category Name
+            create: Create new Category
+        messages:
+            created: Category created
+            deleteQuestion: Do you really want to delete the Category?
+            errors:
+                noCategoryName: Please provide a Category name
+                cannotCreateCategory: Could not create Category with name %s -> %s
+                emptyId: Please provide a Category ID
+                cannotFindCategory: Cannot find Category with Id %s
+        title: Categories
+        createCategoryTitle: Create Category
+        categoryListTitle: Category List
+        categoryColumnName: Name
+        categoryColumnAction: Action
+
+    tags:
+        form:
+            tagName: Tag Name
+            create: Create new Tag
+        messages:
+            deleteQuestion: Do you really want to delete the Tag?
+            created: Tag created
+            errors:
+                emptyId: Please provide a Tag ID
+                cannotFindTag: Cannot find Tag with Id %s
+                noTagName: Please provide a Tag name
+                cannotCreateTag: Could not create Tag with name %s -> %s
+        title: Tags
+        createTagTitle: Create Tag
+        tagListTitle: Tag List
+        tagColumnName: Name
+        tagColumnAction: Action
+
+    system:
+        title: System
+        form:
+            title: System
+            systemName: System Name
+            active: Active
+            create: Create new System
+        messages:
+            noIdProvided: No System ID provided
+            cannotFindSystem: Cannot find System with Id %s
+            systemSaved: System successfully saved
+            systemDeleted: System %s successfully deleted
+            deleteQuestion: Do you really want to delete the System?
+    series:
+        title: Series
+        form:
+            seriesName: Series Name
+            create: Create new Series
+        messages:
+            deleteQuestion: Do you really want to delete the Series?
+            noIdProvided: No Series ID provided
+            cannotFindSeries: Cannot find Series with Id %s
+            seriesSaved: Series successfully saved
+            noSeriesName: Please provide a Series name
+            noSystem: Please select a System
+            seriesDeleted: Series %s successfully deleted
+
+    stage:
+        title: Stage
+        form:
+            stageName: Stage Name
+            create: Create new Stage
+        messages:
+            deleteQuestion: Do you really want to delete the Stage?
+            noIdProvided: No Stage ID provided
+            cannotFindStage: Cannot find Stage with Id %s
+            stageSaved: Stage successfully saved
+            noStageName: Please provide a Stage name
+            noSeries: Please select a Series
+            stageDeleted: Stage %s successfully deleted
+
+    validator:
+        messages:
+            empty: Please provide a value for field %s

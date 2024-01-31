@@ -3,18 +3,28 @@
 namespace App\Controller\Installation;
 
 use App\Installation\CreateUserService;
+use App\Installation\EarthAges\Series;
+use App\Installation\EarthAges\Stage;
+use App\Installation\EarthAges\System;
 use App\Static\Installation\DotEnvFile;
 use App\Static\Installation\Installation;
 use App\Static\Installation\InstallationData;
 use App\Static\Installation\LockFile;
 use App\Static\Installation\PDOConnection;
 use App\Static\Validation\ValidationResult;
+use App\Translations\TranslationService;
 use Doctrine\DBAL\Connection;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\BufferedOutput;
+use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -87,20 +97,20 @@ class InstallationController extends AbstractController
     }
 
     #[Route('/installation/create/tables', name: 'installation_create_tables', methods: 'post')]
-    public function createDatabaseTables(Connection $connection): JsonResponse
+    public function createDatabaseTables(KernelInterface $kernel, EntityManagerInterface $entityManager): JsonResponse
     {
-        $file = __DIR__ . '/SQL/Tables.sql';
-        $sql = file_get_contents($file);
-        if (!is_string($sql)) {
-            return new JsonResponse([
-                'message' => $this->translator->trans('installation.errors.tablesFileNotFound'),
-                'exceptionMessage' => "Cannot read $file",
-                'trace' => debug_backtrace(),
-            ], Response::HTTP_BAD_REQUEST);
-        }
+        try{
+            $application = new Application($kernel);
+            $application->setAutoExit(false);
 
-        try {
-            $connection->executeQuery($sql);
+            $input = new ArrayInput([
+                'command' => 'doctrine:migrations:migrate',
+                '--no-interaction' => true,
+            ]);
+
+            $output = new NullOutput();
+            $application->run($input, $output);
+
         } catch (\Exception $exception) {
             return new JsonResponse([
                 'message' => $this->translator->trans('installation.errors.tablesCreate'),
@@ -113,8 +123,38 @@ class InstallationController extends AbstractController
     }
 
     #[Route('/installation/create/default_data', name: 'installation_create_default_data', methods: 'post')]
-    public function createDefaultData(Connection $connection): JsonResponse
+    public function createDefaultData(Connection $connection, System $system, Series $series, Stage $stage): JsonResponse
     {
+        try {
+            $connection->executeQuery($system->getSql());
+        } catch (\Exception $exception) {
+            return new JsonResponse([
+                'message' => $this->translator->trans('installation.errors.defaultsCreate'),
+                'exceptionMessage' => $exception->getMessage(),
+                'trace' => $exception->getTraceAsString(),
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
+        try {
+            $connection->executeQuery($series->getSql());
+        } catch (\Exception $exception) {
+            return new JsonResponse([
+                'message' => $this->translator->trans('installation.errors.defaultsCreate'),
+                'exceptionMessage' => $exception->getMessage(),
+                'trace' => $exception->getTraceAsString(),
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
+        try {
+            $connection->executeQuery($stage->getSql());
+        } catch (\Exception $exception) {
+            return new JsonResponse([
+                'message' => $this->translator->trans('installation.errors.defaultsCreate'),
+                'exceptionMessage' => $exception->getMessage(),
+                'trace' => $exception->getTraceAsString(),
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
         $file = __DIR__ . '/SQL/Default.sql';
         $sql = file_get_contents($file);
         if (!is_string($sql)) {
@@ -159,6 +199,22 @@ class InstallationController extends AbstractController
         }
 
         return new JsonResponse(['message' => $this->translator->trans('installation.userCreated')]);
+    }
+
+    #[Route('/installation/create/translations', name: 'installation_create_translation_files', methods: 'post')]
+    public function createTranslationFiles(TranslationService $translationService): JsonResponse
+    {
+        try {
+            $translationService->moveToPublic();
+        } catch (\Exception $exception) {
+            return new JsonResponse([
+                'message' => $this->translator->trans('installation.errors.translationFileCreate'),
+                'exceptionMessage' => $exception->getMessage(),
+                'trace' => $exception->getTraceAsString(),
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
+        return new JsonResponse(['message' => $this->translator->trans('installation.translationFileCreated')]);
     }
 
     #[Route('/installation/create/installation_lock', name: 'installation_create_installation_lock', methods: 'post')]

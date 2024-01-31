@@ -74,6 +74,17 @@
                         />
                     </div>
 
+                    <h3>{% trans %}installation.selectLanguage{% endtrans %}</h3>
+                    <div class="mb-3">
+                        <label for="language"
+                               class="form-label">{% trans %}installation.language{% endtrans %}</label>
+                        <select name="language"
+                                class="form-control">
+                            <option value="en">{% trans %}installation.languages.en{% endtrans %}</option>
+                            <option value="de">{% trans %}installation.languages.de{% endtrans %}</option>
+                        </select>
+                    </div>
+
                     <h3>{% trans %}installation.userInformation{% endtrans %}</h3>
                     <div class="mb-3">
                         <label for="userEmail"

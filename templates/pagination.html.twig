@@ -1,0 +1,21 @@
+{% if pages > 0 %}
+    <nav class="fossil-list-pagination">
+        <ul class="pagination justify-content-center">
+            <li class="page-item{% if page <= 1 %} disabled{% endif %}">
+                <a class="page-link" href="#" data-page="{{ page-1 }}">&lt;</a>
+            </li>
+
+            {% for i in startPage..endPage %}
+
+                <li class="page-item{% if page == i %} active"{% endif %} aria-current="page">
+                    <a class="page-link" href="#" data-page="{{ i }}">{{ i }}</a>
+                </li>
+
+            {% endfor %}
+
+            <li class="page-item{% if page >= pages %} disabled{% endif %}">
+                <a class="page-link" href="" data-page="{{ page+1 }}">&gt;</a>
+            </li>
+        </ul>
+    </nav>
+{% endif %}

@@ -1,0 +1,47 @@
+<form name="filters" method="post" action="{{ url('app_admin_fossil_form_field') }}">
+    <div class="mb-3">
+        <div class="row">
+            <div class="col">
+                <label for="fieldTypeFilter"
+                       class="form-label">{% trans %}admin.formFields.table.type{% endtrans %}</label>
+                <select id="fieldTypeFilter" name="fieldTypeFilter" class="form-select">
+                    {% for value, label in formFieldTypes %}
+                        <option value="{{ value }}"{% if filterSelection.fieldType == value %} selected="selected"{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col">
+                <label for="fieldGroupFilter"
+                       class="form-label">{% trans %}admin.formFields.table.group{% endtrans %}</label>
+                <select id="fieldGroupFilter" name="fieldGroupFilter" class="form-select">
+                    {% for value, label in formFieldGroups %}
+                        <option value="{{ value }}"{% if filterSelection.fieldGroup == value %} selected="selected"{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col">
+                <label for="customFieldsFilter"
+                       class="form-label">{% trans %}admin.formFields.filter.customFields{% endtrans %}</label>
+                <select id="customFieldsFilter" name="customFieldsFilter"
+                        class="form-select">
+                    {% for value, label in customFields %}
+                        <option value="{{ value }}"{% if filterSelection.isRequiredDefault == value %} selected="selected"{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3 clearfix">
+        <div class="btn-group float-end" role="group">
+            <a href="{{ url('app_admin_fossil_form_field_filter_clear') }}"
+               data-bs-toggle="tooltip"
+               data-bs-placement="bottom"
+               data-bs-title="{% trans %}base.button.clearFilter{% endtrans %}"
+               class="btn btn-secondary"><i class="bi-x"></i></a>
+
+            <button type="submit"
+                    class="btn btn-primary">{% trans %}base.button.filter{% endtrans %}
+                <i class="bi-filter"></i></button>
+        </div>
+    </div>
+</form>

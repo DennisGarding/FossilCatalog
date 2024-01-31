@@ -4,13 +4,15 @@ namespace App\Static\Installation;
 
 class DotEnvFile
 {
-    const DOT_ENV = __DIR__ . '/../../../.env';
+    private const DOT_ENV = __DIR__ . '/../../../.env';
 
-    const DOT_ENV_DIST = __DIR__ . '/../../../.env.dist';
+    private const DOT_ENV_DIST = __DIR__ . '/../../../.env.dist';
 
-    const DATABASE_REPLACE = '___DATABASE_STRING___';
+    private const DATABASE_REPLACE = '___DATABASE_STRING___';
 
-    const APP_SECRET_REPLACE = '___APP_SECRET___';
+    private const APP_SECRET_REPLACE = '___APP_SECRET___';
+
+    private const LANGUAGE_REPLACE = '___LANGUAGE___';
 
 
     public static function createDonEnvFile(InstallationData $installationData): bool
@@ -32,6 +34,7 @@ class DotEnvFile
 
         $dotEnvContent = \str_replace(self::DATABASE_REPLACE, $databaseConnectionString, $dotEnvContent);
         $dotEnvContent = \str_replace(self::APP_SECRET_REPLACE, $installationData->getAppSecret(), $dotEnvContent);
+        $dotEnvContent = \str_replace(self::LANGUAGE_REPLACE, $installationData->getLanguage(), $dotEnvContent);
 
         \file_put_contents(self::DOT_ENV, $dotEnvContent);
 

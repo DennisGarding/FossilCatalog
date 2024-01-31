@@ -1,0 +1,19 @@
+<div class="mb-3">
+    <label for="{{ formField.fieldName }}" class="form-label">{{ formField.fieldLabel }}</label>
+    <select name="{{ formField.fieldName }}" class="form-select form-control" data-selected="{{ formField.fieldValue }}">
+        <option data-parent-id="0" value="0" disabled>{% trans %}base.pleaseSelect{% endtrans %}</option>
+        {% for value in choiceList %}
+            <option
+                    value="{{ value.name }}"
+                    {% if value.name == formField.fieldValue %} selected="selected"{% endif %}
+                    data-id="{{ value.id }}"
+                    {% if parentIdKey is defined %}data-parent-id="{{ value[parentIdKey] }}"{% endif %}
+            >{{ value.name }}</option>
+        {% endfor %}
+    </select>
+    {% if helpText|default(null) %}
+        <div class="form-text">
+            {{ helptext }}
+        </div>
+    {% endif %}
+</div>

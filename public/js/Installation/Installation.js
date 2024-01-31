@@ -12,38 +12,45 @@ class Installation {
     snippets = {};
 
     currentStep = 1;
-    lastStep = 5;
+    lastStep = 6;
 
     chain = {
         1: {
             ready: false,
-            progress: 20,
+            progress: 15,
             inProgress: false,
             snippet: 'tryToCreateDatabaseText',
             url: 'createDatabaseUrl'
         },
         2: {
             ready: false,
-            progress: 40,
+            progress: 30,
             inProgress: false,
             snippet: 'tryToCreateTablesText',
             url: 'createTablesUrl'
         },
         3: {
             ready: false,
-            progress: 60,
+            progress: 45,
             inProgress: false,
             snippet: 'tryToCreateDefaultData',
             url: 'createDefaultDataUrl'
         },
         4: {
             ready: false,
-            progress: 80,
+            progress: 60,
             inProgress: false,
             snippet: 'tryToCreateUser',
             url: 'createUserUrl'
         },
         5: {
+            ready: false,
+            progress: 75,
+            inProgress: false,
+            snippet: 'tryToCreateTranslationFiles',
+            url: 'createTranslationFileUrl'
+        },
+        6: {
             ready: false,
             progress: 100,
             inProgress: false,
@@ -63,7 +70,7 @@ class Installation {
     }
 
     _startProgress() {
-        this.interval = setInterval(this._executeInstallation.bind(this), 1500);
+        this._executeInstallation();
     }
 
     _finishProgress() {
@@ -76,21 +83,6 @@ class Installation {
     }
 
     _executeInstallation() {
-        if (this.chain[this.currentStep].inProgress) {
-            this.installationLog.addLog('...', TextLog.TYPE.OTHER);
-            return;
-        }
-
-        if (this.chain[this.currentStep].ready) {
-            if (this.currentStep === this.lastStep) {
-                this._finishProgress()
-
-                return;
-            }
-
-            this.currentStep++;
-        }
-
         this.installationLog.addLog(this.snippets[this.chain[this.currentStep].snippet], TextLog.TYPE.INFO);
         this.chain[this.currentStep].inProgress = true;
 
@@ -105,6 +97,7 @@ class Installation {
         this.urls['createTablesUrl'] = dataContainer.dataset.createtablesurl;
         this.urls['createDefaultDataUrl'] = dataContainer.dataset.createdefaultdataurl;
         this.urls['createUserUrl'] = dataContainer.dataset.createuserurl;
+        this.urls['createTranslationFileUrl'] = dataContainer.dataset.createtranslationfileurl;
         this.urls['createLockFileUrl'] = dataContainer.dataset.createlockfileurl;
     }
 
@@ -113,6 +106,7 @@ class Installation {
         this.snippets['tryToCreateTablesText'] = dataContainer.dataset.trytocreatetablestext;
         this.snippets['tryToCreateDefaultData'] = dataContainer.dataset.trytocreatedefaultdata;
         this.snippets['tryToCreateUser'] = dataContainer.dataset.trytocreateuser;
+        this.snippets['tryToCreateTranslationFiles'] = dataContainer.dataset.trytocreatetranslationfiles;
         this.snippets['tryToCreateLockFile'] = dataContainer.dataset.trytocreatelockfile;
     }
 
@@ -123,6 +117,16 @@ class Installation {
 
         this.chain[this.currentStep].inProgress = false;
         this.chain[this.currentStep].ready = true;
+
+        if (this.currentStep === this.lastStep) {
+            this._finishProgress()
+
+            return;
+        }
+
+        this.currentStep++;
+
+        this._executeInstallation();
     }
 
     _onError(response) {

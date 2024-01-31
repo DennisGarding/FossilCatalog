@@ -21,6 +21,7 @@ class OnKernelController
         'installation_create_installation_lock',
         'app_install_collect_information',
         'app_install_execute',
+        'installation_create_translation_files',
     ];
 
     public function __construct(

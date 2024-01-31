@@ -1,15 +1,61 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans %}admin.baseTitle{% endtrans %}|{% block title %}{% endblock %}</title>
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
-{% endblock %}
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{ asset('bootstrap/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('bootstrap/bootstrap-icons-1.10.5/font/bootstrap-icons.css') }}">
+    <script type="application/javascript" src="{{ asset('bootstrap/Bootstrap.js') }}"></script>
 
-{% block javascripts %}
-{% endblock %}
+    {% include 'administration/css.html.twig' %}
+    {% block stylesheets %}{% endblock %}
 
-{% block body %}
-    <div class="container-fluid">
+    {% include 'administration/js.html.twig' %}
+    {% block javascripts %}{% endblock %}
+</head>
+<body>
+    {% block navbar %}
+        {% include 'administration/nav.html.twig' %}
+    {% endblock %}
+
+    <div class="container">
         {% block content %}
+
         {% endblock %}
     </div>
-{% endblock %}
+
+    <div id="modal-template-container" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button id="closeButton" type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-inner-content"></div>
+                    <input type="text" name="confirmInput" class="form-control visually-hidden"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="yesButton btn btn-primary visually-hidden">Ja</button>
+                    <button type="button" class="noButton btn btn-secondary visually-hidden" data-dismiss="modal">Nein</button>
+                    <button type="button" class="okButton btn btn-primary visually-hidden" data-dismiss="modal">OK</button>
+                    <button type="button" class="cancelButton btn btn-secondary visually-hidden" data-dismiss="modal">Abbrechen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-loading-indicator">
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
