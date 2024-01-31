@@ -19,6 +19,10 @@ class Validator
         'type' => 'numeric',
     ];
 
+    public const TYPE_BOOLEAN = [
+        'type' => 'boolean',
+    ];
+
     /**
      * @param array<string, mixed>                 $data
      * @param array<string, array<int, Constraint>> $validationConstraints
@@ -30,7 +34,7 @@ class Validator
         $violations = [];
         $counter = 0;
         foreach ($validationConstraints as $key => $constraint) {
-            $violation = $validator->validate($data[$key], $constraint);
+            $violation = $validator->validate($data[$key] ?? null, $constraint);
             if ($violation->count() > 0) {
                 ++$counter;
                 $violations[$key] = implode('<br />',

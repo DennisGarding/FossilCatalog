@@ -1,0 +1,76 @@
+{% extends 'administration/base.html.twig' %}
+
+{% block title %}{% trans %}admin..title{% endtrans %}{% endblock %}
+
+{% block content %}
+    <div class="card mt-3">
+        <div class="card-header">
+            {% trans %}admin.formFields.title{% endtrans %}
+        </div>
+        <div class="card-body">
+            <form name="fossil_form_field" method="post" action="{{ url('app_admin_fossil_form_field_save') }}">
+                {% if fossilFormField.id %}
+                    <input type="hidden" id="id" name="id" value="{{ fossilFormField.id }}"/>
+                {% endif %}
+
+                <input type="hidden" id="errorRoute" name="errorRoute" value="{{ errorRoute }}"/>
+
+                <div class="mb-3">
+                    <label for="fieldName"
+                           class="form-label">{% trans %}admin.formFields.table.fieldName{% endtrans %}</label>
+                    <input type="text" class="form-control" id="fieldName" name="fieldName" autocomplete="off"
+                           value="{{ fossilFormField.fieldName }}"
+                            {% if fossilFormField.isRequiredDefault %} disabled="disabled"{% endif %}
+                    />
+
+                    <div class="form-text">
+                        {% trans %}admin.formFields.form.fieldNameHelpTest{% endtrans %}
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="fieldLabel"
+                           class="form-label">{% trans %}admin.formFields.table.fieldLabel{% endtrans %}</label>
+                    <input type="text" class="form-control" id="fieldLabel" name="fieldLabel" autocomplete="off"
+                           value="{{ fossilFormField.fieldLabel }}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label for="fieldType"
+                           class="form-label">{% trans %}admin.formFields.table.type{% endtrans %}</label>
+                    <select id="fieldType" name="fieldType" class="form-select"{% if fossilFormField.isRequiredDefault %} disabled="disabled"{% endif %}>
+                        {% for value, label in formFieldTypes %}
+                            <option value="{{ value }}"{% if fossilFormField.fieldType == value %} selected="selected"{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="fieldGroup" class="form-label">{% trans %}admin.formFields.table.group{% endtrans %}</label>
+                    <select id="fieldGroup" name="fieldGroup" class="form-select"{% if fossilFormField.isRequiredDefault %} disabled="disabled"{% endif %}>
+                        {% for value, label in formFieldGroups %}
+                            <option value="{{ value }}"{% if fossilFormField.fieldGroup == value %} selected="selected"{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="fieldOrder" class="form-label">{% trans %}admin.formFields.table.order{% endtrans %}</label>
+                    <input type="number" class="form-control" id="fieldOrder" name="fieldOrder" autocomplete="off" value="{{ fossilFormField.fieldOrder }}">
+                </div>
+
+                {% set showInOverviewLabel = 'admin.formFields.table.inOverview' %}
+                {% include 'administration/base/booleanField.html.twig' with {'fieldLabel': showInOverviewLabel|trans, 'fieldName': 'showInOverview', 'fieldValue': fossilFormField.showInOverview } %}
+
+                {% set activeLabel = 'admin.formFields.table.active' %}
+                {% include 'administration/base/booleanField.html.twig' with {'fieldLabel': activeLabel|trans, 'fieldName': 'active', 'fieldValue': fossilFormField.active, 'disabled': disableActiveField } %}
+
+                {% set allowBlankLabel = 'admin.formFields.table.allowEmpty' %}
+                {% include 'administration/base/booleanField.html.twig' with {'fieldLabel': allowBlankLabel|trans, 'fieldName': 'allowBlank', 'fieldValue': fossilFormField.allowBlank, 'disabled': fossilFormField.isRequiredDefault } %}
+
+                <input type="submit" class="btn btn-primary float-end" value="{% trans %}base.button.save{% endtrans %}" data-submit-fossil-form-field>
+                <a class="btn btn-secondary float-end me-2" href="{{ url('app_admin_fossil_form_field') }}">{% trans %}base.button.cancel{% endtrans %}</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,146 @@
+{% extends 'administration/base.html.twig' %}
+
+{% block title %}{% trans %}admin.fossil.createTitle{% endtrans %}{% endblock %}
+
+{% block content %}
+    <form method="post" action="{{ url('app_admin_fossil_save') }}" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col">
+                <div class="card mt-3">
+                    <div class="card-header">
+                        {% trans %}admin.fossil.groups.general{% endtrans %}
+                    </div>
+                    <div class="card-body">
+                        {% if fossil.id %}
+                            <input type="hidden" name="id" value="{{ fossil.id }}">
+                        {% endif %}
+
+                        <input type="hidden" id="errorRoute" name="errorRoute" value="{{ errorRoute }}"/>
+
+                        {% for formField in fossilFormFields %}
+                            {% if formField.fieldGroup == 'GENERAL' %}
+                                {% include 'administration/fossil/field-switch.html.twig' with { 'formField': formField } %}
+                            {% endif %}
+                        {% endfor %}
+
+                        <div class="row">
+                            <div class="col">
+                                {% include 'administration/base/multi-select.html.twig' with {
+                                    'fieldLabel': 'admin.fossil.form.category'|trans,
+                                    'fieldName': 'categories[]',
+                                    'fieldValues': fossil.categories|idFilter,
+                                    'choiceList':  categories } %}
+                            </div>
+                            <div class="col">
+                                {% include 'administration/base/multi-select.html.twig' with {
+                                    'fieldLabel': 'admin.fossil.form.tags'|trans,
+                                    'fieldName': 'tags[]',
+                                    'fieldValues': fossil.tags|idFilter,
+                                    'choiceList': tags } %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-cols-1 row-cols-lg-2 mt-3">
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-header">
+                        {% trans %}admin.fossil.groups.discoveryInformation{% endtrans %}
+                    </div>
+                    <div class="card-body">
+                        {% for formField in fossilFormFields %}
+                            {% if formField.fieldGroup == 'DISCOVERY' %}
+                                {% include 'administration/fossil/field-switch.html.twig' with { 'formField': formField } %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-header">
+                        {% trans %}admin.fossil.groups.stratigraphy{% endtrans %}
+                    </div>
+                    <div class="card-body">
+                        {% for formField in fossilFormFields %}
+                            {% if formField.fieldGroup == 'STRATIGRAPHY' %}
+                                {% include 'administration/fossil/field-switch.html.twig' with { 'formField': formField } %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-cols-1 row-cols-lg-2 mt-3">
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-header">
+                        {% trans %}admin.fossil.groups.taxonomy{% endtrans %}
+                    </div>
+                    <div class="card-body">
+                        {% for formField in fossilFormFields %}
+                            {% if formField.fieldGroup == 'TAXONOMY' %}
+                                {% include 'administration/fossil/field-switch.html.twig' with { 'formField': formField } %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-header">
+                        {% trans %}admin.fossil.groups.images{% endtrans %}
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="images" class="form-label">{% trans %}admin.fossil.form.images{% endtrans %}</label>
+                            <input name="images[]" type="file" multiple="multiple" class="form-control">
+                        </div>
+                        {% if fossil.images %}
+                        <div class="mb-3">
+                            {% for image in fossil.images %}
+                                <img src="{{ asset(image.thumbnailPath) }}" class="img-thumbnail" alt="{{ image.name }}" width="200" height="200">
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        {% for formField in fossilFormFields %}
+                            {% if formField.fieldGroup == 'IMAGE' %}
+                                {% include 'administration/fossil/field-switch.html.twig' with { 'formField': formField } %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-header">
+                        {% trans %}admin.fossil.groups.other{% endtrans %}
+                    </div>
+                    <div class="card-body">
+                        {% for formField in fossilFormFields %}
+                            {% if formField.fieldGroup == 'OTHER' %}
+                                {% include 'administration/fossil/field-switch.html.twig' with { 'formField': formField } %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <input type="submit" class="btn btn-primary float-end"
+                       value="{% trans %}base.button.save{% endtrans %}">
+                <a class="btn btn-secondary float-end me-2"
+                   href="{{ url('app_admin_fossil_list') }}">{% trans %}base.button.cancel{% endtrans %}</a>
+            </div>
+        </div>
+    </form>
+{% endblock %}

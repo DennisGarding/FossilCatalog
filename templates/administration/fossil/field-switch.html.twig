@@ -1,0 +1,59 @@
+{% if formField.fieldName == 'earthAgeSystem' %}
+    {% include 'administration/base/system-series-stage-select.html.twig' with { 'formField': formField, 'choiceList': systems } %}
+{% elseif formField.fieldName == 'earthAgeSeries' %}
+    {% include 'administration/base/system-series-stage-select.html.twig' with { 'formField': formField, 'choiceList': series, 'parentIdKey': 'earthAgeSystemId' } %}
+{% elseif formField.fieldName == 'earthAgeStage' %}
+    {% include 'administration/base/system-series-stage-select.html.twig' with { 'formField': formField, 'choiceList': stages, 'parentIdKey': 'earthAgeSeriesId' } %}
+{% elseif formField.fieldType == 'TEXT' %}
+    <div class="mb-3">
+        <label for="{{ formField.fieldLabel }}"
+               class="form-label">{{ formField.fieldLabel }}</label>
+        <input type="text"
+               class="form-control"
+               id="{{ formField.fieldName }}"
+               name="{{ formField.fieldName }}"
+               value="{{ formField.fieldValue }}"
+               autocomplete="off"
+               {% if not formField.allowBlank %}required="required"{% endif %}
+        />
+    </div>
+{% elseif formField.fieldType == 'TEXTAREA' %}
+    <div class="mb-3">
+        <label for="{{ formField.fieldLabel }}"
+               class="form-label">{{ formField.fieldLabel }}</label>
+        <textarea class="form-control"
+                  {% if not formField.allowBlank %}required="required"{% endif %}
+                  id="{{ formField.fieldName }}"
+                  name="{{ formField.fieldName }}"
+                  rows="3">{{ formField.fieldValue }}</textarea>
+    </div>
+{% elseif formField.fieldType == 'NUMBER' %}
+    <div class="mb-3">
+        <label for="{{ formField.fieldLabel }}"
+               class="form-label">{{ formField.fieldLabel }}</label>
+        <input type="number"
+               class="form-control"
+               id="{{ formField.fieldName }}"
+               name="{{ formField.fieldName }}"
+               value="{{ formField.fieldValue }}"
+               autocomplete="off"
+               {% if not formField.allowBlank %}required="required"{% endif %}
+        />
+    </div>
+{% elseif formField.fieldType == 'DATE' %}
+    <div class="mb-3">
+        <label for="{{ formField.fieldLabel }}"
+               class="form-label">{{ formField.fieldLabel }}</label>
+        <input type="date"
+               class="form-control"
+               id="{{ formField.fieldName }}"
+               name="{{ formField.fieldName }}"
+               value="{{ formField.fieldValue|date('Y-m-d') }}"
+               {% if not formField.allowBlank %}required="required"{% endif %}
+        >
+    </div>
+{% elseif formField.fieldType == 'BOOL' %}
+    {% include 'administration/base/booleanField.html.twig' with { 'fieldLabel': formField.fieldLabel, 'fieldName': formField.fieldName } %}
+{% else %}
+    <b>Form field type: "{{ type }}" not found</b>
+{% endif %}

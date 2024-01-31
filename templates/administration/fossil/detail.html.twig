@@ -1,0 +1,119 @@
+{% extends 'administration/base.html.twig' %}
+
+{% block title %}{% trans %}admin.fossil.title{% endtrans %}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    {% trans %}admin.fossil.detailsTitle{% endtrans %}
+                </div>
+                <div class="card-body">
+                    <div class="clearfix">
+                        <div class="btn-group float-end">
+                            <a href="{{ url('app_admin_fossil_create_pdf', {'id': fossil.id } )}}"
+                               target="_blank"
+                               class="btn btn-primary">
+                                {% trans %}admin.fossil.createPdf{% endtrans %} <i class="bi-file-earmark-pdf"></i>
+                            </a>
+                            <a href="{{ url('app_admin_fossil_edit_form', {'id': fossil.id } )}}"
+                               class="btn btn-secondary">
+                                {% trans %}base.edit{% endtrans %} <i class="bi-pencil"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    {% trans %}admin.fossil.groups.general{% endtrans %}
+                </div>
+                <div class="card-body">
+                    {% include 'administration/fossil/detail/renderer.html.twig' with { 'fossilFormFields': fossilFormFields, 'groupName': 'GENERAL' } %}
+
+                    <div class="mt-3">
+                        <label class=""><strong>{% trans %}admin.fossil.form.category{% endtrans %}:</strong></label>
+                        {% for category in fossil.categories %}
+                            <span class="badge text-bg-secondary">{{ category.name }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="mt-3">
+                        <label class=""><strong>{% trans %}admin.fossil.form.tags{% endtrans %}:</strong></label>
+                        {% for tag in fossil.tags %}
+                            <span class="badge text-bg-secondary">{{ tag.name }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-lg-2 mt-3">
+        <div class="col">
+            <div class="card h-100Y">
+                <div class="card-header">
+                    {% trans %}admin.fossil.groups.discoveryInformation{% endtrans %}
+                </div>
+                <div class="card-body">
+                    {% include 'administration/fossil/detail/renderer.html.twig' with { 'fossilFormFields': fossilFormFields, 'groupName': 'DISCOVERY' } %}
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-header">
+                    {% trans %}admin.fossil.groups.stratigraphy{% endtrans %}
+                </div>
+                <div class="card-body">
+                    {% include 'administration/fossil/detail/renderer.html.twig' with { 'fossilFormFields': fossilFormFields, 'groupName': 'STRATIGRAPHY' } %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-lg-2 mt-3">
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-header">
+                    {% trans %}admin.fossil.groups.taxonomy{% endtrans %}
+                </div>
+                <div class="card-body">
+                    {% include 'administration/fossil/detail/renderer.html.twig' with { 'fossilFormFields': fossilFormFields, 'groupName': 'TAXONOMY' } %}
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-header">
+                    {% trans %}admin.fossil.groups.images{% endtrans %}
+                </div>
+                <div class="card-body">
+                    {% for image in fossil.images %}
+                        <img src="{{ asset(image.thumbnailPath) }}" class="img-thumbnail" alt="{{ image.name }}"
+                             width="200" height="200">
+                    {% endfor %}
+                    {% include 'administration/fossil/detail/renderer.html.twig' with { 'fossilFormFields': fossilFormFields, 'groupName': 'IMAGE' } %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-header">
+                    {% trans %}admin.fossil.groups.other{% endtrans %}
+                </div>
+                <div class="card-body">
+                    {% include 'administration/fossil/detail/renderer.html.twig' with { 'fossilFormFields': fossilFormFields, 'groupName': 'OTHER' } %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

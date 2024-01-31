@@ -15,3 +15,6 @@ install.lock
 
 .idea
 .env
+
+/public/translations/messages.json
+/public/translations/messages_defaults.json

@@ -1,0 +1,95 @@
+{% extends 'administration/base.html.twig' %}
+
+{% block title %}{% trans %}admin.category.title{% endtrans %}{% endblock %}
+
+{% block content %}
+    <div class="card mt-3">
+        <div class="card-header">
+            {% trans %}admin.category.title{% endtrans %}
+        </div>
+        <div class="card-body">
+            <a href="#"
+               data-category-create="true"
+               class="btn btn-primary float-end">{% trans %}admin.category.form.create{% endtrans %} <i
+                        class="bi-plus-lg"></i></a>
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header">
+            {% trans %}base.filter{% endtrans %}
+        </div>
+        <div class="card-body">
+            <form name="filters" method="post" action="{{ url('app_admin_category') }}">
+                <div class="input-group" data-clearSearchTerm="true">
+                    <span class="input-group-text"><i class="bi-search"></i></span>
+                    <input type="text" class="form-control" name="searchTerm" value="{% if searchTerm is defined %}{{ searchTerm }}{% endif %}">
+                    <button class="btn btn-secondary clearSearchTerm" type="button"><i class="bi-x"></i></button>
+                    <input type="submit" class="btn btn-primary" value="{% trans %}base.button.search{% endtrans %}">
+                </div>
+                <input type="hidden" name="page" value="{{ page }}">
+            </form>
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header">
+            {% trans %}admin.category.categoryListTitle{% endtrans %}
+        </div>
+        <div class="card-body">
+
+            {% include 'pagination.html.twig' %}
+
+            <div class="searchResultContainer">
+                <table class="table table-striped align-middle">
+                    <thead>
+                    <tr>
+                        <th scope="col">{% trans %}admin.category.categoryColumnName{% endtrans %}</th>
+                        <th scope="col"><span class="float-end">{% trans %}admin.category.categoryColumnAction{% endtrans %}</span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for category in categories %}
+                        <tr>
+                            <td>{{ category.name }}</td>
+                            <td>
+                                <a href="{{ url('app_admin_category_delete', { 'categoryId': category.id }) }}"
+                                   class="float-end ms-1 btn btn-danger"
+                                   data-delete-category="true">
+                                    <i class="bi-trash3"></i>
+                                </a>
+
+                                <a href="{{ url('app_admin_category_edit') }}"
+                                   class="float-end ms-1 btn btn-secondary"
+                                   data-edit-category="true"
+                                   data-value="{{ category.name }}"
+                                   data-id="{{ category.id }}">
+                                    <i class="bi-pencil"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="system-form visually-hidden">
+        <form name="category-form" method="post" action="{{ url('app_admin_category_save') }}">
+            <input type="hidden" name="id">
+
+            <div class="mb-3">
+                <label for="name"
+                       class="form-label">{% trans %}admin.category.form.categoryName{% endtrans %}</label>
+                <input type="text"
+                       name="name"
+                       id="name"
+                       class="form-control"
+                       autocomplete="off"
+                       required="required"
+                />
+            </div>
+        </form>
+    </div>
+{% endblock %}

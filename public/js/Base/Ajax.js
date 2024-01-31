@@ -57,9 +57,6 @@ class Ajax {
 
         this.xhttp.onreadystatechange = function () {
             if (this.readyState === XMLHttpRequest.DONE) {
-                // TODO: REMOVE AFTER DEBUG
-                console.log(this);
-                // TODO: REMOVE AFTER DEBUG
                 if (this.status === 200) {
                     me.successCallback(JSON.parse(this.responseText));
                 } else {

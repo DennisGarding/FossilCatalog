@@ -1,0 +1,98 @@
+{% extends 'administration/base.html.twig' %}
+
+{% block title %}{% trans %}admin.tags.title{% endtrans %}{% endblock %}
+
+{% block content %}
+    <div class="card mt-3">
+        <div class="card-header">
+            {% trans %}admin.tags.createTagTitle{% endtrans %}
+        </div>
+        <div class="card-body">
+            <div class="clearfix">
+                <a href="#"
+                   data-tag-create="true"
+                   class="btn btn-primary float-end">{% trans %}admin.tags.form.create{% endtrans %} <i
+                            class="bi-plus-lg"></i></a>
+            </div>
+
+        </div>
+    </div>
+    <div class="card mt-3">
+        <div class="card-header">
+            {% trans %}base.filter{% endtrans %}
+        </div>
+        <div class="card-body">
+            <form name="filters" method="post" action="{{ url('app_admin_tags') }}">
+                <div class="input-group" data-clearSearchTerm="true">
+                    <span class="input-group-text"><i class="bi-search"></i></span>
+                    <input type="text" class="form-control" name="searchTerm"
+                           value="{% if searchTerm is defined %}{{ searchTerm }}{% endif %}">
+                    <button class="btn btn-secondary clearSearchTerm" type="button"><i class="bi-x"></i></button>
+                    <input type="submit" class="btn btn-primary" value="{% trans %}base.button.search{% endtrans %}">
+                </div>
+                <input type="hidden" name="page" value="{{ page }}">
+            </form>
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header">
+            {% trans %}admin.tags.tagListTitle{% endtrans %}
+        </div>
+        <div class="card-body">
+            {% include 'pagination.html.twig' %}
+
+            <div class="searchResultContainer">
+                <table class="table table-striped align-middle">
+                    <thead>
+                    <tr>
+                        <th scope="col">{% trans %}admin.tags.tagColumnName{% endtrans %}</th>
+                        <th scope="col"><span
+                                    class="float-end">{% trans %}admin.tags.tagColumnAction{% endtrans %}</span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for tag in tags %}
+                        <tr>
+                            <td>{{ tag.name }}</td>
+                            <td>
+                                <a href="{{ url('app_admin_tags_delete', { 'tagId': tag.id }) }}"
+                                   class="float-end ms-1 btn btn-danger"
+                                   data-delete-tag="true">
+                                    <i class="bi-trash3"></i>
+                                </a>
+
+                                <a href="{{ url('app_admin_tags_edit') }}"
+                                   class="float-end ms-1 btn btn-secondary"
+                                   data-edit-tag="true"
+                                   data-value="{{ tag.name }}"
+                                   data-id="{{ tag.id }}">
+                                    <i class="bi-pencil"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="system-form visually-hidden">
+        <form name="tag-form" method="post" action="{{ url('app_admin_tags_save') }}">
+            <input type="hidden" name="id">
+
+            <div class="mb-3">
+                <label for="name"
+                       class="form-label">{% trans %}admin.tags.form.tagName{% endtrans %}</label>
+                <input type="text"
+                       name="name"
+                       id="name"
+                       class="form-control"
+                       autocomplete="off"
+                       required="required"
+                />
+            </div>
+        </form>
+    </div>
+{% endblock %}

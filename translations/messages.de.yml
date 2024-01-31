@@ -1,4 +1,376 @@
 installation:
-   title: Willkommen zur Installation des Fossil-Catalog
-   databaseInformation: Informationen zur Datenbank
-   userInformation: Ihre Anmeldeinformationen
+    system:
+        quartaer: Quartär
+        neogen: Neogen
+        paleogen: Paleogen
+        cretaceous: Kreide
+        jurassic: Jura
+        triassic: Trias
+        permian: Perm
+        carboniferous: Karbon
+        devonian: Devon
+        silurian: Silur
+        ordovician: Ordovizium
+        cambrian: Kambrium
+        precambrian: Präkambrium
+    series:
+        holocene: Holozän
+        pleistocene: Pleistozän
+        pliocene: Pliozän
+        miocene: Miozän
+        oligocene: Oligozän
+        eocene: Eozän
+        paleocene: Paläozän
+        upperCretaceous: Oberkreide
+        lowerCretaceous: Unterkreide
+        upperJurassic: Oberjura
+        middleJurassic: Mitteljura
+        lowerJurassic: Unterjura
+        upperTriassic: Obertrias
+        middleTriassic: Mitteltrias
+        lowerTriassic: Untertrias
+        lopingian: Lopingium
+        guadalupian: Guadalupium
+        cisuralian: Cisuralium
+        pennsylvanian: Pennsylvanium
+        mississippian: Mississippium
+        upperDevonian: Oberdevon
+        middleDevonian: Mitteldevon
+        lowerDevonian: Unterdevon
+        pridoli: Pridoli
+        ludlow: Ludlow
+        wenlock: Wenlock
+        llandovery: Llandovery
+        upperOrdovician: Oberordovizium
+        middleOrdovician: Mittelordovizium
+        lowerOrdovician: Unterordovizium
+        furongian: Furongium
+        miaolingian: Miaolingium
+        2ndSeries: 2. Serie
+        terreneuvian: Terreneuvium
+    stage:
+        meghalayan: Meghalayum
+        northgrippian: Northgrippium
+        greenlandian: Greenlandium
+        tarantian: Tarantium
+        ionian: Ionium
+        calabrian: Calabrium
+        gelasian: Gelasium
+        piacenzian: Piacenzium
+        zanclean: Zancleum
+        messinian: Messinium
+        tortonian: Tortonium
+        serravallian: Serravallium
+        langhian: Langhium
+        burdigalian: Burdigalium
+        aquitanian: Aquitanium
+        chattian: Chattium
+        rupelian: Rupelium
+        priabonian: Priabonium
+        bartonian: Bartonium
+        lutetian: Lutetium
+        ypresian: Ypresium
+        thanetian: Thanetium
+        selandian: Selandium
+        danian: Danium
+        maastrichtian: Maastrichtium
+        campanian: Campanium
+        santonian: Santonium
+        coniacian: Coniacium
+        turonian: Turonium
+        cenomanian: Cenomanium
+        albian: Albium
+        aptian: Aptium
+        barremian: Barremium
+        hauterivian: Hauterivium
+        valanginian: Valanginium
+        berriasian: Berriasium
+        tithonian: Tithonium
+        kimmeridgian: Kimmeridgium
+        oxfordian: Oxfordium
+        callovian: Callovium
+        bathonian: Bathonium
+        bajocian: Bajocium
+        aalenian: Aalenium
+        toarcian: Toarcium
+        pliensbachian: Pliensbachium
+        sinemurian: Sinemurium
+        hettangian: Hettangium
+        rhaetian: Rhaetium
+        norian: Norium
+        carnian: Karnium
+        ladinian: Ladinium
+        anisian: Anisium
+        olenekian: Olenekium
+        induan: Induum
+        changhsingian: Changhsingium
+        wuchiapingian: Wuchiapingium
+        capitanian: Capitanium
+        wordian: Wordium
+        roadian: Roadium
+        kungurian: Kungurium
+        artinskian: Artinskium
+        sakmarian: Sakmarium
+        asselian: Asselium
+        gzhelian: Gzhelium
+        kasimovian: Kasimovium
+        moscovian: Moscovium
+        bashkirian: Bashkirium
+        serpukhovian: Serpukhovium
+        visean: Viseium
+        tournaisian: Tournaisium
+        famennian: Famennium
+        frasnian: Frasnium
+        givetian: Givetium
+        eifelian: Eifelium
+        emsian: Emsium
+        pratigian: Pratigium
+        ludfordian: Ludfordium
+        gorstian: Gorstium
+        homerian: Homerium
+        sheinwoodian: Sheinwoodium
+        telychian: Telychium
+        aeronian: Aeronium
+        rhuddanian: Rhuddanium
+        hirnantian: Hirnantium
+        katian: Katium
+        sandbian: Sandbium
+        darriwilian: Darriwilium
+        dapingian: Dapingium
+        floian: Floium
+        tremadocian: Tremadocium
+        10thStage: 10. Stufe
+        jiangshanian: Jiangshanium
+        paibian: Paibium
+        guzhangian: Guzhangium
+        drumian: Drumium
+        wuliuan: Wulium
+        4thStage: 4. Stufe
+        3rdStage: 3. Stufe
+        2ndStage: 2. Stufe
+        fortunian: Fortunium
+
+    errors:
+        databaseCreate: Datenbank konnte nicht erstellt werden
+        envFileNotCreated: .env Datei konnte nicht erstellen
+        tablesFileNotFound: Die *.sql Datei für das Erstellen der Tabellen wurde nicht gefunden
+        tablesCreate: Es gab ein Problem bei der Tabelleninstallation
+        defaultsFileNotFound: Die *.sql Datei für das Erstellen der Standarddaten wurde nicht gefunden
+        defaultsCreate: Es gab ein Problem bei der Installation der Standarddaten
+        userCreate: Es gab ein Problem beim anlegen des Benutzers
+        lockFileCreate: .install.lock Datei konnte nicht erstellen
+        translationFileCreate: Übersetzungsdateien konnten nicht erstellt werden
+
+    title: Willkommen zur Installation des Fossil-Catalog
+
+    databaseInformation: Informationen zur Datenbank
+    userInformation: Ihre Anmeldeinformationen
+    selectLanguage: Sprache auswählen
+    language: Sprache
+    languages:
+        en: Englisch
+        de: Deutsch
+
+    databaseName: Datenbankname
+    databaseUsername: Benutzername
+    databasePassword: Passwort
+    databaseHost: Host
+    databasePort: Port
+    userEmail: Email
+    userPassword: Passwort
+    userPasswordConfirm: Passwort bestätigen
+    installNow: Jetzt installieren
+    toLogin: Zum Login
+
+    installationInProgress: Installation läuft. <br><br>... Bitte warten.
+
+    tryToCreateDatabase: Es wird versucht die Datenbank einzurichten
+    databaseCreated: Die Datenbank wurde erfolgreich erstellt
+
+    tryToCreateTablesText: Es wird versucht die Datenbanktabellen einzurichten
+    tablesCreated: Die Datenbanktabellen wurden erfolgreich erstellt
+
+    tryToCreateDefaultData: Es wird versucht die Standarddaten zu erstellen
+    defaultsCreated: Die Standarddaten wurden erfolgreich erstellt
+
+    tryToCreateUser: Es wird versucht den Benutzer für den Login einzurichten
+    userCreated: Der Benutzer wurde erfolgreich erstellt
+    userExists: Der Benutzer existiert bereits
+
+    tryToCreateLockFile: Es wird versucht die .install.lock Datei zu erstellen
+    lockFileCreated: Die .install.lock Datei wurde erfolgreich erstellt
+
+    tryToCreateTranslationFile: Es wird versucht die Übersetzungsdatei zu erstellen
+    translationFileCreated: Die Übersetzungsdateien wurden erfolgreich erstellt
+
+base:
+    delete: Löschen
+    edit: Bearbeiten
+    filter: Filter
+    list: Liste
+    pleaseSelect: Bitte auswählen ...
+    searchTerm: Suchbegriff ...
+    button:
+        save: Speichern
+        cancel: Abbrechen
+        search: Suchen
+        filter: Filter
+        clearFilter: Filter löschen
+        create: Erstellen
+    booleanField:
+        trueValue: Ja
+        falseValue: Nein
+    detailRenderer:
+        formFieldIsNoteDefined: Variable "fossilFormFields" ist nicht definiert
+        groupNameIsNoteDefined: Variable "groupName" ist nicht definiert
+
+admin:
+    genericError: Es ist ein Fehler aufgetreten.
+    genericSaved: Erfolgreich gespeichert.
+    genericDeleted: Erfolgreich gelöscht.
+    genericPropertyRequired:
+    genericNoIdProvided: Keine ID angegeben.
+
+    fossil:
+        title: Fossilien
+        createTitle: Erstelle dein neues Fossil
+
+        groups:
+            general: Allgemein
+            discoveryInformation: Fund-Informationen
+            stratigraphy: Stratigraphie
+            taxonomy: Taxonomie
+            images: Bilder
+            other: Sonstiges
+
+        form:
+            category: Kategorie
+            tags: Tags
+            images: Bilder
+
+        error:
+            couldNotInstanceFossil: Konnte Fossil nicht instanzieren. Wenn Sie versuchen, ein Fossil zu aktualisieren, überprüfen Sie bitte, ob die ID korrekt ist.
+            couldNotSaveFossil: Fossil konnte nicht gespeichert werden.
+            couldNotUploadImages: Hochladen der bereitgestellten Bilder nicht möglich.
+            couldNotFindFossilWithEmptyId: Konnte Fossil mit leerer ID nicht finden.
+            couldNotFindFossilWithId: Konnte Fossil mit ID %s nicht finden
+
+    formFields:
+        showOnlyCustomFields: Zeige nur eigene Felder
+        create: Neues Feld erstellen
+        successfullyDeleted: Formularfeld erfolgreich gelöscht
+        messages:
+            deleteQuestion: Möchten Sie das Formularfeld wirklich löschen?
+        filter:
+            all: Alle
+            customFields: Eigene Felder
+            defaultFields: Standardfelder
+        error:
+            couldNotCreateFormField: Formularfeld konnte nicht erstellt werden
+            couldNotFindFormField: Formularfeld mit ID %s konnte nicht gefunden werden
+            couldNotDeleteFormFieldDefault: Formularfeld konnte nicht gelöscht werden, da es ein Standardfeld ist
+            couldNotDeleteFormFieldError: Formularfeld konnte nicht gelöscht werden. Nachricht... %s
+            emptyId: Bitte geben Sie eine Feld-ID an
+            emptyName: Bitte geben Sie einen Feldnamen an
+            emptyLabel: Bitte geben Sie einen Feldnamen an
+            emptyType: Bitte geben Sie einen Feldtyp an
+            emptyGroup: Bitte geben Sie eine Feldgruppe an
+            emptyShowInOverview: Bitte geben Sie einen Wert für "In Übersicht anzeigen" an
+            emptyActive: Bitte geben Sie einen Wert für "Aktiv" an
+            emptyAllowEmpty: Bitte geben Sie einen Wert für "Leer zulassen" an
+        form:
+            fieldNameHelpTest: Erlaubte Zeichen sind Kleinbuchstaben von "a-z".
+        types:
+            text: Text
+            textarea: Textarea
+            number: Number
+            date: Date
+            boolean: Boolean
+        groups:
+            general: Allgemein
+            discovery: Fund
+            stratigraphy: Stratigraphie
+            taxonomy: Taxonomie
+            image: Bilder
+            other: Sonstiges
+        table:
+            order: Reihenfolge
+            fieldName: Feldname
+            fieldLabel: Feldlabel
+            type: Typ
+            group: Gruppe
+            allowEmpty: Leer zulassen
+            active: Aktiv
+            inOverview: In Übersicht anzeigen
+            action: Aktion
+        title: Fossil-Formularfelder
+        number: Nummer
+        showInGallery: Fossil in Galerie anzeigen
+        dateOfDiscovery: Funddatum
+        foundInCountry: Gefunden in Land
+        findingPlace: Fundort
+        coordinates: Koordinaten
+        findingNotes: Fundnotizen
+        system: System
+        series: Serie
+        stage: Stufe
+        formation: Formation
+        member: Member
+        stratigraphicNotes: Stratigraphische Notizen
+        empire: Reich
+        tribe: Stamm
+        class: Klasse
+        order: Ordnung
+        family: Familie
+        genius: Gattung
+        species: Art
+        subspecies: Unterart
+        size: Größe
+        taxonomyNotes: Taxonomische Notizen
+
+    nav:
+        catalog: Katalog
+        settings: Einstellungen
+        fossilForm: Fossil-Formular
+        tags: Tags
+        categories: Kategorien
+        backup: Backup
+        export: Export
+        import: Import
+        logOut: Abmelden
+    baseTitle: Fossil-Katalog
+    overviewTitle: Übersicht
+
+    category:
+        messages:
+            created: Kategorie erstellt
+            deleteQuestion: Möchten Sie die Kategorie wirklich löschen?
+            errors:
+                noCategoryName: Bitte geben Sie einen Kategorienamen an
+                cannotCreateCategory: Kategorie mit Namen %s konnte nicht erstellt werden -> %s
+                emptyId: Bitte geben Sie eine Kategorie-ID an
+                cannotFindCategory: Kategorie mit ID %s konnte nicht gefunden werden
+        title: Kategorien
+        createCategoryTitle: Kategorie erstellen
+        categoryListTitle: Kategorienliste
+        categoryColumnName: Name
+        categoryColumnAction: Aktion
+
+    tags:
+        messages:
+            deleteQuestion: Möchten Sie das Tag wirklich löschen?
+            created: Tag erstellt
+            errors:
+                emptyId: Bitte geben Sie eine Tag-ID an
+                cannotFindTag: Tag mit ID %s konnte nicht gefunden werden
+                noTagName: Bitte geben Sie einen Tag-Namen an
+                cannotCreateTag: Tag mit Namen %s konnte nicht erstellt werden -> %s
+        title: Tags
+        createTagTitle: Tag erstellen
+        tagListTitle: Tag Liste
+        tagColumnName: Name
+        tagColumnAction: Aktion
+
+    validator:
+        messages:
+            empty: Bitte geben Sie einen Wert für das Feld %s an

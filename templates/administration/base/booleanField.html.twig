@@ -1,0 +1,22 @@
+{% if fieldLabel is defined and fieldName is defined %}
+<div class="mb-3">
+    <label class="form-label" for="{{ fieldName }}">{{ fieldLabel }}</label>
+    <select name="{{ fieldName }}" id="{{ fieldName }}" class="form-select"{% if disabled is defined and disabled == 1 %} disabled="disabled"{% endif %}>
+        <option {% if fieldValue is defined and fieldValue is same as(false) %}selected="selected"{% endif %}
+                value="0">{% trans %}base.booleanField.falseValue{% endtrans %}
+        </option>
+        <option {% if fieldValue is defined and fieldValue is same as(true) %}selected="selected"{% endif %}
+                value="1">{% trans %}base.booleanField.trueValue{% endtrans %}
+        </option>
+    </select>
+</div>
+{% else %}
+    <div class="text-bg-warning">
+        <p>This field needs 2 variables to be set.</p>
+        <ul>
+            <li>fieldLabel</li>
+            <li>fieldName</li>
+        </ul>
+        <p>And you can provide "fieldValue" for the preselection</p>
+    </div>
+{% endif %}

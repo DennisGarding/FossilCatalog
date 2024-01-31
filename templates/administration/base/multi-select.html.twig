@@ -1,0 +1,13 @@
+<div class="mb-3">
+    <label for="{{ fieldName }}" class="form-label">{{ fieldLabel }}</label>
+    <select name="{{ fieldName }}[]" class="form-control visually-hidden" multiple="multiple" data-multi-select-plugin="true">
+        {% for value in choiceList %}
+            <option value="{{ value.id }}" {% if value.id in fieldValues %} selected="selected"{% endif %}>{{ value.name }}</option>
+        {% endfor %}
+    </select>
+    {% if helpText|default(null) %}
+        <div class="form-text">
+            {{ helptext }}
+        </div>
+    {% endif %}
+</div>

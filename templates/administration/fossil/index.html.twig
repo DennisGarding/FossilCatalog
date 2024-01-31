@@ -1,0 +1,94 @@
+{% extends 'administration/base.html.twig' %}
+
+{% block title %}{% trans %}admin.fossil.title{% endtrans %}{% endblock %}
+
+{% block content %}
+    <div class="card mt-3">
+        <div class="card-header">
+            {% trans %}admin.fossil.title{% endtrans %}
+        </div>
+        <div class="card-body">
+            <div class="clearfix">
+                <a href="{{ url('app_admin_fossil_create_form') }}"
+                   class="btn btn-primary float-end">
+                    {% trans %}base.button.create{% endtrans %} <i class="bi-plus-lg"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header">
+            {% trans %}base.filter{% endtrans %}
+        </div>
+        <div class="card-body">
+            {% include "administration/fossil/filter.html.twig" %}
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header">
+            {% trans %}base.list{% endtrans %}
+        </div>
+        <div class="card-body">
+            {% include 'pagination.html.twig' %}
+            <table class="table table-striped table-hover fossil-list-table">
+                <thead>
+                <tr>
+                    <th scope="col"></th>
+                    {% for formField in formFields %}
+                        {% if formField.showInOverview %}
+                            <th scope="col">{{ formField.fieldLabel }}</th>
+                        {% endif %}
+                    {% endfor %}
+                    <th class="fossil-list-action-column">Aktionen</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for fossil in fossilList %}
+                    <tr class="fossil-row">
+                        <td class="fossil-list-image-column">
+                            <a href="{{ url('app_admin_fossil_detail', {'id': fossil.id}) }}" style="width: 90px;">
+                                <span class="list-image" style="
+                                        background: url('{% if fossil.images|length > 0 %}{{ asset(fossil.images|first.thumbnailPath) }}{% else %}{{ asset('images/no-image.png') }}{% endif %}');
+                                        background-repeat: no-repeat;
+                                        background-position: center;
+                                        background-size: cover;
+                                        ">
+                                </span>
+                            </a>
+                        </td>
+                        {% for formField in formFields %}
+                            {% if formField.showInOverview %}
+                                <td>
+                                    {{ fossil[formField.fieldName|mapField] }}
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+                        <td>
+                            <a href="{{ url('app_admin_fossil_detail', { 'id': fossil.id }) }}"
+                               class="float-left btn btn-primary">
+                                <i class="bi-search"></i>
+                            </a>
+
+                            {% set errorRoute = url ('app_admin_fossil_list') %}
+                            <a href="{{ url('app_admin_fossil_edit_form', { 'id': fossil.id, 'errorRoute': errorRoute }) }}"
+                               class="float-left ms-1 btn btn-secondary">
+                                <i class="bi-pencil"></i>
+                            </a>
+
+                            <a href="{{ url('app_admin_fossil_delete', { 'id': fossil.id }) }}"
+                               class="float-left ms-1 btn btn-danger"
+                               data-delete-fossil="true"
+                               data-id="{{ fossil.id }}"
+                               data-number="{{ fossil.number }}">
+                                <i class="bi-trash3"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,147 @@
+{% extends 'administration/base.html.twig' %}
+
+{% block title %}{% trans %}admin.stage.title{% endtrans %}{% endblock %}
+
+{% block content %}
+    <div class="card mt-3">
+        <div class="card-header">
+            {% trans %}admin.stage.title{% endtrans %}
+        </div>
+        <div class="card-body">
+            <div class="clearfix">
+                <a href="#"
+                   data-stage-create="true"
+                   class="btn btn-primary float-end">
+                    {% trans %}admin.stage.form.create{% endtrans %} <i class="bi-plus-lg"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header">
+            {% trans %}base.filter{% endtrans %}
+        </div>
+        <div class="card-body">
+            <form name="stage-filter" action="{{ url('app_admin_stage') }}">
+                <div class="clearfix">
+                    <div class="row">
+                        <div class="col">
+                            <label for="systemFilter"
+                                   class="form-label">{% trans %}admin.series.title{% endtrans %}</label>
+                            <select name="seriesFilter" class="form-select form-control" required="required">
+                                <option value="0">{% trans %}base.pleaseSelect{% endtrans %}</option>
+                                {% for series in seriesList %}
+                                    <option value="{{ series.id }}"{% if series.id == filterSelection.series %} selected="selected"{% endif %}>{{ series.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col">
+                            {% include 'administration/base/booleanField.html.twig' with { 'fieldLabel': 'admin.formFields.filter.customFields'|trans, 'fieldName': 'customFilter', 'fieldValue': filterSelection.custom } %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="searchTerm"
+                                   class="form-label">{% trans %}base.searchTerm{% endtrans %}</label>
+                            <input type="text"
+                                   name="searchTerm"
+                                   class="form-control"
+                                   autocomplete="off"
+                                   value="{{ filterSelection.searchTerm }}"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-3 clearfix">
+                    <div class="btn-group float-end" role="group">
+                        <a href="{{ url('app_admin_stage_clear_filter') }}"
+                           data-stage-clear-filter="true"
+                           data-bs-toggle="tooltip"
+                           data-bs-placement="bottom"
+                           data-bs-title="{% trans %}base.button.clearFilter{% endtrans %}"
+                           class="btn btn-secondary">
+                            <i class="bi-x"></i>
+                        </a>
+
+                        <button type="submit" class="btn btn-primary">
+                            {% trans %}base.button.filter{% endtrans %} <i class="bi-filter"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header">
+            {% trans %}base.list{% endtrans %}
+        </div>
+        <div class="card-body">
+            <div class="searchResultContainer">
+                <table class="table table-striped table-hover form-field-list-table table-fixed">
+                    <thead>
+                    <tr>
+                        <th scope="col">{% trans %}base.name{% endtrans %}</th>
+                        <th scope="col"><span class="float-end">{% trans %}base.action{% endtrans %}</span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for stage in stageList %}
+                        <tr class="form-field-row">
+                            <td>
+                                {{ stage.name }}
+                            </td>
+                            <td>
+                                {% if stage.custom %}
+                                    <a href="{{ url('app_admin_stage_delete', {'id': stage.id }) }}"
+                                       class="float-end ms-1 btn btn-danger"
+                                       data-delete-stage="true">
+                                        <i class="bi-trash"></i>
+                                    </a>
+                                {% endif %}
+
+                                <a href="#"
+                                   data-edit-stage="true"
+                                   data-id="{{ stage.id }}"
+                                   data-name="{{ stage.name }}"
+                                   data-series="{{ stage.earthAgeSeries.id }}"
+                                   class="float-end ms-1 btn btn-secondary">
+                                    <i class="bi-pen"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="stage-form visually-hidden">
+        <form name="stage-form" method="post" action="{{ url('app_admin_stage_save') }}">
+            <input type="hidden" name="id">
+            <div class="mb-3">
+                <label for="name"
+                       class="form-label">{% trans %}admin.stage.form.stageName{% endtrans %}</label>
+                <input type="text"
+                       name="name"
+                       class="form-control"
+                       autocomplete="off"
+                       required="required"
+                />
+            </div>
+            <div class="mb-3">
+                <label for="system"
+                       class="form-label">{% trans %}admin.series.title{% endtrans %}</label>
+                <select name="series" class="form-select form-control" required="required">
+                    <option value="0">{% trans %}base.pleaseSelect{% endtrans %}</option>
+                    {% for series in seriesList %}
+                        <option value="{{ series.id }}">{{ series.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form>
+    </div>
+{% endblock %}

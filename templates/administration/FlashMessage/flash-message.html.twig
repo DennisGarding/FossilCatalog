@@ -1,0 +1,33 @@
+<div class="toast show flash-message" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+        <strong class="me-auto toast-title">
+            {% if flashMessageType == 'info' %}
+                <i class="bi-info-circle-fill text-info"></i> Info
+            {% elseif flashMessageType == 'success' %}
+                <i class="bi-check-circle-fill text-success"></i> Success
+            {% elseif flashMessageType == 'warning' %}
+                <i class="bi-exclamation-circle-fill text-warning"></i> Warning
+            {% elseif flashMessageType == 'error' %}
+                <i class="bi-exclamation-octagon-fill text-danger"></i> Error
+            {% elseif flashMessageType == 'debug' %}
+                <span class="">Debug</span>
+            {% endif %}
+        </strong>
+
+        <button type="button"
+                class="btn-close toast-close-button"
+                data-bs-dismiss="toast"
+                aria-label="Close"></button>
+    </div>
+    <div class="toast-body toast-content">
+        {% if flashMessageValue is iterable %}
+            <ul>
+            {% for flashMessageValueItem in flashMessageValue %}
+                <li>{{ flashMessageValueItem }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            {{ flashMessageValue }}
+        {% endif %}
+    </div>
+</div>
