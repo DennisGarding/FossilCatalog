@@ -145,7 +145,7 @@ class FossilController extends AbstractController
 
         return $this->render('administration/fossil/form.html.twig', [
             'fossil' => $fossil,
-            'errorRoute' => $this->router->generate('app_admin_fossil_form_field_create_form'),
+            'errorRoute' => $this->router->generate('app_admin_fossil_edit_form'),
             'fossilFormFields' => $fossilFormFields,
             'categories' => $this->categoryRepository->findAll(),
             'tags' => $this->tagRepository->findAll(),

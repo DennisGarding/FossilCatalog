@@ -46,7 +46,7 @@ class ImageUploadService
             }
 
             $uploadedFile->move(
-                sprintf('%s/%s/%s', 'public', $this->rootDirectory, $path),
+                sprintf('%s/%s/%s', $this->rootDirectory, 'public', $path),
                 $image->getName()
             );
 
