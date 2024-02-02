@@ -1,5 +1,6 @@
 <script type="application/javascript" src="{{ asset('js/Translations/Translation.js') }}"></script>
 <script type="application/javascript" src="{{ asset('js/Admin/LoadingIndicator.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/Admin/SetLoading.js') }}"></script>
 <script type="application/javascript" src="{{ asset('js/Admin/FlashMessage.js') }}"></script>
 <script type="application/javascript" src="{{ asset('js/Admin/ClearSearchTerm.js') }}"></script>
 <script type="application/javascript" src="{{ asset('js/Admin/Tag/TagDelete.js') }}"></script>
@@ -16,21 +17,22 @@
 <script type="application/javascript" src="{{ asset('js/Admin/Fossil/SystemSeriesStageSelect.js') }}"></script>
 <script type="application/javascript" src="{{ asset('js/Admin/Fossil/DeleteFossil.js') }}"></script>
 <script type="application/javascript" src="{{ asset('js/Admin/Fossil/FossilPage.js') }}"></script>
-<script type="application/ecmascript" src="{{ asset('js/Admin/MultiSelectField.js') }}"></script>
-<script type="application/ecmascript" src="{{ asset('js/Admin/Pagination.js') }}"></script>
-<script type="application/ecmascript" src="{{ asset('js/Admin/System/SystemEdit.js') }}"></script>
-<script type="application/ecmascript" src="{{ asset('js/Admin/System/SystemCreate.js') }}"></script>
-<script type="application/ecmascript" src="{{ asset('js/Admin/System/SystemDelete.js') }}"></script>
-<script type="application/ecmascript" src="{{ asset('js/Admin/System/SystemPage.js') }}"></script>
-<script type="application/ecmascript" src="{{ asset('js/Admin/Series/SeriesCreate.js') }}"></script>
-<script type="application/ecmascript" src="{{ asset('js/Admin/Series/SeriesDelete.js') }}"></script>
-<script type="application/ecmascript" src="{{ asset('js/Admin/Series/SeriesEdit.js') }}"></script>
-<script type="application/ecmascript" src="{{ asset('js/Admin/Series/SeriesPage.js') }}"></script>
-<script type="application/ecmascript" src="{{ asset('js/Admin/Stage/StageCreate.js') }}"></script>
-<script type="application/ecmascript" src="{{ asset('js/Admin/Stage/StageDelete.js') }}"></script>
-<script type="application/ecmascript" src="{{ asset('js/Admin/Stage/StageEdit.js') }}"></script>
-<script type="application/ecmascript" src="{{ asset('js/Admin/Stage/StagePage.js') }}"></script>
-
+<script type="application/javascript" src="{{ asset('js/Admin/MultiSelectField.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/Admin/Pagination.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/Admin/System/SystemEdit.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/Admin/System/SystemCreate.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/Admin/System/SystemDelete.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/Admin/System/SystemPage.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/Admin/Series/SeriesCreate.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/Admin/Series/SeriesDelete.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/Admin/Series/SeriesEdit.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/Admin/Series/SeriesPage.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/Admin/Stage/StageCreate.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/Admin/Stage/StageDelete.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/Admin/Stage/StageEdit.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/Admin/Stage/StagePage.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/Admin/Export/Export.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/Admin/Export/ExportPage.js') }}"></script>
 
 
 
@@ -60,6 +62,7 @@
                 new SeriesPage();
                 new StagePage();
                 new Pagination();
+                new ExportPage();
 
                 const multiSelectFields = document.querySelectorAll('select[data-multi-select-plugin="true"]');
                 multiSelectFields.forEach(function (field) {
