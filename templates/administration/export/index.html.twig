@@ -1,0 +1,47 @@
+{% extends 'administration/base.html.twig' %}
+
+{% block title %}{% trans %}admin.export.title{% endtrans %}{% endblock %}
+
+{% block content %}
+    <div class="card mt-3">
+        <div class="card-header">
+            {% trans %}admin.export.export{% endtrans %}
+        </div>
+        <div class="card-body">
+            <div class="clearfix">
+                <button
+                   class="btn btn-primary float-end"
+                   data-start-export="true"
+                   data-url="{{ url('app_admin_export_progress') }}"
+                   data-clearUrl="{{ url('app_admin_export_clear') }}"
+                >
+                    {% trans %}admin.export.title{% endtrans %} <i class="bi-plus-lg"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header">
+            {% trans %}admin.export.status{% endtrans %}
+        </div>
+        <div class="card-body">
+            {% for status in data %}
+                <div class="mb-2">
+                    {% if status.type == 'category' %}
+                        <label>{% trans %}admin.export.categories{% endtrans %}</label>
+                    {% endif %}
+
+                    <div class="progress mt-1" role="progressbar" aria-label="{{ status.type }} status"
+                         aria-valuenow="0"
+                         aria-valuemin="{{ status.exported }}" aria-valuemax="{{ status.inExportQueue }}">
+                        <div data-progress-bar="true"
+                             data-type="{{ status.type }}"
+                             class="progress-bar progress-bar-striped progress-bar-animated"
+                             style="width: 0"></div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
