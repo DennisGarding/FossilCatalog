@@ -7,6 +7,7 @@ use App\ImportExport\Export\ExportHandler\AbstractExportHandler;
 use App\ImportExport\Export\ExportHandler\CategoryHandler;
 use App\ImportExport\Export\ExportHandler\CategoryRelationHandler;
 use App\ImportExport\Export\ExportHandler\SeriesHandler;
+use App\ImportExport\Export\ExportHandler\StageHandler;
 use App\ImportExport\Export\ExportHandler\SystemHandler;
 use App\ImportExport\Export\ExportHandler\TagHandler;
 use App\ImportExport\Export\ExportHandler\TagRelationHandler;
@@ -39,6 +40,7 @@ class ExportService implements ExportServiceInterface
         private readonly TagRelationHandler      $tagRelationHandler,
         private readonly SystemHandler           $systemHandler,
         private readonly SeriesHandler           $seriesHandler,
+        private readonly StageHandler            $stageHandler,
     ) {
         $this->handler = [
             $this->categoryHandler,
@@ -47,6 +49,7 @@ class ExportService implements ExportServiceInterface
             $this->tagRelationHandler,
             $this->systemHandler,
             $this->seriesHandler,
+            $this->stageHandler,
         ];
     }
 

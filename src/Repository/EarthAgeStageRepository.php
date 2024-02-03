@@ -85,4 +85,29 @@ class EarthAgeStageRepository extends ServiceEntityRepository
         $this->_em->remove($earthAgeSystem);
         $this->_em->flush();
     }
+
+    public function getColumnCount(): int
+    {
+        $queryBuilder = $this->createQueryBuilder('earthAgeStage')
+            ->select(['COUNT(earthAgeStage.id)']);
+
+        $result = $queryBuilder->getQuery()
+            ->getResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
+
+        return (int) $result;
+    }
+
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    public function getExportList(int $limit, int $offset): array
+    {
+        return $this->getEntityManager()->getConnection()->createQueryBuilder()
+            ->select(['*'])
+            ->from('earth_age_stage')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
 }

@@ -446,4 +446,5 @@ admin:
         tagRelations: Tag Relations
         systems: Systems
         series: Series
+        stages: Stages
 
