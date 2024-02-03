@@ -74,15 +74,10 @@ class EarthAgeSystemRepository extends ServiceEntityRepository
         $this->_em->flush();
     }
 
-    public function getColumnCount(?string $searchTerm = null): int
+    public function getColumnCount(): int
     {
         $queryBuilder = $this->createQueryBuilder('earthAgeSystem')
             ->select(['COUNT(earthAgeSystem.id)']);
-
-        if ($searchTerm !== null) {
-            $queryBuilder->where('earthAgeSystem.name LIKE :searchTerm')
-                ->setParameter('searchTerm', '%' . $searchTerm . '%');
-        }
 
         $result = $queryBuilder->getQuery()
             ->getResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);

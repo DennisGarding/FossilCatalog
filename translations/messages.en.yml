@@ -445,4 +445,5 @@ admin:
         tags: Tags
         tagRelations: Tag Relations
         systems: Systems
+        series: Series
 
