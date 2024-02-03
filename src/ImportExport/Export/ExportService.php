@@ -8,6 +8,7 @@ use App\ImportExport\Export\ExportHandler\CategoryHandler;
 use App\ImportExport\Export\ExportHandler\CategoryRelationHandler;
 use App\ImportExport\Export\ExportHandler\FormFieldHandler;
 use App\ImportExport\Export\ExportHandler\ImageHandler;
+use App\ImportExport\Export\ExportHandler\ImageRelationHandler;
 use App\ImportExport\Export\ExportHandler\SeriesHandler;
 use App\ImportExport\Export\ExportHandler\StageHandler;
 use App\ImportExport\Export\ExportHandler\SystemHandler;
@@ -45,6 +46,7 @@ class ExportService implements ExportServiceInterface
         private readonly StageHandler            $stageHandler,
         private readonly FormFieldHandler        $formFieldHandler,
         private readonly ImageHandler            $imageHandler,
+        private readonly ImageRelationHandler    $imageRelationHandler,
     ) {
         $this->handler = [
             $this->categoryHandler,
@@ -56,6 +58,7 @@ class ExportService implements ExportServiceInterface
             $this->stageHandler,
             $this->formFieldHandler,
             $this->imageHandler,
+            $this->imageRelationHandler,
         ];
     }
 
