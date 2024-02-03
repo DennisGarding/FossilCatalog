@@ -442,4 +442,5 @@ admin:
         status: Status
         categories: Categories
         categoryRelations: Category Relations
+        tags: Tags
 

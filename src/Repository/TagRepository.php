@@ -63,4 +63,18 @@ class TagRepository extends ServiceEntityRepository
 
         return $result;
     }
+
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    public function getExportList(int $limit, int $offset): array
+    {
+        return $this->getEntityManager()->getConnection()->createQueryBuilder()
+            ->select(['*'])
+            ->from('tag')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
 }
