@@ -6,6 +6,7 @@ use App\ImportExport\CreateZipException;
 use App\ImportExport\Export\ExportHandler\AbstractExportHandler;
 use App\ImportExport\Export\ExportHandler\CategoryHandler;
 use App\ImportExport\Export\ExportHandler\CategoryRelationHandler;
+use App\ImportExport\Export\ExportHandler\SystemHandler;
 use App\ImportExport\Export\ExportHandler\TagHandler;
 use App\ImportExport\Export\ExportHandler\TagRelationHandler;
 use App\Repository\ExportRepository;
@@ -35,12 +36,14 @@ class ExportService implements ExportServiceInterface
         private readonly CategoryRelationHandler $categoryRelationHandler,
         private readonly TagHandler              $tagHandler,
         private readonly TagRelationHandler      $tagRelationHandler,
+        private readonly SystemHandler           $systemHandler,
     ) {
         $this->handler = [
             $this->categoryHandler,
             $this->categoryRelationHandler,
             $this->tagHandler,
             $this->tagRelationHandler,
+            $this->systemHandler,
         ];
     }
 
