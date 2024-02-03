@@ -20,39 +20,16 @@ class CategoryHandler extends AbstractExportHandler
         return 'category';
     }
 
-    public function analyzeData(): ExportStatus
+    public function getColumnCount(): int
     {
-        $inExportQueue = $this->categoryRepository->getColumnCount();
-
-        $categoryStatus = new ExportStatus($this->getKey(), $inExportQueue);
-
-        $this->saveSession($categoryStatus);
-
-        return $categoryStatus;
+        return $this->categoryRepository->getColumnCount();
     }
 
-    public function export(): ExportStatus
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    public function getData(ExportStatus $status): array
     {
-        $status = $this->getStatusFromSession();
-
-        if ($status->isFinished()) {
-            return $status;
-        }
-
-        $data = $this->categoryRepository->getExportList(self::EXPORT_LIMIT, $status->getExported());
-
-        foreach ($data as $line) {
-            \file_put_contents($this->targetFile, json_encode($line) . PHP_EOL, FILE_APPEND);
-        }
-
-        $status->add(count($data));
-
-        if ($status->getExported() >= $status->getInExportQueue()) {
-            $status->finish();
-        }
-
-        $this->saveSession($status);
-
-        return $status;
+        return $this->categoryRepository->getExportList(self::EXPORT_LIMIT, $status->getExported());
     }
 }

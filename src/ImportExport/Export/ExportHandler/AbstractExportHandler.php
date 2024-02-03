@@ -17,9 +17,9 @@ abstract class AbstractExportHandler
 
     abstract public function getKey(): string;
 
-    abstract public function analyzeData(): ExportStatus;
+    abstract public function getColumnCount(): int;
 
-    abstract public function export(): ExportStatus;
+    abstract public function getData(ExportStatus $status): array;
 
     public function initialize(string $targetDirectory): void
     {
@@ -36,6 +36,42 @@ abstract class AbstractExportHandler
         $this->targetFile = sprintf('%s/%s', $targetDirectory, $this->getFileName());
 
         $session->set($sessionFileNameKey, $this->targetFile);
+    }
+
+    public function analyzeData(): ExportStatus
+    {
+        $inExportQueue = $this->getColumnCount();
+
+        $categoryStatus = new ExportStatus($this->getKey(), $inExportQueue);
+
+        $this->saveSession($categoryStatus);
+
+        return $categoryStatus;
+    }
+
+    public function export(): ExportStatus
+    {
+        $status = $this->getStatusFromSession();
+
+        if ($status->isFinished()) {
+            return $status;
+        }
+
+        $data = $this->getData($status);
+
+        foreach ($data as $line) {
+            \file_put_contents($this->targetFile, json_encode($line) . PHP_EOL, FILE_APPEND);
+        }
+
+        $status->add(count($data));
+
+        if ($status->getExported() >= $status->getInExportQueue()) {
+            $status->finish();
+        }
+
+        $this->saveSession($status);
+
+        return $status;
     }
 
     public function clearSession(): void

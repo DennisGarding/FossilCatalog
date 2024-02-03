@@ -3,26 +3,26 @@
 namespace App\ImportExport\Export\ExportHandler;
 
 use App\ImportExport\Export\ExportStatus;
-use App\Repository\CategoryRepository;
+use App\Repository\TagRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class CategoryRelationHandler extends AbstractExportHandler
+class TagHandler extends AbstractExportHandler
 {
     public function __construct(
-        private readonly RequestStack       $requestStack,
-        private readonly CategoryRepository $categoryRepository,
+        private readonly RequestStack  $requestStack,
+        private readonly TagRepository $tagRepository,
     ) {
         parent::__construct($this->requestStack);
     }
 
     public function getKey(): string
     {
-        return 'category_relation';
+        return 'tag';
     }
 
     public function getColumnCount(): int
     {
-        return $this->categoryRepository->getRelationColumnCount();
+        return $this->tagRepository->getColumnCount();
     }
 
     /**
@@ -30,6 +30,6 @@ class CategoryRelationHandler extends AbstractExportHandler
      */
     public function getData(ExportStatus $status): array
     {
-        return $this->categoryRepository->getRelationExportList(self::EXPORT_LIMIT, $status->getExported());
+        return $this->tagRepository->getExportList(self::EXPORT_LIMIT, $status->getExported());
     }
 }
