@@ -40,6 +40,8 @@
                         <label>{% trans %}admin.export.systems{% endtrans %}</label>
                     {% elseif status.type == 'series' %}
                         <label>{% trans %}admin.export.series{% endtrans %}</label>
+                    {% elseif status.type == 'stage' %}
+                        <label>{% trans %}admin.export.stages{% endtrans %}</label>
                     {% endif %}
 
                     <div class="progress mt-1" role="progressbar" aria-label="{{ status.type }} status"
