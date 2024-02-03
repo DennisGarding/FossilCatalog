@@ -434,10 +434,12 @@ admin:
             empty: Please provide a value for field %s
 
     export:
+        startQuestion: Do you really want to start the export?
+        timeHint: Based on the amount of data this process can take a while.
+        doNotLeaveThePage: Do not leave the page until the process is finished.
         title: Export Data
         export: Export
         status: Status
         categories: Categories
-        startQuestion: Do you really want to start the export?
-        timeHint: Based on the amount of data this process can take a while.
-        doNotLeaveThePage: Do not leave the page until the process is finished.
+        categoryRelations: Category Relations
+

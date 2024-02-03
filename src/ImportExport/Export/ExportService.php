@@ -5,6 +5,7 @@ namespace App\ImportExport\Export;
 use App\ImportExport\CreateZipException;
 use App\ImportExport\Export\ExportHandler\AbstractExportHandler;
 use App\ImportExport\Export\ExportHandler\CategoryHandler;
+use App\ImportExport\Export\ExportHandler\CategoryRelationHandler;
 use App\Repository\ExportRepository;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -27,11 +28,13 @@ class ExportService implements ExportServiceInterface
         #[Autowire('%kernel.project_dir%')]
         private readonly string $rootDirectory,
         private readonly RequestStack $requestStack,
-        private readonly CategoryHandler $categoryHandler,
         private readonly ExportRepository $exportRepository,
+        private readonly CategoryHandler $categoryHandler,
+        private readonly CategoryRelationHandler $categoryRelationHandler,
     ) {
         $this->handler = [
             $this->categoryHandler,
+            $this->categoryRelationHandler,
         ];
     }
 

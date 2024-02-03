@@ -55,7 +55,7 @@ abstract class AbstractExportHandler
 
     public function getFileName(): string
     {
-        return $this->getKey() . '.csv';
+        return $this->getKey() . '.fcb';
     }
 
     public function getStatus(): ExportStatus
