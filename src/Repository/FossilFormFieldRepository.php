@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\FossilFormField;
 use App\FossilFormField\FossilFormFieldDefaults;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -91,7 +92,6 @@ class FossilFormFieldRepository extends ServiceEntityRepository
             ->where('formField.active = true')
             ->andWhere('formField.isRequiredDefault = true')
             ->andWhere('formField.fieldType in (:searchableTypes)')
-//            ->andWhere('formField.name not in ("earthAgeSystem", "earthAgeSeries", "earthAgeStage")')
             ->setParameter('searchableTypes', FossilFormFieldDefaults::getSearchableTypes())
             ->getQuery()
             ->getResult();
@@ -111,5 +111,30 @@ class FossilFormFieldRepository extends ServiceEntityRepository
     public function findActiveCustom(): array
     {
         return $this->findBy(['active' => true, 'isRequiredDefault' => false]);
+    }
+
+    public function getColumnCount(): int
+    {
+        $queryBuilder = $this->createQueryBuilder('formField')
+            ->select(['COUNT(formField.id)']);
+
+        $result = $queryBuilder->getQuery()
+            ->getResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
+
+        return (int) $result;
+    }
+
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    public function getExportList(int $limit, int $offset): array
+    {
+        return $this->getEntityManager()->getConnection()->createQueryBuilder()
+            ->select(['*'])
+            ->from('fossil_form_field')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->executeQuery()
+            ->fetchAllAssociative();
     }
 }
