@@ -451,4 +451,11 @@ admin:
         images: Images
         imagesRelations: Images Relations
         fossils: Fossils
+        earlierExports: Earlier Exports
+        couldNotFindExport: Could not find Export
+        exportDeleted: Backup successfully deleted
+        exportComplete: Export complete
+        list:
+            createdAt: Created at
+            isComplete: Is complete
 

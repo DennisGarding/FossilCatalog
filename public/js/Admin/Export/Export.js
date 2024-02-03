@@ -3,15 +3,22 @@ class Export {
 
     progressBarAnimatedClass = 'progress-bar-animated';
 
+    statusCardSelector = 'div[data-status-card="true"]';
+
+    hiddenClass = 'visually-hidden';
+
     constructor(exportButton, progressBars) {
         this.exportButton = exportButton;
         this.progressBars = progressBars;
+
+        this.statusCard = document.querySelector(this.statusCardSelector);
 
         this._registerEvents();
     }
 
     onClickButton(event) {
         event.preventDefault();
+        this._showStausCard()
         this._resetProgressBars();
         this._showStartModal();
     }
@@ -22,11 +29,13 @@ class Export {
         this._export();
     }
 
+    onCancelStartExport() {
+        this._hideStausCard();
+    }
+
     onSuccess(response) {
         let allFinished = true;
         Object.keys(response.status).forEach((status) => {
-            // TODO Create status class
-
             if (!response.status[status].isFinished) {
                 allFinished = false;
             }
@@ -47,8 +56,7 @@ class Export {
     }
 
     onSessionCleared() {
-        this.loadingIndicator.remove();
-        this._enableExportButton();
+        window.location.reload();
     }
 
     onError(response) {
@@ -90,11 +98,18 @@ class Export {
     }
 
     _showStartModal() {
-        const modalContent = `
-            <p>${window.translations.trans('admin.export.startQuestion')}</p>
-            <p>${window.translations.trans('admin.export.timeHint')}</p>
-            <p>${window.translations.trans('admin.export.doNotLeaveThePage')}</p>
-        `;
+        const modalContent = document.createElement('div'),
+            p_question = document.createElement('p'),
+            p_hint = document.createElement('p'),
+            p_doNotLeaveThePage = document.createElement('p');
+
+        p_question.innerText = window.translations.trans('admin.export.startQuestion');
+        p_hint.innerText = window.translations.trans('admin.export.timeHint');
+        p_doNotLeaveThePage.innerText = window.translations.trans('admin.export.doNotLeaveThePage');
+
+        modalContent.appendChild(p_question);
+        modalContent.appendChild(p_hint);
+        modalContent.appendChild(p_doNotLeaveThePage);
 
         const modal = new Modal(
             Modal.BUTTONS.OK_CANCEL_BUTTON,
@@ -102,8 +117,17 @@ class Export {
             modalContent,
         );
 
-        modal.setConfirmCallback(this.onConfirmExport.bind(this))
-            .show();
+        modal.setConfirmCallback(this.onConfirmExport.bind(this));
+        modal.setCancelCallback(this.onCancelStartExport.bind(this));
+        modal.show();
+    }
+
+    _showStausCard() {
+        this.statusCard.classList.remove(this.hiddenClass);
+    }
+
+    _hideStausCard() {
+        this.statusCard.classList.add(this.hiddenClass);
     }
 
     _resetProgressBars() {
