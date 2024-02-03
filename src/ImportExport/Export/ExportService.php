@@ -7,6 +7,7 @@ use App\ImportExport\Export\ExportHandler\AbstractExportHandler;
 use App\ImportExport\Export\ExportHandler\CategoryHandler;
 use App\ImportExport\Export\ExportHandler\CategoryRelationHandler;
 use App\ImportExport\Export\ExportHandler\TagHandler;
+use App\ImportExport\Export\ExportHandler\TagRelationHandler;
 use App\Repository\ExportRepository;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -33,11 +34,13 @@ class ExportService implements ExportServiceInterface
         private readonly CategoryHandler         $categoryHandler,
         private readonly CategoryRelationHandler $categoryRelationHandler,
         private readonly TagHandler              $tagHandler,
+        private readonly TagRelationHandler      $tagRelationHandler,
     ) {
         $this->handler = [
             $this->categoryHandler,
             $this->categoryRelationHandler,
             $this->tagHandler,
+            $this->tagRelationHandler,
         ];
     }
 

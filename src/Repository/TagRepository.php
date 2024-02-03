@@ -77,4 +77,27 @@ class TagRepository extends ServiceEntityRepository
             ->executeQuery()
             ->fetchAllAssociative();
     }
+
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    public function getRelationExportList(int $limit, int $offset): array
+    {
+        return $this->getEntityManager()->getConnection()->createQueryBuilder()
+            ->select(['*'])
+            ->from('fossil_tag')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
+
+    public function getRelationColumnCount(): int
+    {
+        return $this->getEntityManager()->getConnection()->createQueryBuilder()
+            ->select(['COUNT(*)'])
+            ->from('fossil_tag')
+            ->executeQuery()
+            ->fetchOne();
+    }
 }
