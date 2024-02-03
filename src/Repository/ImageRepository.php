@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Image;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -21,28 +22,28 @@ class ImageRepository extends ServiceEntityRepository
         parent::__construct($registry, Image::class);
     }
 
-//    /**
-//     * @return Image[] Returns an array of Image objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('i.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function getColumnCount(): int
+    {
+        $queryBuilder = $this->createQueryBuilder('image')
+            ->select(['COUNT(image.id)']);
 
-//    public function findOneBySomeField($value): ?Image
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $result = $queryBuilder->getQuery()
+            ->getResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
+
+        return (int) $result;
+    }
+
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    public function getExportList(int $limit, int $offset): array
+    {
+        return $this->getEntityManager()->getConnection()->createQueryBuilder()
+            ->select(['*'])
+            ->from('image')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
 }

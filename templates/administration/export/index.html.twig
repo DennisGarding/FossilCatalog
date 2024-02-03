@@ -44,6 +44,8 @@
                         <label>{% trans %}admin.export.stages{% endtrans %}</label>
                     {% elseif status.type == 'form_field' %}
                         <label>{% trans %}admin.export.formFields{% endtrans %}</label>
+                    {% elseif status.type == 'image' %}
+                        <label>{% trans %}admin.export.images{% endtrans %}</label>
                     {% endif %}
 
                     <div class="progress mt-1" role="progressbar" aria-label="{{ status.type }} status"
