@@ -6,6 +6,7 @@ use App\ImportExport\CreateZipException;
 use App\ImportExport\Export\ExportHandler\AbstractExportHandler;
 use App\ImportExport\Export\ExportHandler\CategoryHandler;
 use App\ImportExport\Export\ExportHandler\CategoryRelationHandler;
+use App\ImportExport\Export\ExportHandler\FormFieldHandler;
 use App\ImportExport\Export\ExportHandler\SeriesHandler;
 use App\ImportExport\Export\ExportHandler\StageHandler;
 use App\ImportExport\Export\ExportHandler\SystemHandler;
@@ -41,6 +42,7 @@ class ExportService implements ExportServiceInterface
         private readonly SystemHandler           $systemHandler,
         private readonly SeriesHandler           $seriesHandler,
         private readonly StageHandler            $stageHandler,
+        private readonly FormFieldHandler        $formFieldHandler,
     ) {
         $this->handler = [
             $this->categoryHandler,
@@ -50,6 +52,7 @@ class ExportService implements ExportServiceInterface
             $this->systemHandler,
             $this->seriesHandler,
             $this->stageHandler,
+            $this->formFieldHandler,
         ];
     }
 
