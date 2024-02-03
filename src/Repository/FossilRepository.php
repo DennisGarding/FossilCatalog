@@ -48,4 +48,18 @@ class FossilRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    public function getExportList(int $limit, int $offset): array
+    {
+        return $this->getEntityManager()->getConnection()->createQueryBuilder()
+            ->select(['*'])
+            ->from('fossil')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
 }
