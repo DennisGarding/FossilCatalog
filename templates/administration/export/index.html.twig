@@ -38,6 +38,8 @@
                         <label>{% trans %}admin.export.tagRelations{% endtrans %}</label>
                     {% elseif status.type == 'system' %}
                         <label>{% trans %}admin.export.systems{% endtrans %}</label>
+                    {% elseif status.type == 'series' %}
+                        <label>{% trans %}admin.export.series{% endtrans %}</label>
                     {% endif %}
 
                     <div class="progress mt-1" role="progressbar" aria-label="{{ status.type }} status"
