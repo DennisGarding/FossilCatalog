@@ -23,6 +23,49 @@
 
     <div class="card mt-3">
         <div class="card-header">
+            {% trans %}admin.export.earlierExports{% endtrans %}
+        </div>
+        <div class="card-body">
+            <div class="clearfix">
+                <table class="table table-striped table-hover export-table">
+                    <thead>
+                    <tr>
+                        <th class="w-25" scope="col">{% trans %}admin.export.list.createdAt{% endtrans %}</th>
+                        <th class="w-25" scope="col">{% trans %}admin.export.list.isComplete{% endtrans %}</th>
+                        <th class="w-auto" scope="col"></th>
+                        <th class="export-action-column" scope="col">{% trans %}base.action{% endtrans %}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for export in exports %}
+                        <tr>
+                            <td>{{ export.name }}</td>
+                            <td>{% include 'administration/base/booleanColumnRenderer.html.twig' with {'value': export.hasFinished } %}</td>
+                            <td></td>
+                            <td class="export-action-column">
+                                <a href="{{ url('app_admin_download_zip', {'directory': export.realPath, 'name': export.name}) }}"
+                                   data-downloadButton="true"
+                                   data-downloadUrl="{{ url('app_admin_download_zip') }}"
+                                   class="float-left btn btn-primary">
+                                    <i class="bi-download"></i>
+                                </a>
+
+                                <a href="{{ url('app_admin_delete_export_zip', {'directory': export.realPath, 'name': export.name}) }}"
+                                   data-deleteButton="true"
+                                   class="float-left ms-1 btn btn-danger">
+                                    <i class="bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-3 visually-hidden" data-status-card="true">
+        <div class="card-header">
             {% trans %}admin.export.status{% endtrans %}
         </div>
         <div class="card-body">
