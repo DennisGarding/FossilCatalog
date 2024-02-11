@@ -1,0 +1,28 @@
+{% extends 'administration/base.html.twig' %}
+
+{% block title %}{% trans %}admin.import.title{% endtrans %}{% endblock %}
+
+{% block content %}
+    <div class="card mt-3">
+        <div class="card-header">
+            {% trans %}admin.import.title{% endtrans %}
+        </div>
+        <div class="card-body">
+            <form action="{{ path('app_admin_import_upload_file') }}" method="post" enctype="multipart/form-data">
+                <div class="input-group">
+                    <input type="file" class="form-control" name="importFile" accept=".zip">
+                    <input type="submit" class="input-group-text btn btn-primary" value="{% trans %}admin.import.upload{% endtrans %}"/>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header">
+            {% trans %}admin.import.uploadListTitle{% endtrans %}
+        </div>
+        <div class="card-body">
+
+        </div>
+    </div>
+{% endblock %}

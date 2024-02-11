@@ -459,3 +459,8 @@ admin:
             createdAt: Created at
             isComplete: Is complete
 
+    import:
+        title: Import
+        upload: Upload
+        uploadListTitle: Uploads
+
