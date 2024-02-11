@@ -87,7 +87,7 @@ class ExportController extends AbstractController
         return $response;
     }
 
-    #[Route('/admin/export/zip/delete', name: 'app_admin_delete_export_zip')]
+    #[Route('/admin/export/delete', name: 'app_admin_delete_export')]
     public function deleteExportZip(Request $request,): Response
     {
         $directory = $request->get('directory');

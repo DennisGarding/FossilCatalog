@@ -17,11 +17,14 @@ use App\ImportExport\Export\ExportHandler\TagHandler;
 use App\ImportExport\Export\ExportHandler\TagRelationHandler;
 use App\Repository\ExportRepository;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\RequestStack;
 use ZipArchive;
 
 class ExportService implements ExportServiceInterface
 {
+    private const IMAGE_DIRECTORY = 'public/images/gallery';
+
     private const TARGET_DIRECTORY_SESSION_KEY = 'exportTargetDirectory';
 
     private const ZIP_FILE_EXTENSION = '.fc.backup.zip';
@@ -122,6 +125,11 @@ class ExportService implements ExportServiceInterface
             }
 
             $zip->addFile($handlerFile, $handler->getFileName());
+        }
+
+        $targetPath = sprintf('%s/%s', $this->rootDirectory, self::IMAGE_DIRECTORY);
+        foreach ((new Finder())->files()->in($targetPath) as $file) {
+            $zip->addFile($file->getRealPath(), $file->getRelativePathname());
         }
 
         $zip->close();
