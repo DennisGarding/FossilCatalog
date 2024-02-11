@@ -211,6 +211,7 @@ class FossilController extends AbstractController
         try {
             $requestData['dateOfDiscovery'] = new \DateTime($requestData['dateOfDiscovery']);
         } catch (\Exception $exception) {
+            // TODO: Add correct error message
             $this->addFlash(
                 Defaults::FLASH_TYPE_ERROR,
                 $this->translator->trans('admin.fossil.error.couldNotUploadImages') . '<br/>' . $exception->getMessage()
