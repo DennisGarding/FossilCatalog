@@ -6,26 +6,26 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
-class ExportRepository
+class ImportRepository
 {
-    private string $exportDirectory;
+    private string $importDirectory;
 
     public function __construct(
         #[Autowire('%kernel.project_dir%')]
         private readonly string $rootDirectory,
     ) {
-        $this->exportDirectory = sprintf(
+        $this->importDirectory = sprintf(
             '%s/%s',
             $this->rootDirectory,
-            'public/export',
+            'public/import',
         );
     }
 
     public function getList(): array
     {
         $finder = new Finder();
-
-        $finder->directories()->in($this->exportDirectory);
+        $finder->depth('== 0');
+        $finder->files()->in($this->importDirectory);
 
         if (!$finder->hasResults()) {
             return [];
@@ -33,16 +33,15 @@ class ExportRepository
 
         $finder->sortByName()->reverseSorting();
 
-        $exportArray = [];
+        $importsArray = [];
         foreach ($finder as $directory) {
-            $exportArray[] = [
+            $importsArray[] = [
                 'name' => $directory->getRelativePathname(),
                 'realPath'=> $directory->getRealPath(),
-                'hasFinished' => !file_exists($directory->getRealPath() . '/in_progress.lock')
             ];
         }
 
-        return $exportArray;
+        return $importsArray;
     }
 
     public function delete(string $path): void

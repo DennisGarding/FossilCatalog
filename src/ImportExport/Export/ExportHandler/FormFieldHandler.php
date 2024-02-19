@@ -3,6 +3,8 @@
 namespace App\ImportExport\Export\ExportHandler;
 
 use App\ImportExport\Export\ExportStatus;
+use App\ImportExport\ImportExportLimit;
+use App\ImportExport\Types;
 use App\Repository\FossilFormFieldRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -17,7 +19,7 @@ class FormFieldHandler extends AbstractExportHandler
 
     public function getKey(): string
     {
-        return 'form_field';
+        return Types::TYPE_FORM_FIELD;
     }
 
     public function getColumnCount(): int
@@ -30,6 +32,6 @@ class FormFieldHandler extends AbstractExportHandler
      */
     public function getData(ExportStatus $status): array
     {
-        return $this->formFieldRepository->getExportList(self::EXPORT_LIMIT, $status->getExported());
+        return $this->formFieldRepository->getExportList(ImportExportLimit::LIMIT, $status->getExported());
     }
 }

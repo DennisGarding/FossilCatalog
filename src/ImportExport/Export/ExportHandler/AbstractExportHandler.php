@@ -3,12 +3,11 @@
 namespace App\ImportExport\Export\ExportHandler;
 
 use App\ImportExport\Export\ExportStatus;
+use App\ImportExport\FileTypes;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 abstract class AbstractExportHandler
 {
-    protected const EXPORT_LIMIT = 20;
-
     protected string $targetFile;
 
     public function __construct(
@@ -91,7 +90,7 @@ abstract class AbstractExportHandler
 
     public function getFileName(): string
     {
-        return $this->getKey() . '.fcb';
+        return $this->getKey() . FileTypes::FOSSIL_CATALOG_BACKUP;
     }
 
     public function getStatus(): ExportStatus

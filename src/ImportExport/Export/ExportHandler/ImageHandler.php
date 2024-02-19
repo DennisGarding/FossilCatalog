@@ -3,6 +3,8 @@
 namespace App\ImportExport\Export\ExportHandler;
 
 use App\ImportExport\Export\ExportStatus;
+use App\ImportExport\ImportExportLimit;
+use App\ImportExport\Types;
 use App\Repository\ImageRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -17,7 +19,7 @@ class ImageHandler extends AbstractExportHandler
 
     public function getKey(): string
     {
-        return 'image';
+        return Types::TYPE_IMAGE;
     }
 
     public function getColumnCount(): int
@@ -30,6 +32,6 @@ class ImageHandler extends AbstractExportHandler
      */
     public function getData(ExportStatus $status): array
     {
-        return $this->imageRepository->getExportList(self::EXPORT_LIMIT, $status->getExported());
+        return $this->imageRepository->getExportList(ImportExportLimit::LIMIT, $status->getExported());
     }
 }

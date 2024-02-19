@@ -1,9 +1,9 @@
 class Export {
+    statusCardSelector = 'div[data-status-card="true"]';
+
     progressBarStripedClass = 'progress-bar-striped';
 
     progressBarAnimatedClass = 'progress-bar-animated';
-
-    statusCardSelector = 'div[data-status-card="true"]';
 
     hiddenClass = 'visually-hidden';
 
@@ -94,7 +94,7 @@ class Export {
             Modal.BUTTONS.OK_BUTTON,
             window.translations.trans('admin.genericError'),
             content,
-        );
+        ).show();
     }
 
     _showStartModal() {

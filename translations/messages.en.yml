@@ -454,13 +454,24 @@ admin:
         earlierExports: Earlier Exports
         couldNotFindExport: Could not find Export
         exportDeleted: Backup successfully deleted
-        exportComplete: Export complete
+        exportComplete: Export successfully complete
         list:
             createdAt: Created at
             isComplete: Is complete
 
     import:
         title: Import
+        importStatus: Import Status
         upload: Upload
         uploadListTitle: Uploads
-
+        startImport: Start Import
+        noFileSelected: No file selected. Please provide a file path to continue this action.
+        fileNotFound: Could not find file with path %s
+        fileDeleted: File successfully deleted
+        deleteFileQuestion: Do you really want to delete the Backup file?
+        startQuestion: Do you really want to start the import? This will overwrite the existing data.
+        timeHint: Based on the amount of data this process can take a while.
+        doNotLeaveThePage: Do not leave the page until the process is finished.
+        importComplete: Import successfully complete
+        list:
+            fileName: File Name

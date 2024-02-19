@@ -33,6 +33,9 @@
 <script type="application/javascript" src="{{ asset('js/Admin/Stage/StagePage.js') }}"></script>
 <script type="application/javascript" src="{{ asset('js/Admin/Export/Export.js') }}"></script>
 <script type="application/javascript" src="{{ asset('js/Admin/Export/ExportPage.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/Admin/Import/Import.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/Admin/Import/ImportDelete.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/Admin/Import/ImportPage.js') }}"></script>
 
 
 
@@ -63,6 +66,7 @@
                 new StagePage();
                 new Pagination();
                 new ExportPage();
+                new ImportPage();
 
                 const multiSelectFields = document.querySelectorAll('select[data-multi-select-plugin="true"]');
                 multiSelectFields.forEach(function (field) {

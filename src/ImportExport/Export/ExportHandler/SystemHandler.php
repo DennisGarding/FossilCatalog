@@ -3,6 +3,8 @@
 namespace App\ImportExport\Export\ExportHandler;
 
 use App\ImportExport\Export\ExportStatus;
+use App\ImportExport\ImportExportLimit;
+use App\ImportExport\Types;
 use App\Repository\EarthAgeSystemRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -17,7 +19,7 @@ class SystemHandler extends AbstractExportHandler
 
     public function getKey(): string
     {
-        return 'system';
+        return Types::TYPE_SYSTEM;
     }
 
     public function getColumnCount(): int
@@ -30,6 +32,6 @@ class SystemHandler extends AbstractExportHandler
      */
     public function getData(ExportStatus $status): array
     {
-        return $this->systemRepository->getExportList(self::EXPORT_LIMIT, $status->getExported());
+        return $this->systemRepository->getExportList(ImportExportLimit::LIMIT, $status->getExported());
     }
 }
