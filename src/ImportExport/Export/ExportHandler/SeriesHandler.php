@@ -3,6 +3,8 @@
 namespace App\ImportExport\Export\ExportHandler;
 
 use App\ImportExport\Export\ExportStatus;
+use App\ImportExport\ImportExportLimit;
+use App\ImportExport\Types;
 use App\Repository\EarthAgeSeriesRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -17,7 +19,7 @@ class SeriesHandler extends AbstractExportHandler
 
     public function getKey(): string
     {
-        return 'series';
+        return Types::TYPE_SERIES;
     }
 
     public function getColumnCount(): int
@@ -30,6 +32,6 @@ class SeriesHandler extends AbstractExportHandler
      */
     public function getData(ExportStatus $status): array
     {
-        return $this->seriesRepository->getExportList(self::EXPORT_LIMIT, $status->getExported());
+        return $this->seriesRepository->getExportList(ImportExportLimit::LIMIT, $status->getExported());
     }
 }

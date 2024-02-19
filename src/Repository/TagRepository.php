@@ -100,4 +100,12 @@ class TagRepository extends ServiceEntityRepository
             ->executeQuery()
             ->fetchOne();
     }
+
+    public function save(Tag $tag): Tag
+    {
+        $this->getEntityManager()->persist($tag);
+        $this->getEntityManager()->flush();
+
+        return $tag;
+    }
 }

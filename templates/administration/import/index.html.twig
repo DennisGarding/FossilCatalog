@@ -10,8 +10,9 @@
         <div class="card-body">
             <form action="{{ path('app_admin_import_upload_file') }}" method="post" enctype="multipart/form-data">
                 <div class="input-group">
-                    <input type="file" class="form-control" name="importFile" accept=".zip">
-                    <input type="submit" class="input-group-text btn btn-primary" value="{% trans %}admin.import.upload{% endtrans %}"/>
+                    <input type="file" class="form-control" name="importFile" accept=".zip" required="required">
+                    <input type="submit" class="input-group-text btn btn-primary"
+                           value="{% trans %}admin.import.upload{% endtrans %}"/>
                 </div>
             </form>
         </div>
@@ -22,6 +23,50 @@
             {% trans %}admin.import.uploadListTitle{% endtrans %}
         </div>
         <div class="card-body">
+            <table class="table table-striped table-hover export-table">
+                <thead>
+                <tr>
+                    <th class="w-25" scope="col">{% trans %}admin.import.list.fileName{% endtrans %}</th>
+                    <th class="w-auto" scope="col"></th>
+                    <th class="export-action-column" scope="col">{% trans %}base.action{% endtrans %}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for import in imports %}
+                    <tr>
+                        <td>{{ import.name }}</td>
+                        <td></td>
+
+                        <td class="export-action-column">
+                            <a href="{{ url('app_admin_import_progress') }}"
+                               data-analyzeurl="{{ url('app_admin_import_analyze', {'path': import.realPath}) }}"
+                               data-clearurl="{{ url('app_admin_import_clear') }}"
+                               data-start-importButton="true"
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="bottom"
+                               data-bs-title="{% trans %}admin.import.startImport{% endtrans %}"
+                               class="float-left btn btn-warning">
+                                <i class="bi-caret-right-fill"></i>
+                            </a>
+
+                            <a href="{{ url('app_admin_import_delete_file', {'path': import.realPath}) }}"
+                               data-deleteImportButton="true"
+                               class="float-left ms-1 btn btn-danger">
+                                <i class="bi-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card mt-3 visually-hidden" data-import-status-card="true">
+        <div class="card-header">
+            {% trans %}admin.import.importStatus{% endtrans %}
+        </div>
+        <div class="card-body import_progress_container">
 
         </div>
     </div>

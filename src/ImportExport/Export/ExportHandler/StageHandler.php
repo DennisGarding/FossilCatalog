@@ -3,6 +3,8 @@
 namespace App\ImportExport\Export\ExportHandler;
 
 use App\ImportExport\Export\ExportStatus;
+use App\ImportExport\ImportExportLimit;
+use App\ImportExport\Types;
 use App\Repository\EarthAgeStageRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -17,7 +19,7 @@ class StageHandler extends AbstractExportHandler
 
     public function getKey(): string
     {
-        return 'stage';
+        return Types::TYPE_STAGE;
     }
 
     public function getColumnCount(): int
@@ -30,6 +32,6 @@ class StageHandler extends AbstractExportHandler
      */
     public function getData(ExportStatus $status): array
     {
-        return $this->stageRepository->getExportList(self::EXPORT_LIMIT, $status->getExported());
+        return $this->stageRepository->getExportList(ImportExportLimit::LIMIT, $status->getExported());
     }
 }
