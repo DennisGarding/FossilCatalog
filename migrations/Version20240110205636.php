@@ -4,26 +4,18 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
-use App\Installation\EarthAges\Series;
-use App\Installation\EarthAges\System;
-use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
-use Psr\Log\LoggerInterface;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
 final class Version20240110205636 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Initial migration for fossil catalog database';
     }
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE category (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE earth_age_series (id INT AUTO_INCREMENT NOT NULL, earth_age_system_id INT NOT NULL, name VARCHAR(255) NOT NULL, custom TINYINT(1) NOT NULL, INDEX IDX_2051C30D10CFAD95 (earth_age_system_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE earth_age_stage (id INT AUTO_INCREMENT NOT NULL, earth_age_series_id INT NOT NULL, name VARCHAR(255) NOT NULL, custom TINYINT(1) NOT NULL, INDEX IDX_596ACE7D9222B3AC (earth_age_series_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');

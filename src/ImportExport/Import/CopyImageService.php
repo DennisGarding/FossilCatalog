@@ -2,7 +2,6 @@
 
 namespace App\ImportExport\Import;
 
-use Doctrine\DBAL\Connection;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -10,8 +9,7 @@ class CopyImageService
 {
     public function __construct(
         #[Autowire('%kernel.project_dir%')]
-        private readonly string     $rootDirectory,
-        private readonly Connection $connection
+        private readonly string $rootDirectory,
     ) {}
 
     public function copyImages(array $data, string $basePath)

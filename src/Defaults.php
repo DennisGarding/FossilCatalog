@@ -14,5 +14,7 @@ final class Defaults
 
     public const LANGUAGE_ENGLISH = 'en';
 
+    public const LATEST_FOSSILS_COUNT = 5;
+
     private function __construct() {}
 }

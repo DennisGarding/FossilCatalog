@@ -66,3 +66,17 @@ div.show-loading-indicator .spinner-border {
     top: 8px;
 }
 
+.fossil-list-action-column-buttons {
+    width: 0;
+    min-width: fit-content;
+    text-align: center;
+}
+
+.action-column-row {
+    width: max-content;
+}
+
+.action-column-row .col{
+    margin: unset;
+    padding: 0 3px 0 0;
+}

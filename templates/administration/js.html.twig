@@ -36,7 +36,7 @@
 <script type="application/javascript" src="{{ asset('js/Admin/Import/Import.js') }}"></script>
 <script type="application/javascript" src="{{ asset('js/Admin/Import/ImportDelete.js') }}"></script>
 <script type="application/javascript" src="{{ asset('js/Admin/Import/ImportPage.js') }}"></script>
-
+<script type="application/javascript" src="{{ asset('js/Admin/FossilListTableActionColumn.js') }}"></script>
 
 
 {# Elements without new instance #}
@@ -71,6 +71,11 @@
                 const multiSelectFields = document.querySelectorAll('select[data-multi-select-plugin="true"]');
                 multiSelectFields.forEach(function (field) {
                     new MultiSelectField(field);
+                });
+
+                const fossilTables = document.querySelectorAll('table[data-fossil-list-table="true"]');
+                fossilTables.forEach(function (table) {
+                    new FossilListTableActionColumn(table);
                 });
             })
             .execute();
