@@ -2,6 +2,39 @@
 
 {% block title %}{% trans %}admin.overviewTitle{% endtrans %}{% endblock %}
 
-{% block body %}
+{% block content %}
+    <div class="card mt-3">
+        <div class="card-header">
+            {% trans %}admin.overview.overviewTitle{% endtrans %}
+        </div>
+        <div class="card-body">
+            <div>
+                <strong>{% trans %}admin.overview.fossilCount{% endtrans %}:</strong> {{ fossilCount }}
+            </div>
+            <div>
+                <strong>{% trans %}admin.overview.categoryCount{% endtrans %}:</strong> {{ categoryCount }}
+            </div>
+            <div>
+                <strong>{% trans %}admin.overview.tagCount{% endtrans %}:</strong> {{ tagCount }}
+            </div>
+        </div>
+    </div>
 
+    <div class="card mt-3">
+        <div class="card-header">
+            {% trans %}admin.overview.latestFossils{% endtrans %}
+        </div>
+        <div class="card-body">
+            {% include 'administration/fossil/fossil-list.html.twig'  with {'list': latestFossils, 'formFieldList': formFields, 'hideEditButton': true, 'hideDeleteButton': true } %}
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header">
+            {% trans %}admin.overview.latestEditedFossils{% endtrans %}
+        </div>
+        <div class="card-body">
+            {% include 'administration/fossil/fossil-list.html.twig'  with {'list': latestChangedFossils, 'formFieldList': formFields, 'hideEditButton': true, 'hideDeleteButton': true } %}
+        </div>
+    </div>
 {% endblock %}

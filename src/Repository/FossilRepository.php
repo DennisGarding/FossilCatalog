@@ -62,4 +62,27 @@ class FossilRepository extends ServiceEntityRepository
             ->executeQuery()
             ->fetchAllAssociative();
     }
+
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    public function getLatestFossils(): array
+    {
+        return $this->createQueryBuilder('fossil')
+            ->select(['fossil'])
+            ->orderBy('fossil.createdAt', 'DESC')
+            ->setMaxResults(Defaults::LATEST_FOSSILS_COUNT)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getLatestChangedFossils(): array
+    {
+        return $this->createQueryBuilder('fossil')
+            ->select(['fossil'])
+            ->orderBy('fossil.updatedAt', 'DESC')
+            ->setMaxResults(Defaults::LATEST_FOSSILS_COUNT)
+            ->getQuery()
+            ->getResult();
+    }
 }

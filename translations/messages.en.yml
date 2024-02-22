@@ -236,6 +236,14 @@ admin:
     genericPropertyRequired:
     genericNoIdProvided: No ID provided.
 
+    overview:
+        overviewTitle: Overview
+        fossilCount: Amount of Fossils
+        categoryCount: Amount of Categories
+        tagCount: Amount of Tags
+        latestFossils: Latest Fossils
+        latestEditedFossils: Latest edited Fossils
+
     fossil:
         title: Fossils
         detailsTitle: Fossil Details

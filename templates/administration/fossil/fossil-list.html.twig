@@ -1,0 +1,84 @@
+{% if list is not defined  %}
+    <div class="text-bg-warning">
+        <p>Expect "fossilList" to be defined</p>
+    </div>
+{% elseif formFieldList is not defined %}
+    <div class="text-bg-warning">
+        <p>Expect "formFieldList" to be defined</p>
+    </div>
+{% else %}
+    <table class="table table-striped table-hover fossil-list-table" data-fossil-list-table="true">
+        <thead>
+        <tr>
+            <th scope="col"></th>
+            {% for formField in formFieldList %}
+                {% if formField.showInOverview %}
+                    <th scope="col"{% if formField.fieldName not in ['number', 'species'] %} class="d-none d-lg-table-cell"{% endif %}>{{ formField.fieldLabel }}</th>
+                {% endif %}
+            {% endfor %}
+            <th class="fossil-list-action-column">{% trans %}base.action{% endtrans %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for fossil in list %}
+            <tr class="fossil-row">
+                <td class="fossil-list-image-column">
+                    <a href="{{ url('app_admin_fossil_detail', {'id': fossil.id}) }}" style="width: 90px;">
+                        <span class="list-image" style="
+                                background: url('{% if fossil.images|length > 0 %}{{ asset(fossil.images|first.thumbnailPath) }}{% else %}{{ asset('images/no-image.png') }}{% endif %}');
+                                background-repeat: no-repeat;
+                                background-position: center;
+                                background-size: cover;
+                                ">
+                        </span>
+                    </a>
+                </td>
+                {% for formField in formFieldList %}
+                    {% if formField.showInOverview %}
+                        <td{% if formField.fieldName not in ['number', 'species'] %} class="d-none d-lg-table-cell"{% endif %}>
+                            {{ fossil[formField.fieldName|mapField] }}
+                        </td>
+                    {% endif %}
+                {% endfor %}
+
+                <td class="fossil-list-action-column-buttons">
+                    <div class="container">
+                        <div class="row row-cols-3 action-column-row">
+                            {% if hideDetailButton|default == false %}
+                                <div class="col col-auto">
+                                    <a href="{{ url('app_admin_fossil_detail', { 'id': fossil.id }) }}"
+                                       class="btn btn-primary">
+                                        <i class="bi-search"></i>
+                                    </a>
+                                </div>
+                            {% endif %}
+
+                            {% if hideEditButton|default == false %}
+                                <div class="col col-auto">
+                                    {% set errorRoute = url ('app_admin_fossil_list') %}
+                                    <a href="{{ url('app_admin_fossil_edit_form', { 'id': fossil.id, 'errorRoute': errorRoute }) }}"
+                                       class="btn btn-secondary">
+                                        <i class="bi-pencil"></i>
+                                    </a>
+                                </div>
+                            {% endif %}
+
+                            {% if hideDeleteButton|default == false %}
+                                <div class="col col-auto">
+                                    <a href="{{ url('app_admin_fossil_delete', { 'id': fossil.id }) }}"
+                                       class="btn btn-danger"
+                                       data-delete-fossil="true"
+                                       data-id="{{ fossil.id }}"
+                                       data-number="{{ fossil.number }}">
+                                        <i class="bi-trash3"></i>
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}

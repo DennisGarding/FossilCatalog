@@ -1,6 +1,7 @@
 {
     "type": "project",
-    "license": "proprietary",
+    "license": "MIT License",
+    "version": "1.0.0-beta-1",
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
