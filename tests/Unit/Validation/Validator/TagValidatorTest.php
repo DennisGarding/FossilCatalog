@@ -2,6 +2,7 @@
 
 namespace App\Tests\Unit\Validation\Validator;
 
+use App\Validation\IdConstraint;
 use App\Validation\Validator;
 use App\Validation\Validator\TagValidator;
 use PHPUnit\Framework\TestCase;
@@ -15,7 +16,8 @@ class TagValidatorTest extends TestCase
             'name' => 'Test',
         ];
 
-        $validator = new TagValidator($this->createTranslatorMock());
+        $validator = $this->createTagValidator();
+
         $result = $validator->validate($data);
 
         static::assertFalse($result->hasViolations());
@@ -29,7 +31,7 @@ class TagValidatorTest extends TestCase
             'name' => null,
         ];
 
-        $validator = new TagValidator($this->createTranslatorMock());
+        $validator = $this->createTagValidator();
         $result = $validator->validate($data);
 
         static::assertTrue($result->hasViolations());
@@ -45,7 +47,7 @@ class TagValidatorTest extends TestCase
             'name' => '',
         ];
 
-        $validator = new TagValidator($this->createTranslatorMock());
+        $validator = $this->createTagValidator();
         $result = $validator->validate($data);
 
         static::assertTrue($result->hasViolations());
@@ -61,7 +63,7 @@ class TagValidatorTest extends TestCase
             'name' => '   ',
         ];
 
-        $validator = new TagValidator($this->createTranslatorMock());
+        $validator = $this->createTagValidator();
         $result = $validator->validate($data);
 
         static::assertTrue($result->hasViolations());
@@ -71,13 +73,13 @@ class TagValidatorTest extends TestCase
         static::assertSame('Please provide a Tag name', $result->getViolations()['name']);
     }
 
-    public function testValidateWithExpectIdAndNoIdGiven()
+    public function testValidateWithExpectIdAndNoIdGiven(): void
     {
         $data = [
             'name' => 'Test',
         ];
 
-        $validator = new TagValidator($this->createTranslatorMock());
+        $validator = $this->createTagValidator();
 
         $result = $validator->validate($data, Validator::EXPECT_ID);
 
@@ -88,14 +90,14 @@ class TagValidatorTest extends TestCase
         static::assertSame('Please provide a Tag ID', $result->getViolations()['id']);
     }
 
-    public function testValidateWithExpectIdAndIdIsNotNumeric()
+    public function testValidateWithExpectIdAndIdIsNotNumeric(): void
     {
         $data = [
             'name' => 'Test',
             'id' => '12abc',
         ];
 
-        $validator = new TagValidator($this->createTranslatorMock());
+        $validator = $this->createTagValidator();
 
         $result = $validator->validate($data, Validator::EXPECT_ID);
 
@@ -106,14 +108,14 @@ class TagValidatorTest extends TestCase
         static::assertSame('This value should be of type integer.', $result->getViolations()['id']);
     }
 
-    public function testValidateWithExpectIdAndIdIsNumericString()
+    public function testValidateWithExpectIdAndIdIsNumericString(): void
     {
         $data = [
             'name' => 'Test',
             'id' => '42',
         ];
 
-        $validator = new TagValidator($this->createTranslatorMock());
+        $validator = $this->createTagValidator();
 
         $result = $validator->validate($data, Validator::EXPECT_ID);
 
@@ -122,14 +124,14 @@ class TagValidatorTest extends TestCase
         static::assertCount(0, $result->getViolations());
     }
 
-    public function testValidateWithExpectIdAndIdIsNull()
+    public function testValidateWithExpectIdAndIdIsNull(): void
     {
         $data = [
             'name' => 'Test',
             'id' => null,
         ];
 
-        $validator = new TagValidator($this->createTranslatorMock());
+        $validator = $this->createTagValidator();
 
         $result = $validator->validate($data, Validator::EXPECT_ID);
 
@@ -140,12 +142,20 @@ class TagValidatorTest extends TestCase
         static::assertSame('Please provide a Tag ID', $result->getViolations()['id']);
     }
 
+    private function createTagValidator(): TagValidator
+    {
+        $translatorMock = $this->createTranslatorMock();
+
+        return new TagValidator(new IdConstraint($translatorMock), $translatorMock);
+    }
+
     private function createTranslatorMock(): TranslatorInterface
     {
         $translatorMock = $this->createMock(TranslatorInterface::class);
         $translatorMock->method('trans')->willReturnMap([
             ['admin.tags.messages.errors.noTagName', [], null, null, 'Please provide a Tag name'],
             ['admin.tags.messages.errors.emptyId', [], null, null, 'Please provide a Tag ID'],
+            ['admin.category.messages.errors.emptyId', [], null, null, 'Please provide a Tag ID'],
         ]);
 
         return $translatorMock;

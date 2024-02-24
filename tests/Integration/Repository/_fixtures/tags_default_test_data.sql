@@ -1,4 +1,4 @@
-INSERT INTO tag (id, display_name)
+INSERT INTO tag (id, name)
 VALUES (1, 'tag1'),
        (2, 'tag2'),
        (3, 'tag3'),

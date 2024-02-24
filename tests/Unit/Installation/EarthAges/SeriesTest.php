@@ -8,45 +8,45 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SeriesTest extends TestCase
 {
-    public function testGet()
+    public function testGet(): void
     {
         $system = new Series($this->createTranslator());
         $expected = <<<SQL
-INSERT INTO `earth_age_series` (`id`, `name`, `earth_age_system_id`)
-VALUES (1, 'Holocene', 1),
-       (2, 'Pleistocene', 1),
-       (3, 'Pliocene', 2),
-       (4, 'Miocene', 2),
-       (5, 'Oligocene', 3),
-       (6, 'Eocene', 3),
-       (7, 'Paleocene', 3),
-       (8, 'Upper Cretaceous', 4),
-       (9, 'Lower Cretaceous', 4),
-       (10, 'Upper Jurassic', 5),
-       (11, 'Middle Jurassic', 5),
-       (12, 'Lower Jurassic', 5),
-       (13, 'Upper Triassic', 6),
-       (14, 'Middle Triassic', 6),
-       (15, 'Lower Triassic', 6),
-       (16, 'Lopingian', 7),
-       (17, 'Guadalupian', 7),
-       (18, 'Cisuralian', 7),
-       (19, 'Pennsylvanian', 8),
-       (20, 'Mississippian', 8),
-       (21, 'Upper Devonian', 9),
-       (22, 'Middle Devonian', 9),
-       (23, 'Lower Devonian', 9),
-       (24, 'Pridoli', 10),
-       (25, 'Ludlow', 10),
-       (26, 'Wenlock', 10),
-       (27, 'Llandovery', 10),
-       (28, 'Upper Ordovician', 11),
-       (29, 'Middle Ordovician', 11),
-       (30, 'Lower Ordovician', 11),
-       (31, 'Furongian', 12),
-       (32, 'Miaolingian', 12),
-       (33, '2nd Series', 12),
-       (34, 'Terreneuvian', 12);
+INSERT INTO `earth_age_series` (`id`, `name`, `earth_age_system_id`, `custom`)
+VALUES (1, 'Holocene', 1, false),
+       (2, 'Pleistocene', 1, false),
+       (3, 'Pliocene', 2, false),
+       (4, 'Miocene', 2, false),
+       (5, 'Oligocene', 3, false),
+       (6, 'Eocene', 3, false),
+       (7, 'Paleocene', 3, false),
+       (8, 'Upper Cretaceous', 4, false),
+       (9, 'Lower Cretaceous', 4, false),
+       (10, 'Upper Jurassic', 5, false),
+       (11, 'Middle Jurassic', 5, false),
+       (12, 'Lower Jurassic', 5, false),
+       (13, 'Upper Triassic', 6, false),
+       (14, 'Middle Triassic', 6, false),
+       (15, 'Lower Triassic', 6, false),
+       (16, 'Lopingian', 7, false),
+       (17, 'Guadalupian', 7, false),
+       (18, 'Cisuralian', 7, false),
+       (19, 'Pennsylvanian', 8, false),
+       (20, 'Mississippian', 8, false),
+       (21, 'Upper Devonian', 9, false),
+       (22, 'Middle Devonian', 9, false),
+       (23, 'Lower Devonian', 9, false),
+       (24, 'Pridoli', 10, false),
+       (25, 'Ludlow', 10, false),
+       (26, 'Wenlock', 10, false),
+       (27, 'Llandovery', 10, false),
+       (28, 'Upper Ordovician', 11, false),
+       (29, 'Middle Ordovician', 11, false),
+       (30, 'Lower Ordovician', 11, false),
+       (31, 'Furongian', 12, false),
+       (32, 'Miaolingian', 12, false),
+       (33, '2nd Series', 12, false),
+       (34, 'Terreneuvian', 12, false);
 SQL;
 
         static::assertSame($expected, $system->getSql());

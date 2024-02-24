@@ -20,7 +20,7 @@ class InstallationData
 
     private string $databaseHost;
 
-    private int $databasePort;
+    private string $databasePort;
 
     private string $userEmail;
 
@@ -35,7 +35,7 @@ class InstallationData
     private ValidationResult $validationResult;
 
     /**
-     * @param array<string, string|int> $data
+     * @param array<string, string> $data
      */
     public function __construct(array $data, ValidationResult $validationResult)
     {
@@ -66,7 +66,7 @@ class InstallationData
         return $this->databaseHost;
     }
 
-    public function getDatabasePort(): int
+    public function getDatabasePort(): string
     {
         return $this->databasePort;
     }
@@ -111,7 +111,7 @@ class InstallationData
             'databaseUsername' => [new NotBlank(), new Type(Validator::TYPE_STRING)],
             'databasePassword' => [new NotBlank(), new Type(Validator::TYPE_STRING)],
             'databaseHost' => [new NotBlank(), new Type(Validator::TYPE_STRING)],
-            'databasePort' => [new NotBlank(), new Type(Validator::TYPE_INT)],
+            'databasePort' => [new NotBlank(), new Type(Validator::TYPE_STRING), new Length(['min' => 4])],
             'userEmail' => [new NotBlank(), new Type(Validator::TYPE_STRING)],
             'userPassword' => [new NotBlank(), new Type(Validator::TYPE_STRING)],
             'userPasswordConfirm' => [new NotBlank(), new Type(Validator::TYPE_STRING)],
@@ -121,7 +121,7 @@ class InstallationData
     }
 
     /**
-     * @return array<string, string|int>
+     * @return array<string, string>
      */
     public function toArray(): array
     {
