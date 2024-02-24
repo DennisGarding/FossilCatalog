@@ -8,7 +8,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SystemTest extends TestCase
 {
-    public function testGet()
+    public function testGet(): void
     {
         $system = new System($this->createTranslator());
         $expected = <<<SQL

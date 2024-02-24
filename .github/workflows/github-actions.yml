@@ -1,0 +1,33 @@
+name: Run
+run-name: ${{ github.actor }} GitHub Actions 🚀
+on:
+    pull_request:
+    workflow_dispatch:
+
+jobs:
+    PHPUnitTests:
+        runs-on: ubuntu-latest
+        env:
+            DB_DATABASE: fossilCatalog
+            DB_USER: root
+            DB_PASSWORD: root
+            DB_HOST: "127.0.0.1"
+            DB_PORT: 3306
+
+        steps:
+            -   name: Checkout repository
+                uses: actions/checkout@v4
+            -   uses: shogo82148/actions-setup-mysql@v1
+                with:
+                    distribution: "mariadb"
+                    mysql-version: "10.5"
+                    root-password: root
+
+            -   name: Install composer dependencies
+                run: composer install
+
+            -   name: Setup environment
+                run: composer setup
+
+            -   name: Run PHPUnit tests
+                run: composer phpunit
