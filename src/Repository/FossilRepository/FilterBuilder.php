@@ -18,6 +18,9 @@ class FilterBuilder
 
     private CacheItem $cacheItem;
 
+    /**
+     * @return static
+     */
     public function __construct()
     {
         $this->cacheAdapter = new FilesystemAdapter();

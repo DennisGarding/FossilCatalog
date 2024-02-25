@@ -12,7 +12,10 @@ class CopyImageService
         private readonly string $rootDirectory,
     ) {}
 
-    public function copyImages(array $data, string $basePath)
+    /**
+     * @param array<string, mixed> $data
+     */
+    public function copyImages(array $data, string $basePath): void
     {
         $filesystem = new Filesystem();
 
@@ -33,6 +36,4 @@ class CopyImageService
             $filesystem->copy($thumbnailSourcePath, $thumbnailDestinationPath);
         }
     }
-
-
 }

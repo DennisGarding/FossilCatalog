@@ -76,6 +76,9 @@ class Fossil implements \ArrayAccess, EntityInterface
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $taxonomyNotes = null;
 
+    /**
+     * @var array<mixed>|null
+     */
     #[ORM\Column(nullable: true)]
     private ?array $extraFields = null;
 
@@ -379,11 +382,17 @@ class Fossil implements \ArrayAccess, EntityInterface
         return $this;
     }
 
+    /**
+     * @return array<int|string, mixed>|null
+     */
     public function getExtraFields(): ?array
     {
         return $this->extraFields;
     }
 
+    /**
+     * @param array<mixed>|null $extraFields
+     */
     public function setExtraFields(?array $extraFields): static
     {
         $this->extraFields = $extraFields;
@@ -469,7 +478,10 @@ class Fossil implements \ArrayAccess, EntityInterface
         $this->earthAgeStage = $earthAgeStage;
     }
 
-    public function apply(array $fossilData)
+    /**
+     * @param array<string, mixed> $fossilData
+     */
+    public function apply(array $fossilData): void
     {
         $this->tags = new ArrayCollection();
         $this->categories = new ArrayCollection();

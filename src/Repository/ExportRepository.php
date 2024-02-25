@@ -21,6 +21,9 @@ class ExportRepository
         );
     }
 
+    /**
+     * @return array<int, array<string, string|bool>>
+     */
     public function getList(): array
     {
         $finder = new Finder();

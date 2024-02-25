@@ -13,6 +13,9 @@ class EntityObjectOptions
 
     private int $length;
 
+    /**
+     * @param array<int, EntityInterface> $entities
+     */
     public function __construct(int $length, array $entities)
     {
         $this->entities = $entities;

@@ -4,6 +4,9 @@ namespace App\DemoData\Random\NameOptions;
 
 class FindingPlaceNames
 {
+    /**
+     * @return array<int, string>
+     */
     public static function getNames(): array
     {
         return [

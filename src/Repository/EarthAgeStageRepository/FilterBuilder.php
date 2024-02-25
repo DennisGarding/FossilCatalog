@@ -96,7 +96,7 @@ class FilterBuilder
         $this->filters['searchTerm'] = trim($this->filters['searchTerm']);
     }
 
-    private function buildCustom()
+    private function buildCustom(): void
     {
         if (empty($this->filters['custom'])) {
             $this->filters['custom'] = false;
@@ -107,7 +107,7 @@ class FilterBuilder
         $this->filters['custom'] = true;
     }
 
-    private function buildSeries()
+    private function buildSeries(): void
     {
         if (empty($this->filters['series'])) {
             $this->filters['series'] = null;

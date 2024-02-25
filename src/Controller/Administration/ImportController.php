@@ -22,7 +22,6 @@ class ImportController extends AbstractController
         private readonly ImportFileUploadService $importFileUploadService,
         private readonly ImportRepository        $importRepository,
         private readonly ImportService           $importService,
-        private readonly CopyImageService        $copyImageService,
         private readonly TranslatorInterface     $translator,
     ) {}
 

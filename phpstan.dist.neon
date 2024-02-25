@@ -6,3 +6,9 @@ parameters:
         - public/
         - src/
         - tests/
+
+    checkGenericClassInNonGenericObjectType: false
+
+    ignoreErrors:
+        - # ignore constructor return types
+            message: '#^Method .*::__construct\(\) with return type void returns.*#'

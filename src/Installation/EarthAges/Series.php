@@ -57,6 +57,9 @@ SQL;
         return $sql;
     }
 
+    /**
+     * @return array<int, string>
+     */
     private function getTranslationKeys(): array
     {
         return [

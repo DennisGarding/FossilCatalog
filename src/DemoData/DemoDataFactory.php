@@ -5,12 +5,13 @@ namespace App\DemoData;
 use App\DemoData\Handler\CategoryHandler;
 use App\DemoData\Handler\FormFieldHandler;
 use App\DemoData\Handler\FossilHandler;
+use App\DemoData\Handler\HandlerInterface;
 use App\DemoData\Handler\TagHandler;
 
 class DemoDataFactory
 {
     /**
-     * @var array <string, HandlerInterface>
+     * @var array<string, HandlerInterface>
      */
     private array $handlers = [];
 

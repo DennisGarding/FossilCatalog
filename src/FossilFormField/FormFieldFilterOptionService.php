@@ -6,6 +6,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class FormFieldFilterOptionService
 {
+    /**
+     * @var array<string, string>
+     */
     private array $allOption;
 
     public function __construct(
@@ -37,6 +40,9 @@ class FormFieldFilterOptionService
         );
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function createCustomFiledOptions(): array
     {
         return array_merge(

@@ -30,6 +30,9 @@ class ImageHandler extends AbstractImportHandler implements AdditionalWorkerInte
         return 'image';
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     public function createQuery(array $data): ?QueryBuilder
     {
         if ($this->datasetExists($this->createConfig($data))) {
@@ -39,6 +42,9 @@ class ImageHandler extends AbstractImportHandler implements AdditionalWorkerInte
         return $this->createInsertQuery($data);
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     private function createConfig(array $data): TableConfig
     {
         return new TableConfig(
@@ -48,6 +54,9 @@ class ImageHandler extends AbstractImportHandler implements AdditionalWorkerInte
         );
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     private function createInsertQuery(array $data): QueryBuilder
     {
         return $this->connection->createQueryBuilder()
@@ -70,6 +79,9 @@ class ImageHandler extends AbstractImportHandler implements AdditionalWorkerInte
             ->setParameter('mime_type', $data['mime_type']);
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     private function createUpdateQuery(array $data): QueryBuilder
     {
         return $this->connection->createQueryBuilder()
@@ -90,6 +102,9 @@ class ImageHandler extends AbstractImportHandler implements AdditionalWorkerInte
             ->setParameter('mime_type', $data['mime_type']);
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     public function doWork(array $data, ImportStatus $status): void
     {
         $this->copyImageService->copyImages($data, $status->getPath());

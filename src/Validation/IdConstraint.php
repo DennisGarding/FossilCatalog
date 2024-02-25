@@ -15,6 +15,8 @@ class IdConstraint
     ) {}
 
     /**
+     * @param array<string, array<int, Constraint>> $constraints
+     *
      * @return array<string, array<int, Constraint>>
      */
     public function addIdConstraint(bool $requiresId, array &$constraints): array

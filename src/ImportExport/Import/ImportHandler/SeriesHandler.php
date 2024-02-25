@@ -18,6 +18,9 @@ class SeriesHandler extends AbstractImportHandler
         return 'earth_age_series';
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     public function createQuery(array $data): ?QueryBuilder
     {
         if ($this->datasetExists($this->createConfig($data))) {
@@ -27,6 +30,9 @@ class SeriesHandler extends AbstractImportHandler
         return $this->createInsertQuery($data);
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     private function createConfig(array $data): TableConfig
     {
         return new TableConfig(
@@ -36,6 +42,9 @@ class SeriesHandler extends AbstractImportHandler
         );
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     private function createInsertQuery(array $data): QueryBuilder
     {
         return $this->connection->createQueryBuilder()
@@ -53,6 +62,9 @@ class SeriesHandler extends AbstractImportHandler
             ->setParameter('custom', $data['custom']);
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     private function createUpdateQuery(array $data): QueryBuilder
     {
         return $this->connection->createQueryBuilder()

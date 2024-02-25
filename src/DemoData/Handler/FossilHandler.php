@@ -16,13 +16,16 @@ use App\DemoData\Random\StringOptions\LowerCaseLetters;
 use App\DemoData\Random\StringOptions\Numbers;
 use App\DemoData\Random\StringOptions\UpperCaseLetters;
 use App\DemoData\Random\SystemSeriesStageResult;
+use App\Entity\Category;
 use App\Entity\EarthAgeSeries;
 use App\Entity\EarthAgeStage;
 use App\Entity\EarthAgeSystem;
 use App\Entity\Fossil;
+use App\Entity\Tag;
 use App\Repository\CategoryRepository;
 use App\Repository\EarthAgeSystemRepository;
 use App\Repository\TagRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 
 class FossilHandler implements HandlerInterface
@@ -63,7 +66,7 @@ class FossilHandler implements HandlerInterface
         $fossil->setNumber($this->createNumber());
         $this->addCategories($fossil);
         $this->addTags($fossil);
-        $fossil->setDateOfDiscovery(Random::date(new \DateTimeImmutable('3 years ago'), new \DateTimeImmutable('now')));
+        $fossil->setDateOfDiscovery(Random::date(new DateTimeImmutable('3 years ago'), new DateTimeImmutable('now')));
         $fossil->setFoundInCountry($this->createCountryName());
         $fossil->setFindingPlace($this->createFindingPlaceName());
         $fossil->setCoordinates($this->createCoordinates());
@@ -78,8 +81,8 @@ class FossilHandler implements HandlerInterface
         $fossil->setSpecies($this->createSpeciesName());
         $fossil->setSize(Random::string(new StringOptions(mt_rand(1, 3), [new Numbers()])) . ' cm');
         $fossil->setTaxonomyNotes(Random::loremIpsum());
-        $fossil->setCreatedAt(new \DateTimeImmutable());
-        $fossil->setUpdatedAt(new \DateTimeImmutable());
+        $fossil->setCreatedAt(new DateTimeImmutable());
+        $fossil->setUpdatedAt(new DateTimeImmutable());
 
         return $fossil;
     }
@@ -155,7 +158,7 @@ class FossilHandler implements HandlerInterface
         return $latitude . ', ' . $longitude;
     }
 
-    private function addCategories(Fossil $fossil)
+    private function addCategories(Fossil $fossil): void
     {
         $categories = Random::entity(
             new EntityObjectOptions(
@@ -165,11 +168,15 @@ class FossilHandler implements HandlerInterface
         );
 
         foreach ($categories as $category) {
+            if (!$category instanceof Category) {
+                continue;
+            }
+
             $fossil->addCategory($category);
         }
     }
 
-    private function addTags(Fossil $fossil)
+    private function addTags(Fossil $fossil): void
     {
         $tags = Random::entity(
             new EntityObjectOptions(
@@ -179,6 +186,9 @@ class FossilHandler implements HandlerInterface
         );
 
         foreach ($tags as $tag) {
+            if (!$tag instanceof Tag) {
+                continue;
+            }
             $fossil->addTag($tag);
         }
     }
@@ -197,11 +207,13 @@ class FossilHandler implements HandlerInterface
         $system = array_shift($systemArray);
 
         $allSeries = $system->getEarthAgeSeries();
+        // @phpstan-ignore-next-line
         $seriesArray = Random::entity(new EntityObjectOptions(1, $allSeries->getIterator()->getArrayCopy()));
         /** @var EarthAgeSeries $series */
         $series = array_shift($seriesArray);
 
         $stages = $series->getEarthAgeStage();
+        // @phpstan-ignore-next-line
         $stagesArray = Random::entity(new EntityObjectOptions(1, $stages->getIterator()->getArrayCopy()));
         /** @var EarthAgeStage $stage */
         $stage = array_shift($stagesArray);

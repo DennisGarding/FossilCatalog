@@ -3,6 +3,7 @@
 namespace App\Validation\Validator;
 
 use App\Entity\Fossil;
+use App\Entity\FossilFormField;
 use App\FossilFormField\FossilFormFieldDefaults;
 use App\Repository\FossilFormFieldRepository;
 use App\Static\Validation\ValidationResult;
@@ -13,6 +14,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class FossilValidator implements ValidatorInterface
 {
+/**
+     * @var array<FossilFormField>
+     */
     private array $fossilFormFields = [];
 
     public function __construct(

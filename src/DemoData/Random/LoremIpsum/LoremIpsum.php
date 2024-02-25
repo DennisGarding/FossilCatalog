@@ -4,6 +4,9 @@ namespace App\DemoData\Random\LoremIpsum;
 
 class LoremIpsum
 {
+    /**
+     * @return array<int, string>
+     */
     public static function get(): array
     {
         return [

@@ -4,6 +4,9 @@ namespace App\DemoData\Random\NameOptions;
 
 class CountryNames
 {
+    /**
+     * @return array<int, string>
+     */
     public static function getNames()
     {
         return [

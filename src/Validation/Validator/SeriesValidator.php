@@ -12,6 +12,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SeriesValidator implements ValidatorInterface
 {
+    /**
+     * @var array <mixed>
+     */
     private $options = [];
 
     public function __construct(
@@ -55,6 +58,7 @@ class SeriesValidator implements ValidatorInterface
 
     /**
      * @param array<string,mixed> $data
+     *
      * @return array<string,mixed>
      */
     private function preValidate(array $data): array
@@ -68,6 +72,7 @@ class SeriesValidator implements ValidatorInterface
 
     /**
      * @param array<string,mixed> $data
+     *
      * @return array<string,mixed>
      */
     private function removeSpaces(array $data): array
@@ -81,6 +86,7 @@ class SeriesValidator implements ValidatorInterface
 
     /**
      * @param array<string,mixed> $data
+     *
      * @return array<string,mixed>
      */
     private function castToInt(array $data, string $key): array
@@ -98,6 +104,11 @@ class SeriesValidator implements ValidatorInterface
         return $data;
     }
 
+    /**
+     * @param array<string,mixed> $data
+     *
+     * @return array<string,mixed>
+     */
     private function castToBool(array $data, string $key): array
     {
         if (!isset($data[$key])) {

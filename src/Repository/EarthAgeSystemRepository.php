@@ -23,6 +23,11 @@ class EarthAgeSystemRepository extends ServiceEntityRepository
         parent::__construct($registry, EarthAgeSystem::class);
     }
 
+    /**
+     * @param array<int> $ids
+     *
+     * @return array<int, array<string, mixed>>
+     */
     public function findNamesById(array $ids): array
     {
         $queryBuilder = $this->createQueryBuilder('earthAgeSystem')
@@ -33,6 +38,9 @@ class EarthAgeSystemRepository extends ServiceEntityRepository
         return $queryBuilder->getQuery()->getResult(AbstractQuery::HYDRATE_SCALAR_COLUMN);
     }
 
+    /**
+     * @return array<int, EarthAgeSystem>
+     */
     public function findAllActive()
     {
         $queryBuilder = $this->createQueryBuilder('earthAgeSystem')
@@ -55,6 +63,7 @@ class EarthAgeSystemRepository extends ServiceEntityRepository
             return $system;
         }
 
+        // @phpstan-ignore-next-line
         if ($id === null) {
             return null;
         }

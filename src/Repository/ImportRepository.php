@@ -21,6 +21,9 @@ class ImportRepository
         );
     }
 
+    /**
+     * @return array<int, array<string, string>>
+     */
     public function getList(): array
     {
         $finder = new Finder();

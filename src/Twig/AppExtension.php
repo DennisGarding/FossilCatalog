@@ -29,6 +29,7 @@ class AppExtension extends AbstractExtension
 
     /**
      * @param Collection<EntityInterface> $objects
+     *
      * @return array<int>
      */
     public function idFilter(Collection $objects): array

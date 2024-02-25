@@ -56,6 +56,9 @@ class ImportService
         ];
     }
 
+    /**
+     * @return array<string, array<string, mixed>>
+     */
     public function analyzeData(string $directory): array
     {
         $status = [];
@@ -67,6 +70,9 @@ class ImportService
         return $status;
     }
 
+    /**
+     * @return array<string, array<string, mixed>>
+     */
     public function import(): array
     {
         $status = [];
