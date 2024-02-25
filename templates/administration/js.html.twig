@@ -37,6 +37,7 @@
 <script type="application/javascript" src="{{ asset('js/Admin/Import/ImportDelete.js') }}"></script>
 <script type="application/javascript" src="{{ asset('js/Admin/Import/ImportPage.js') }}"></script>
 <script type="application/javascript" src="{{ asset('js/Admin/FossilListTableActionColumn.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/Admin/ImageModal.js') }}"></script>
 
 
 {# Elements without new instance #}
@@ -77,6 +78,12 @@
                 fossilTables.forEach(function (table) {
                     new FossilListTableActionColumn(table);
                 });
+
+                const thumbnailImages = document.querySelectorAll('img[data-image-thumbnail="true"]');
+                const modal = document.querySelector('div[data-image-modal="true"]');
+                if (modal !== null && thumbnailImages.length > 0) {
+                    new ImageModal(modal, thumbnailImages);
+                }
             })
             .execute();
 

@@ -80,3 +80,21 @@ div.show-loading-indicator .spinner-border {
     margin: unset;
     padding: 0 3px 0 0;
 }
+.image-carousel-modal {
+    overflow: hidden;
+}
+.carousel-item img {
+    width: auto;
+    height: 86vh;
+    margin: auto;
+    display: block;
+}
+
+.image-carousel-modal .modal-body {
+    background: #1a1d20;
+}
+
+body.modal-is-open {
+    overflow: hidden;
+    height: 90%;
+}
