@@ -12,12 +12,12 @@
                 <div class="card-body">
                     <div class="clearfix">
                         <div class="btn-group float-end">
-                            <a href="{{ url('app_admin_fossil_create_pdf', {'id': fossil.id } )}}"
+                            <a href="{{ url('app_admin_fossil_create_pdf', {'id': fossil.id } ) }}"
                                target="_blank"
                                class="btn btn-primary">
                                 {% trans %}admin.fossil.createPdf{% endtrans %} <i class="bi-file-earmark-pdf"></i>
                             </a>
-                            <a href="{{ url('app_admin_fossil_edit_form', {'id': fossil.id } )}}"
+                            <a href="{{ url('app_admin_fossil_edit_form', {'id': fossil.id } ) }}"
                                class="btn btn-secondary">
                                 {% trans %}base.edit{% endtrans %} <i class="bi-pencil"></i>
                             </a>
@@ -95,8 +95,13 @@
                 </div>
                 <div class="card-body">
                     {% for image in fossil.images %}
-                        <img src="{{ asset(image.thumbnailPath) }}" class="img-thumbnail" alt="{{ image.name }}"
-                             width="200" height="200">
+                        <img src="{{ asset(image.thumbnailPath) }}"
+                             data-image-thumbnail="true"
+                             data-index="{{ loop.index }}"
+                             class="img-thumbnail"
+                             alt="{{ image.name }}"
+                             width="200"
+                             height="200">
                     {% endfor %}
                     {% include 'administration/fossil/detail/renderer.html.twig' with { 'fossilFormFields': fossilFormFields, 'groupName': 'IMAGE' } %}
                 </div>
@@ -116,4 +121,49 @@
             </div>
         </div>
     </div>
+
+    <div class="modal image-carousel-modal" tabindex="-1" data-image-modal="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-modal-close-button="true"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="card-body image-carousel" data-image-carousel="true">
+                        <div id="carouselExampleIndicators" class="carousel slide">
+                            <div class="carousel-inner">
+                                {% for image in fossil.images %}
+                                    <div class="carousel-item{% if loop.index == 1 %} active{% endif %}" data-index="{{ loop.index }}">
+                                        <img src="{{ asset(image.path) }}" class="d-block" alt="{{ image.name }}">
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <button class="carousel-control-prev"
+                                    type="button"
+                                    data-bs-target="#carouselExampleIndicators"
+                                    data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next"
+                                    type="button"
+                                    data-bs-target="#carouselExampleIndicators"
+                                    data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-modal-close-button="true">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
