@@ -40,7 +40,7 @@ class ImportRepository
         foreach ($finder as $directory) {
             $importsArray[] = [
                 'name' => $directory->getRelativePathname(),
-                'realPath'=> $directory->getRealPath(),
+                'realPath' => $directory->getRealPath(),
             ];
         }
 

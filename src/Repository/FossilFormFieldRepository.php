@@ -15,7 +15,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class FossilFormFieldRepository extends ServiceEntityRepository
 {
     public function __construct(
-        ManagerRegistry                      $registry,
+        ManagerRegistry $registry,
         private readonly TranslatorInterface $translator
     ) {
         parent::__construct($registry, FossilFormField::class);
@@ -36,7 +36,7 @@ class FossilFormFieldRepository extends ServiceEntityRepository
         return $result;
     }
 
-    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null): array
+    public function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null): array
     {
         $result = parent::findBy($criteria, $orderBy, $limit, $offset);
 
@@ -67,7 +67,7 @@ class FossilFormFieldRepository extends ServiceEntityRepository
         return $result;
     }
 
-    public function findOneBy(array $criteria, array $orderBy = null): ?object
+    public function findOneBy(array $criteria, ?array $orderBy = null): ?object
     {
         $result = parent::findOneBy($criteria, $orderBy);
         if (!$result instanceof FossilFormField) {

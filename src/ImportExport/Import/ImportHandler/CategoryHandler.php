@@ -29,8 +29,6 @@ class CategoryHandler extends AbstractImportHandler
 
     /**
      * @param array<string, mixed> $data
-     *
-     * @return QueryBuilder
      */
     private function createUpdateQuery(array $data): QueryBuilder
     {
@@ -44,8 +42,6 @@ class CategoryHandler extends AbstractImportHandler
 
     /**
      * @param array<string, mixed> $data
-     *
-     * @return QueryBuilder
      */
     private function createInsertQuery(array $data): QueryBuilder
     {
@@ -53,7 +49,7 @@ class CategoryHandler extends AbstractImportHandler
             ->insert($this->getTableName())
             ->values([
                 'id' => ':id',
-                'name' => ':name'
+                'name' => ':name',
             ])
             ->setParameter('id', $data['id'])
             ->setParameter('name', $data['name']);

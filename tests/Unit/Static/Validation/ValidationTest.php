@@ -10,7 +10,8 @@ use Symfony\Component\Validator\Constraints\Type;
 
 class ValidationTest extends TestCase
 {
-    public function testValidateWithViolations(): void {
+    public function testValidateWithViolations(): void
+    {
         $constraints = [
             'foo' => [new NotBlank(), new Type(Validator::TYPE_INT)],
             'bar' => [new NotBlank(), new Type(Validator::TYPE_STRING)],

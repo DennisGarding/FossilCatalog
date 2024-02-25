@@ -54,7 +54,6 @@ class SeriesHandler extends AbstractImportHandler
                 'earth_age_system_id' => ':earth_age_system_id',
                 'name' => ':name',
                 'custom' => ':custom',
-
             ])
             ->setParameter('id', $data['id'])
             ->setParameter('earth_age_system_id', $data['earth_age_system_id'])

@@ -29,6 +29,9 @@ jobs:
             -   name: Setup environment
                 run: composer setup
 
+            -   name: Run Php cs-fixer
+                run: composer fix-cs-dry
+
             -   name: Run PhpStan
                 run: composer phpstan
 

@@ -8,11 +8,11 @@ class TableConfig
     public const TYPE_DATA = 'data';
 
     public function __construct(
-        private readonly string  $type,
-        private readonly string  $tableName,
-        private readonly int     $idOne,
+        private readonly string $type,
+        private readonly string $tableName,
+        private readonly int $idOne,
         private readonly ?string $columnOneName = 'id',
-        private readonly ?int    $idTwo = 0,
+        private readonly ?int $idTwo = 0,
         private readonly ?string $columnTwoName = 'id',
     ) {}
 

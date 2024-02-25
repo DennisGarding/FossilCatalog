@@ -20,11 +20,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class FossilFormFieldController extends AbstractController
 {
     public function __construct(
-        private readonly UrlGeneratorInterface        $router,
-        private readonly EntityManagerInterface       $entityManager,
-        private readonly FossilFormFieldRepository    $fossilFormFieldRepository,
-        private readonly FossilFormFieldDefaults      $fossilFormFieldDefaults,
-        private readonly TranslatorInterface          $translator,
+        private readonly UrlGeneratorInterface $router,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly FossilFormFieldRepository $fossilFormFieldRepository,
+        private readonly FossilFormFieldDefaults $fossilFormFieldDefaults,
+        private readonly TranslatorInterface $translator,
         private readonly FormFieldFilterOptionService $formFieldFilterOptionService
     ) {}
 
@@ -141,7 +141,7 @@ class FossilFormFieldController extends AbstractController
             return $this->redirect($request->get('errorRoute'));
         }
 
-        $validationResult = $validator->validate(FossilFormField::class, $request->request->all(), ($formFieldId !== null));
+        $validationResult = $validator->validate(FossilFormField::class, $request->request->all(), $formFieldId !== null);
         if ($validationResult->hasViolations()) {
             $this->addFlash(Defaults::FLASH_TYPE_ERROR, $validationResult->getViolations());
 

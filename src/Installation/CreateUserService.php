@@ -10,8 +10,8 @@ class CreateUserService
 {
     public function __construct(
         private readonly UserPasswordHasherInterface $passwordHasher,
-        private readonly EntityManagerInterface      $entityManager
-    ) { }
+        private readonly EntityManagerInterface $entityManager
+    ) {}
 
     public function createUser(string $email, string $plainPassword): User
     {

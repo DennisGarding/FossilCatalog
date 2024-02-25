@@ -8,5 +8,5 @@ final class FileTypes
 
     public const ZIP = '.zip';
 
-    const ZIP_FILE_EXTENSION = '.fc.backup.zip';
+    public const ZIP_FILE_EXTENSION = '.fc.backup.zip';
 }

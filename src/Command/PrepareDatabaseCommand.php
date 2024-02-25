@@ -5,8 +5,6 @@ namespace App\Command;
 use App\Installation\InstallationDataService;
 use App\Static\Installation\DotEnvFile;
 use App\Static\Installation\PDOConnection;
-use PDO;
-use RuntimeException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -33,7 +31,7 @@ class PrepareDatabaseCommand extends Command
 
         $output->writeln('Create .env File...');
         if (!DotEnvFile::createDonEnvFile($installationData)) {
-            throw new RuntimeException('Could not create .env file.');
+            throw new \RuntimeException('Could not create .env file.');
         }
 
         $output->writeln('Establish Database Connection...');
@@ -45,14 +43,14 @@ class PrepareDatabaseCommand extends Command
         return Command::SUCCESS;
     }
 
-    private function createDatabase(OutputInterface $output, PDO $connection): void
+    private function createDatabase(OutputInterface $output, \PDO $connection): void
     {
         $output->writeln('Create Database...');
         $connection->exec('CREATE DATABASE IF NOT EXISTS fossilCatalog;');
         $connection->exec('CREATE DATABASE IF NOT EXISTS fossilCatalog_test;');
     }
 
-    private function dropDatabase(OutputInterface $output, PDO $connection): void
+    private function dropDatabase(OutputInterface $output, \PDO $connection): void
     {
         $output->writeln('Drop Database...');
         $connection->exec('DROP DATABASE IF EXISTS fossilCatalog;');

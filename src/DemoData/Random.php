@@ -3,7 +3,6 @@
 namespace App\DemoData;
 
 use App\DemoData\Random\EntityObjectOptions;
-use App\DemoData\Random\EntityOptions;
 use App\DemoData\Random\LoremIpsum\LoremIpsum;
 use App\DemoData\Random\NameOptions;
 use App\DemoData\Random\StringOptions;
@@ -44,7 +43,6 @@ class Random
     }
 
     /**
-     * @param EntityObjectOptions $entityOptions
      * @return array<int, EntityInterface>
      */
     public static function entity(EntityObjectOptions $entityOptions): array

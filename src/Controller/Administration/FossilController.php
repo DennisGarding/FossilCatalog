@@ -29,17 +29,17 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class FossilController extends AbstractController
 {
     public function __construct(
-        private readonly UrlGeneratorInterface     $router,
-        private readonly EntityManagerInterface    $entityManager,
-        private readonly FossilRepository          $fossilRepository,
+        private readonly UrlGeneratorInterface $router,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly FossilRepository $fossilRepository,
         private readonly FossilFormFieldRepository $fossilFormFieldRepository,
-        private readonly CategoryRepository        $categoryRepository,
-        private readonly TagRepository             $tagRepository,
-        private readonly EarthAgeSystemRepository  $earthAgeSystemRepository,
-        private readonly EarthAgeSeriesRepository  $earthAgeSeriesRepository,
-        private readonly EarthAgeStageRepository   $earthAgeStageRepository,
-        private readonly TranslatorInterface       $translator,
-        private readonly FossilFieldMapper         $fieldMapper,
+        private readonly CategoryRepository $categoryRepository,
+        private readonly TagRepository $tagRepository,
+        private readonly EarthAgeSystemRepository $earthAgeSystemRepository,
+        private readonly EarthAgeSeriesRepository $earthAgeSeriesRepository,
+        private readonly EarthAgeStageRepository $earthAgeStageRepository,
+        private readonly TranslatorInterface $translator,
+        private readonly FossilFieldMapper $fieldMapper,
     ) {}
 
     #[Route('/admin/fossil/list', name: 'app_admin_fossil_list')]
@@ -304,8 +304,8 @@ class FossilController extends AbstractController
         $dompdf->loadHtml($html);
         $dompdf->render();
 
-        return new Response (
-            $dompdf->stream('resume', ["Attachment" => false]),
+        return new Response(
+            $dompdf->stream('resume', ['Attachment' => false]),
             Response::HTTP_OK,
             ['Content-Type' => 'application/pdf']
         );

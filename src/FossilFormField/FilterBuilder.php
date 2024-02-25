@@ -14,9 +14,7 @@ class FilterBuilder
 
     private const CACHE_KEY = 'fossil_form_field_filter';
 
-    /**
-     * @var array<string, string>
-     */
+    /** @var array<string, string> */
     private array $filters = [];
 
     private FilesystemAdapter $cacheAdapter;
@@ -106,5 +104,4 @@ class FilterBuilder
         $this->cacheItem->set($this->filters);
         $this->cacheAdapter->save($this->cacheItem);
     }
-
 }

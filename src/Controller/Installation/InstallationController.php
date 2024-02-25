@@ -18,7 +18,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,7 +33,7 @@ class InstallationController extends AbstractController
 
     public function __construct(
         private readonly TranslatorInterface $translator,
-        private readonly RequestStack        $requestStack
+        private readonly RequestStack $requestStack
     ) {}
 
     #[Route('/collectInformation', name: 'collect_information')]
@@ -99,7 +98,7 @@ class InstallationController extends AbstractController
     #[Route('/installation/create/tables', name: 'installation_create_tables', methods: 'post')]
     public function createDatabaseTables(KernelInterface $kernel, EntityManagerInterface $entityManager): JsonResponse
     {
-        try{
+        try {
             $application = new Application($kernel);
             $application->setAutoExit(false);
 
@@ -110,7 +109,6 @@ class InstallationController extends AbstractController
 
             $output = new NullOutput();
             $application->run($input, $output);
-
         } catch (\Exception $exception) {
             return new JsonResponse([
                 'message' => $this->translator->trans('installation.errors.tablesCreate'),

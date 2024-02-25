@@ -18,14 +18,13 @@ class ImportStatus
 
     private ?string $file;
 
-
     public function __construct(
         string $type,
         ?string $path = null,
         ?string $file = null,
-        ?int   $inImportQueue = 0,
-        ?int   $imported = 0,
-        ?bool  $isFinished = false,
+        ?int $inImportQueue = 0,
+        ?int $imported = 0,
+        ?bool $isFinished = false,
     ) {
         $this->type = $type;
         $this->path = $path;
@@ -36,9 +35,9 @@ class ImportStatus
     }
 
     /**
-     * @throws MissingArrayKeyException
+     * @param array<string, mixed> $data
      *
-     * @param array<string,mixed> $data
+     * @throws MissingArrayKeyException
      */
     public function fromArray(array $data): ImportStatus
     {
@@ -54,7 +53,7 @@ class ImportStatus
     }
 
     /**
-     * @return array<string,mixed>
+     * @return array<string, mixed>
      */
     public function toArray(): array
     {

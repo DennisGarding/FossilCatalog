@@ -40,7 +40,7 @@ class PaginationResult
     /**
      * @return array<string, int>
      */
-    public function toArray():array
+    public function toArray(): array
     {
         return [
             'offset' => $this->offset,

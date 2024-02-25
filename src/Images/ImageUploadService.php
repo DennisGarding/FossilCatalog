@@ -19,7 +19,7 @@ class ImageUploadService
 
     public function __construct(
         #[Autowire('%kernel.project_dir%')]
-        private readonly string                      $rootDirectory,
+        private readonly string $rootDirectory,
         private readonly ThumbnailGeneratorInterface $thumbnailGenerator,
     ) {}
 

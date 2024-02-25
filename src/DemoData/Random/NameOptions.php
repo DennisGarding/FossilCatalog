@@ -4,17 +4,15 @@ namespace App\DemoData\Random;
 
 class NameOptions
 {
-    /**
-     * @var array<int, string>
-     */
+    /** @var array<int, string> */
     private array $avoid = [];
 
     /**
      * @param array<int, string> $names
      */
     public function __construct(
-        private readonly array         $names,
-        private readonly string        $divider,
+        private readonly array $names,
+        private readonly string $divider,
         private readonly StringOptions $stringOptions,
     ) {}
 

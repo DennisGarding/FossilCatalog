@@ -9,9 +9,7 @@ class FilterBuilder
 {
     private const CACHE_KEY = 'stage_filter';
 
-    /**
-     * @var array<string, mixed>
-     */
+    /** @var array<string, mixed> */
     private array $filters = [];
 
     private FilesystemAdapter $cacheAdapter;

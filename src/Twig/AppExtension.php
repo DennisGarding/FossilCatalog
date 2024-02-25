@@ -24,7 +24,7 @@ class AppExtension extends AbstractExtension
 
     public function mapField(string $fieldName): string
     {
-       return $this->fossilFieldMapper->mapProperty($fieldName);
+        return $this->fossilFieldMapper->mapProperty($fieldName);
     }
 
     /**

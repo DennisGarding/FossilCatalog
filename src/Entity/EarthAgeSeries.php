@@ -50,7 +50,6 @@ class EarthAgeSeries implements \ArrayAccess, EntityInterface
         $this->name = $name;
     }
 
-
     public function offsetExists(mixed $offset): bool
     {
         if (!property_exists($this, $offset)) {

@@ -54,7 +54,7 @@ class ImageRelationHandler extends AbstractImportHandler
             ->insert($this->getTableName())
             ->values([
                 'fossil_id' => ':fossil_id',
-                'image_id' => ':image_id'
+                'image_id' => ':image_id',
             ])
             ->setParameter('fossil_id', $data['fossil_id'])
             ->setParameter('image_id', $data['image_id']);

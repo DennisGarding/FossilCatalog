@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class SystemHandler extends AbstractExportHandler
 {
     public function __construct(
-        private readonly RequestStack  $requestStack,
+        private readonly RequestStack $requestStack,
         private readonly EarthAgeSystemRepository $systemRepository,
     ) {
         parent::__construct($this->requestStack);

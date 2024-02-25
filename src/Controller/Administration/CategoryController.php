@@ -18,8 +18,8 @@ class CategoryController extends AbstractController
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
-        private readonly TranslatorInterface    $translator,
-        private readonly CategoryRepository     $categoryRepository
+        private readonly TranslatorInterface $translator,
+        private readonly CategoryRepository $categoryRepository
     ) {}
 
     #[Route('/admin/category', name: 'app_admin_category')]
@@ -49,7 +49,8 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/admin/category/save', name: 'app_admin_category_save')]
-    public function saveCategory(Request $request, Validator $validator): Response {
+    public function saveCategory(Request $request, Validator $validator): Response
+    {
         $requestData = $request->request->all();
 
         $validationResult = $validator->validate(Category::class, $requestData);
@@ -83,7 +84,8 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/admin/category/edit', name: 'app_admin_category_edit')]
-    public function editCategory(Request $request): Response {
+    public function editCategory(Request $request): Response
+    {
         $categoryId = $request->get('id');
         if ($categoryId === null) {
             $this->addFlash(Defaults::FLASH_TYPE_ERROR, $this->translator->trans('admin.category.messages.errors.emptyId'));
@@ -120,7 +122,8 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/admin/category/delete', name: 'app_admin_category_delete')]
-    public function deleteCategory(Request $request): Response {
+    public function deleteCategory(Request $request): Response
+    {
         $categoryId = $request->get('categoryId');
         if ($categoryId === null) {
             $this->addFlash(Defaults::FLASH_TYPE_ERROR, $this->translator->trans('admin.category.messages.errors.emptyId'));

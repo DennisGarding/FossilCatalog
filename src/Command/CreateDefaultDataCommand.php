@@ -11,7 +11,6 @@ use App\Static\Installation\InstallationData;
 use App\Static\Installation\LockFile;
 use App\Static\Installation\PDOConnection;
 use App\Translations\TranslationService;
-use RuntimeException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -27,11 +26,11 @@ class CreateDefaultDataCommand extends Command
 {
     public function __construct(
         private readonly InstallationDataService $installationDataService,
-        private readonly CreateUserService  $createUserService,
+        private readonly CreateUserService $createUserService,
         private readonly TranslationService $translationService,
-        private readonly System             $system,
-        private readonly Series             $series,
-        private readonly Stage              $stage,
+        private readonly System $system,
+        private readonly Series $series,
+        private readonly Stage $stage,
     ) {
         parent::__construct();
     }
@@ -51,7 +50,7 @@ class CreateDefaultDataCommand extends Command
 
         $sql = file_get_contents(__DIR__ . '/../Controller/Installation/SQL/Default.sql');
         if (!is_string($sql)) {
-            throw new RuntimeException('Could not read default data sql file.');
+            throw new \RuntimeException('Could not read default data sql file.');
         }
         $connection->exec($sql);
 

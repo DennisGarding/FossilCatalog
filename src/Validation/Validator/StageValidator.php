@@ -12,13 +12,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class StageValidator implements ValidatorInterface
 {
-    /**
-     * @var array <mixed>
-     */
+    /** @var array <mixed> */
     private array $options = [];
 
     public function __construct(
-        private readonly IdConstraint        $idConstraint,
+        private readonly IdConstraint $idConstraint,
         private readonly TranslatorInterface $translator,
     ) {}
 
@@ -40,14 +38,14 @@ class StageValidator implements ValidatorInterface
         $constraints = [
             'name' => [
                 new NotBlank(['message' => $this->translator->trans('admin.stage.messages.noStageName')]),
-                new Type(Validator::TYPE_STRING)
+                new Type(Validator::TYPE_STRING),
             ],
         ];
 
         if ($this->options['custom']) {
             $constraints['series'] = [
                 new NotBlank(['message' => $this->translator->trans('admin.stage.messages.noSeries')]),
-                new Type(Validator::TYPE_NUMERIC)
+                new Type(Validator::TYPE_NUMERIC),
             ];
         }
 
@@ -57,8 +55,9 @@ class StageValidator implements ValidatorInterface
     }
 
     /**
-     * @param array<string,mixed> $data
-     * @return array<string,mixed>
+     * @param array<string, mixed> $data
+     *
+     * @return array<string, mixed>
      */
     private function preValidate(array $data): array
     {
@@ -70,8 +69,9 @@ class StageValidator implements ValidatorInterface
     }
 
     /**
-     * @param array<string,mixed> $data
-     * @return array<string,mixed>
+     * @param array<string, mixed> $data
+     *
+     * @return array<string, mixed>
      */
     private function removeSpaces(array $data): array
     {
@@ -83,8 +83,9 @@ class StageValidator implements ValidatorInterface
     }
 
     /**
-     * @param array<string,mixed> $data
-     * @return array<string,mixed>
+     * @param array<string, mixed> $data
+     *
+     * @return array<string, mixed>
      */
     private function castToInt(array $data, string $key): array
     {
@@ -102,9 +103,9 @@ class StageValidator implements ValidatorInterface
     }
 
     /**
-     * @param array<string,mixed> $data
+     * @param array<string, mixed> $data
      *
-     * @return array<string,mixed>
+     * @return array<string, mixed>
      */
     private function castToBool(array $data, string $key): array
     {

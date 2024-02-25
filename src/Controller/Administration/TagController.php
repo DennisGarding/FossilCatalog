@@ -18,8 +18,8 @@ class TagController extends AbstractController
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
-        private readonly TranslatorInterface    $translator,
-        private readonly TagRepository          $tagRepository
+        private readonly TranslatorInterface $translator,
+        private readonly TagRepository $tagRepository
     ) {}
 
     #[Route('/admin/tags', name: 'app_admin_tags')]

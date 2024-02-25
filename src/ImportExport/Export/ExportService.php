@@ -19,7 +19,6 @@ use App\Repository\ExportRepository;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\RequestStack;
-use ZipArchive;
 
 class ExportService implements ExportServiceInterface
 {
@@ -29,29 +28,27 @@ class ExportService implements ExportServiceInterface
 
     private const ZIP_FILE_EXTENSION = '.fc.backup.zip';
 
-    /**
-     * @var array<AbstractExportHandler>
-     */
+    /** @var array<AbstractExportHandler> */
     private array $handler;
 
     private string $targetDirectory;
 
     public function __construct(
         #[Autowire('%kernel.project_dir%')]
-        private readonly string                  $rootDirectory,
-        private readonly RequestStack            $requestStack,
-        private readonly ExportRepository        $exportRepository,
-        private readonly CategoryHandler         $categoryHandler,
+        private readonly string $rootDirectory,
+        private readonly RequestStack $requestStack,
+        private readonly ExportRepository $exportRepository,
+        private readonly CategoryHandler $categoryHandler,
         private readonly CategoryRelationHandler $categoryRelationHandler,
-        private readonly TagHandler              $tagHandler,
-        private readonly TagRelationHandler      $tagRelationHandler,
-        private readonly SystemHandler           $systemHandler,
-        private readonly SeriesHandler           $seriesHandler,
-        private readonly StageHandler            $stageHandler,
-        private readonly FormFieldHandler        $formFieldHandler,
-        private readonly ImageHandler            $imageHandler,
-        private readonly ImageRelationHandler    $imageRelationHandler,
-        private readonly FossilHandler           $fossilHandler,
+        private readonly TagHandler $tagHandler,
+        private readonly TagRelationHandler $tagRelationHandler,
+        private readonly SystemHandler $systemHandler,
+        private readonly SeriesHandler $seriesHandler,
+        private readonly StageHandler $stageHandler,
+        private readonly FormFieldHandler $formFieldHandler,
+        private readonly ImageHandler $imageHandler,
+        private readonly ImageRelationHandler $imageRelationHandler,
+        private readonly FossilHandler $fossilHandler,
     ) {
         $this->handler = [
             $this->categoryHandler,
@@ -113,8 +110,8 @@ class ExportService implements ExportServiceInterface
     {
         $target = $this->createFileName($directory, $name . self::ZIP_FILE_EXTENSION);
 
-        $zip = new ZipArchive();
-        if ($zip->open($target, ZipArchive::CREATE) !== true) {
+        $zip = new \ZipArchive();
+        if ($zip->open($target, \ZipArchive::CREATE) !== true) {
             throw new CreateZipException();
         }
 

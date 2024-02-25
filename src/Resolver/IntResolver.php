@@ -2,12 +2,10 @@
 
 namespace App\Resolver;
 
-use Symfony\Component\HttpFoundation\Request;
-
 class IntResolver
 {
     /**
-     * @param array<mixed>  $requestData
+     * @param array<mixed> $requestData
      */
     public static function resolve(array $requestData, string $key): ?int
     {

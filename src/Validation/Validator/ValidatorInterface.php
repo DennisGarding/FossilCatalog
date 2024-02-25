@@ -9,13 +9,16 @@ interface ValidatorInterface
 {
     /**
      * @param array<string, mixed> $data
-     * @param array<mixed> $options
+     * @param ?bool                $requiresId
+     * @param array<mixed>         $options
      */
     public function validate(array $data, ?bool $requiresId = false, array $options = []): ValidationResult;
 
     public static function supports(): string;
 
     /**
+     * @param ?bool $requiresId
+     *
      * @return array<string, array<int, Constraint>>
      */
     public function getConstraints(?bool $requiresId = false): array;

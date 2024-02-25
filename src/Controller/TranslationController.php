@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use _PHPStan_d5c599c96\Nette\Neon\Exception;
 use App\Translations\TranslationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

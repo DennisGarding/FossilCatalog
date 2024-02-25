@@ -119,7 +119,6 @@ VALUES (1, 'installation.stage.meghalayan', 1, false),
 SQL;
 
         foreach ($this->getTranslationKeys() as $translationKey) {
-
             $sql = str_replace($translationKey, $this->translator->trans($translationKey), $sql);
         }
 

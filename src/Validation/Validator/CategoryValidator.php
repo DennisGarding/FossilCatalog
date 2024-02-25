@@ -13,7 +13,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class CategoryValidator implements ValidatorInterface
 {
     public function __construct(
-        private readonly IdConstraint        $idConstraint,
+        private readonly IdConstraint $idConstraint,
         private readonly TranslatorInterface $translator,
     ) {}
 
@@ -34,7 +34,7 @@ class CategoryValidator implements ValidatorInterface
         $constraints = [
             'name' => [
                 new NotBlank(['message' => $this->translator->trans('admin.category.messages.errors.noCategoryName')]),
-                new Type(Validator::TYPE_STRING)
+                new Type(Validator::TYPE_STRING),
             ],
         ];
 
@@ -44,8 +44,9 @@ class CategoryValidator implements ValidatorInterface
     }
 
     /**
-     * @param array<string,mixed> $data
-     * @return array<string,mixed>
+     * @param array<string, mixed> $data
+     *
+     * @return array<string, mixed>
      */
     private function preValidate(array $data): array
     {
@@ -55,8 +56,9 @@ class CategoryValidator implements ValidatorInterface
     }
 
     /**
-     * @param array<string,mixed> $data
-     * @return array<string,mixed>
+     * @param array<string, mixed> $data
+     *
+     * @return array<string, mixed>
      */
     private function removeSpaces(array $data): array
     {
@@ -68,8 +70,9 @@ class CategoryValidator implements ValidatorInterface
     }
 
     /**
-     * @param array<string,mixed> $data
-     * @return array<string,mixed>
+     * @param array<string, mixed> $data
+     *
+     * @return array<string, mixed>
      */
     private function castIdToInt(array $data): array
     {

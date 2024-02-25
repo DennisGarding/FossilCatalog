@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\EarthAgeStageRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EarthAgeStageRepository::class)]
@@ -27,9 +25,7 @@ class EarthAgeStage implements \ArrayAccess, EntityInterface
     #[ORM\Column]
     private ?bool $custom = null;
 
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public function getId(): ?int
     {

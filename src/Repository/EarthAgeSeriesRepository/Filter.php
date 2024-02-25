@@ -10,15 +10,13 @@ use Doctrine\ORM\QueryBuilder;
 
 class Filter
 {
-    /**
-     * @var array<string, FilterHandlerInterface>
-     */
+    /** @var array<string, FilterHandlerInterface> */
     private array $filters = [];
 
     public function __construct(
-        private readonly CustomFilter     $customFilter,
+        private readonly CustomFilter $customFilter,
         private readonly SearchTermFilter $searchTermFilter,
-        private readonly SystemFilter     $systemFilter,
+        private readonly SystemFilter $systemFilter,
     ) {
         $this->filters = [
             $this->customFilter->supports() => $this->customFilter,

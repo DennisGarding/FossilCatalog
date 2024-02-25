@@ -14,7 +14,6 @@ class DotEnvFile
 
     private const LANGUAGE_REPLACE = '___LANGUAGE___';
 
-
     public static function createDonEnvFile(InstallationData $installationData): bool
     {
         $dotEnvContent = \file_get_contents(self::DOT_ENV_DIST);

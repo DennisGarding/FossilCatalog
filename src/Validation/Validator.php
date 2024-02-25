@@ -15,18 +15,16 @@ class Validator
 {
     public const EXPECT_ID = true;
 
-    /**
-     * @var array<ValidatorInterface>
-     */
+    /** @var array<ValidatorInterface> */
     private array $validators = [];
 
     public function __construct(
-        private readonly TagValidator             $tagValidator,
-        private readonly CategoryValidator        $categoryValidator,
+        private readonly TagValidator $tagValidator,
+        private readonly CategoryValidator $categoryValidator,
         private readonly FossilFormFieldValidator $fossilFormFieldValidator,
-        private readonly FossilValidator          $fossilValidator,
-        private readonly SeriesValidator          $seriesValidator,
-        private readonly StageValidator           $stageValidator,
+        private readonly FossilValidator $fossilValidator,
+        private readonly SeriesValidator $seriesValidator,
+        private readonly StageValidator $stageValidator,
     ) {
         $this->validators[TagValidator::supports()] = $this->tagValidator;
         $this->validators[CategoryValidator::supports()] = $this->categoryValidator;
@@ -38,6 +36,7 @@ class Validator
 
     /**
      * @param array<mixed> $data
+     * @param ?bool        $requiresId
      * @param array<mixed> $options
      */
     public function validate(string $type, array $data, ?bool $requiresId = false, array $options = []): ValidationResult

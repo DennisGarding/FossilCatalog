@@ -47,8 +47,6 @@ class CategoryRelationHandler extends AbstractImportHandler
 
     /**
      * @param array<string, mixed> $data
-     *
-     * @return QueryBuilder
      */
     private function createInsertQuery(array $data): QueryBuilder
     {
@@ -56,7 +54,7 @@ class CategoryRelationHandler extends AbstractImportHandler
             ->insert($this->getTableName())
             ->values([
                 'fossil_id' => ':fossilId',
-                'category_id' => ':categoryId'
+                'category_id' => ':categoryId',
             ])
             ->setParameter('fossilId', $data['fossil_id'])
             ->setParameter('categoryId', $data['category_id']);

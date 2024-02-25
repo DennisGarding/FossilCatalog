@@ -24,7 +24,9 @@ class FossilFormFieldDefaults
         'showInGallery',
     ];
 
-    public function __construct(private readonly TranslatorInterface $translator) {}
+    public function __construct(
+        private readonly TranslatorInterface $translator
+    ) {}
 
     /**
      * @return array<int, string>

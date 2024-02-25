@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class CategoryRelationHandler extends AbstractExportHandler
 {
     public function __construct(
-        private readonly RequestStack       $requestStack,
+        private readonly RequestStack $requestStack,
         private readonly CategoryRepository $categoryRepository,
     ) {
         parent::__construct($this->requestStack);

@@ -5,8 +5,8 @@ namespace App\Controller\Administration;
 use App\Defaults;
 use App\Entity\EarthAgeSeries;
 use App\Repository\EarthAgeSeriesRepository;
-use App\Repository\EarthAgeSystemRepository;
 use App\Repository\EarthAgeSeriesRepository\FilterBuilder;
+use App\Repository\EarthAgeSystemRepository;
 use App\Validation\Validator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,10 +17,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class SeriesController extends AbstractController
 {
     public function __construct(
-        private readonly Validator                $validator,
+        private readonly Validator $validator,
         private readonly EarthAgeSystemRepository $earthAgeSystemRepository,
         private readonly EarthAgeSeriesRepository $earthAgeSeriesRepository,
-        private readonly TranslatorInterface      $translator,
+        private readonly TranslatorInterface $translator,
     ) {}
 
     #[Route('/admin/series', name: 'app_admin_series')]

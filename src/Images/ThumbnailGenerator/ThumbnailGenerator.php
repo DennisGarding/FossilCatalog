@@ -8,9 +8,7 @@ use App\Images\ThumbnailGenerator\Handler\ThumbnailCreationHandlerInterface;
 
 class ThumbnailGenerator implements ThumbnailGeneratorInterface
 {
-    /**
-     * @var array<int, ThumbnailCreationHandlerInterface>
-     */
+    /** @var array<int, ThumbnailCreationHandlerInterface> */
     private array $handler = [];
 
     public function __construct()

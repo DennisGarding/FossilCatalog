@@ -6,6 +6,6 @@ class EntityOptions
 {
     public function __construct(
         public readonly string $entityClass,
-        public readonly int    $amount,
+        public readonly int $amount,
     ) {}
 }
