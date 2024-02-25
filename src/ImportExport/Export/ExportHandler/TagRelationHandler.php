@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class TagRelationHandler extends AbstractExportHandler
 {
     public function __construct(
-        private readonly RequestStack  $requestStack,
+        private readonly RequestStack $requestStack,
         private readonly TagRepository $tagRepository,
     ) {
         parent::__construct($this->requestStack);

@@ -24,7 +24,7 @@ class Validator
     ];
 
     /**
-     * @param array<string, mixed>                 $data
+     * @param array<string, mixed>                  $data
      * @param array<string, array<int, Constraint>> $validationConstraints
      */
     public static function validate(array $data, array $validationConstraints): ValidationResult
@@ -36,7 +36,7 @@ class Validator
         foreach ($validationConstraints as $key => $constraint) {
             $violation = $validator->validate($data[$key] ?? null, $constraint);
             if ($violation->count() > 0) {
-                ++$counter;
+                $counter++;
                 $violations[$key] = implode('<br />',
                     array_map(static function ($violation) {
                         return $violation->getMessage();

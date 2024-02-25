@@ -10,7 +10,7 @@ class ValidationResult
      * @param array<string, string> $violations
      */
     public function __construct(
-        protected readonly int   $violationCount,
+        protected readonly int $violationCount,
         protected readonly array $violations,
     ) {
         $this->hasViolations = $this->violationCount > 0;

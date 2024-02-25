@@ -13,8 +13,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class ImageHandler extends AbstractImportHandler implements AdditionalWorkerInterface
 {
     public function __construct(
-        protected RequestStack   $requestStack,
-        protected Connection     $connection,
+        protected RequestStack $requestStack,
+        protected Connection $connection,
         private readonly CopyImageService $copyImageService
     ) {
         parent::__construct($requestStack, $connection);

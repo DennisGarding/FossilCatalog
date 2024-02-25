@@ -11,10 +11,10 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<EarthAgeSystem>
  *
- * @method EarthAgeSystem|null find($id, $lockMode = null, $lockVersion = null)
- * @method EarthAgeSystem|null findOneBy(array $criteria, array $orderBy = null)
- * @method EarthAgeSystem[]    findAll()
- * @method EarthAgeSystem[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method EarthAgeSystem|null   find($id, $lockMode = null, $lockVersion = null)
+ * @method EarthAgeSystem|null   findOneBy(array $criteria, array $orderBy = null)
+ * @method array<EarthAgeSystem> findAll()
+ * @method array<EarthAgeSystem> findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class EarthAgeSystemRepository extends ServiceEntityRepository
 {

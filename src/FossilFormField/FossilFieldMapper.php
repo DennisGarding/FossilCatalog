@@ -2,7 +2,6 @@
 
 namespace App\FossilFormField;
 
-
 use App\Entity\Fossil;
 use App\Entity\FossilFormField;
 
@@ -62,7 +61,7 @@ class FossilFieldMapper
 
     /**
      * @param array<FossilFormField> $fossilFormFields
-     * @param Fossil                 $fossil
+     *
      * @return array<FossilFormField>
      */
     public function mapGetter(array $fossilFormFields, Fossil $fossil): array

@@ -9,9 +9,7 @@ class FilterBuilder
 {
     private const CACHE_KEY = 'series_filter';
 
-    /**
-     * @var array<string, mixed>
-     */
+    /** @var array<string, mixed> */
     private array $filters = [];
 
     private FilesystemAdapter $cacheAdapter;
@@ -38,7 +36,7 @@ class FilterBuilder
     /**
      * @param mixed $value
      */
-    public function addRequestValue(string $type, $value = null): static
+    public function addRequestValue(string $type, $value = null): FilterBuilder
     {
         if ($value !== null) {
             $this->filters[$type] = $value;

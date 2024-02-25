@@ -4,7 +4,6 @@ namespace App\ImportExport\Import\ImportHandler;
 
 use App\ImportExport\FileTypes;
 use App\ImportExport\Import\ImportStatus;
-use App\ImportExport\Import\SessionTrait;
 use App\ImportExport\Import\TableConfig;
 use App\ImportExport\ImportExportLimit;
 use App\ImportExport\MissingArrayKeyException;
@@ -18,7 +17,7 @@ abstract class AbstractImportHandler
 
     public function __construct(
         protected RequestStack $requestStack,
-        protected Connection   $connection,
+        protected Connection $connection,
     ) {}
 
     abstract public function getKey(): string;
@@ -105,8 +104,6 @@ abstract class AbstractImportHandler
     }
 
     /**
-     * @return ImportStatus
-     *
      * @throws MissingArrayKeyException
      */
     protected function getStatusFromSession(): ImportStatus

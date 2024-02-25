@@ -2,7 +2,6 @@
 
 namespace App\Static\Installation;
 
-use App\Resolver\IntResolver;
 use App\Static\Validation\Validator;
 
 class Installation

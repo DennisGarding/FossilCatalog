@@ -11,7 +11,7 @@ class SystemSeriesStageResult
     public function __construct(
         private readonly EarthAgeSystem $system,
         private readonly EarthAgeSeries $series,
-        private readonly EarthAgeStage  $stage
+        private readonly EarthAgeStage $stage
     ) {}
 
     public function getSystem(): EarthAgeSystem

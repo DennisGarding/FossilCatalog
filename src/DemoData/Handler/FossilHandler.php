@@ -12,7 +12,6 @@ use App\DemoData\Random\NameOptions\FindingPlaceNames;
 use App\DemoData\Random\NameOptions\FormationNames;
 use App\DemoData\Random\NameOptions\GeniusNames;
 use App\DemoData\Random\StringOptions;
-use App\DemoData\Random\StringOptions\LowerCaseLetters;
 use App\DemoData\Random\StringOptions\Numbers;
 use App\DemoData\Random\StringOptions\UpperCaseLetters;
 use App\DemoData\Random\SystemSeriesStageResult;
@@ -25,15 +24,14 @@ use App\Entity\Tag;
 use App\Repository\CategoryRepository;
 use App\Repository\EarthAgeSystemRepository;
 use App\Repository\TagRepository;
-use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 
 class FossilHandler implements HandlerInterface
 {
     public function __construct(
-        private readonly EntityManagerInterface   $entityManager,
-        private readonly CategoryRepository       $categoryRepository,
-        private readonly TagRepository            $tagRepository,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly CategoryRepository $categoryRepository,
+        private readonly TagRepository $tagRepository,
         private readonly EarthAgeSystemRepository $earthAgeSystemRepository,
     ) {}
 
@@ -66,7 +64,7 @@ class FossilHandler implements HandlerInterface
         $fossil->setNumber($this->createNumber());
         $this->addCategories($fossil);
         $this->addTags($fossil);
-        $fossil->setDateOfDiscovery(Random::date(new DateTimeImmutable('3 years ago'), new DateTimeImmutable('now')));
+        $fossil->setDateOfDiscovery(Random::date(new \DateTimeImmutable('3 years ago'), new \DateTimeImmutable('now')));
         $fossil->setFoundInCountry($this->createCountryName());
         $fossil->setFindingPlace($this->createFindingPlaceName());
         $fossil->setCoordinates($this->createCoordinates());
@@ -81,8 +79,8 @@ class FossilHandler implements HandlerInterface
         $fossil->setSpecies($this->createSpeciesName());
         $fossil->setSize(Random::string(new StringOptions(mt_rand(1, 3), [new Numbers()])) . ' cm');
         $fossil->setTaxonomyNotes(Random::loremIpsum());
-        $fossil->setCreatedAt(new DateTimeImmutable());
-        $fossil->setUpdatedAt(new DateTimeImmutable());
+        $fossil->setCreatedAt(new \DateTimeImmutable());
+        $fossil->setUpdatedAt(new \DateTimeImmutable());
 
         return $fossil;
     }

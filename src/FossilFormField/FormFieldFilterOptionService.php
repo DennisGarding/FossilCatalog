@@ -6,14 +6,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class FormFieldFilterOptionService
 {
-    /**
-     * @var array<string, string>
-     */
+    /** @var array<string, string> */
     private array $allOption;
 
     public function __construct(
         private readonly TranslatorInterface $translator,
-        private readonly FossilFormFieldDefaults   $fossilFormFieldDefaults
+        private readonly FossilFormFieldDefaults $fossilFormFieldDefaults
     ) {
         $this->allOption = ['ALL' => $this->translator->trans('admin.formFields.filter.all')];
     }

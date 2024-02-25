@@ -26,8 +26,7 @@ class OnKernelController
 
     public function __construct(
         private readonly UrlGeneratorInterface $router
-    ) {
-    }
+    ) {}
 
     public function __invoke(ControllerEvent $event): void
     {
@@ -39,7 +38,7 @@ class OnKernelController
             return;
         }
 
-      $controller = $event->getController();
+        $controller = $event->getController();
         if (is_array($controller)) {
             $event->stopPropagation();
             $event->setController(function () {

@@ -40,8 +40,8 @@ class ExportRepository
         foreach ($finder as $directory) {
             $exportArray[] = [
                 'name' => $directory->getRelativePathname(),
-                'realPath'=> $directory->getRealPath(),
-                'hasFinished' => !file_exists($directory->getRealPath() . '/in_progress.lock')
+                'realPath' => $directory->getRealPath(),
+                'hasFinished' => !file_exists($directory->getRealPath() . '/in_progress.lock'),
             ];
         }
 

@@ -15,7 +15,7 @@ class SystemController extends AbstractController
 {
     public function __construct(
         private readonly EarthAgeSystemRepository $earthAgeSystemRepository,
-        private readonly TranslatorInterface      $translator,
+        private readonly TranslatorInterface $translator,
     ) {}
 
     #[Route('/admin/system', name: 'app_admin_system')]

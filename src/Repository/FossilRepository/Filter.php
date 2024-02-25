@@ -13,17 +13,15 @@ use Doctrine\ORM\QueryBuilder;
 
 class Filter
 {
-    /**
-     * @var array<string, FilterHandlerInterface>
-     */
+    /** @var array<string, FilterHandlerInterface> */
     private array $filters = [];
 
     public function __construct(
         private readonly CategoryFilter $categoryFilter,
-        private readonly TagFilter      $tagFilter,
-        private readonly SystemFilter   $systemFilter,
-        private readonly SeriesFilter   $seriesFilter,
-        private readonly StageFilter    $stageFilter,
+        private readonly TagFilter $tagFilter,
+        private readonly SystemFilter $systemFilter,
+        private readonly SeriesFilter $seriesFilter,
+        private readonly StageFilter $stageFilter,
         private readonly SearchTermFilter $searchTermFilter,
     ) {
         $this->filters = [

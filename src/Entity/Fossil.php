@@ -76,9 +76,7 @@ class Fossil implements \ArrayAccess, EntityInterface
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $taxonomyNotes = null;
 
-    /**
-     * @var array<mixed>|null
-     */
+    /** @var array<mixed>|null */
     #[ORM\Column(nullable: true)]
     private ?array $extraFields = null;
 

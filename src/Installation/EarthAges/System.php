@@ -30,7 +30,6 @@ VALUES (1, 'installation.system.quartaer', false, false),
 SQL;
 
         foreach ($this->getTranslationKeys() as $translationKey) {
-
             $sql = str_replace($translationKey, $this->translator->trans($translationKey), $sql);
         }
 

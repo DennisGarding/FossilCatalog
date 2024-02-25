@@ -5,9 +5,6 @@ namespace App\Repository;
 use App\Defaults;
 use App\Entity\Category;
 use App\Entity\Tag;
-use App\Repository\Results\TagRepositorySaveResult;
-use App\Resolver\IntResolver;
-use App\Static\Validation\Validator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\Persistence\ManagerRegistry;
@@ -15,10 +12,10 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<Category>
  *
- * @method Category|null find($id, $lockMode = null, $lockVersion = null)
- * @method Category|null findOneBy(array $criteria, array $orderBy = null)
- * @method Category[]    findAll()
- * @method Category[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Category|null   find($id, $lockMode = null, $lockVersion = null)
+ * @method Category|null   findOneBy(array $criteria, array $orderBy = null)
+ * @method array<Category> findAll()
+ * @method array<Category> findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class CategoryRepository extends ServiceEntityRepository
 {
@@ -44,6 +41,8 @@ class CategoryRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param ?string $searchTerm
+     *
      * @return array<int, Tag>
      */
     public function getSearchResult(int $offset, ?string $searchTerm = null): array

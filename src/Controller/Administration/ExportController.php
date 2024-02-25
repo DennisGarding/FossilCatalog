@@ -18,8 +18,8 @@ class ExportController extends AbstractController
 {
     public function __construct(
         private readonly ExportServiceInterface $exportService,
-        private readonly ExportRepository       $exportRepository,
-        private readonly TranslatorInterface    $translator,
+        private readonly ExportRepository $exportRepository,
+        private readonly TranslatorInterface $translator,
     ) {}
 
     #[Route('/admin/export', name: 'app_admin_export')]
@@ -88,7 +88,7 @@ class ExportController extends AbstractController
     }
 
     #[Route('/admin/export/delete', name: 'app_admin_delete_export')]
-    public function deleteExportZip(Request $request,): Response
+    public function deleteExportZip(Request $request): Response
     {
         $directory = $request->get('directory');
         if (!is_string($directory)) {

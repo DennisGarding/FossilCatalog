@@ -13,7 +13,7 @@ class SearchTermFilter implements FilterHandlerInterface
 
     public function __construct(
         private readonly FossilFormFieldRepository $fossilFormFieldRepository,
-        private readonly FossilFieldMapper         $fossilFieldMapper,
+        private readonly FossilFieldMapper $fossilFieldMapper,
     ) {}
 
     public function supports(): string

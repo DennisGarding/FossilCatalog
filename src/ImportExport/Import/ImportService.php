@@ -2,6 +2,10 @@
 
 namespace App\ImportExport\Import;
 
+use App\ImportExport\FileTypes;
+use App\ImportExport\Import\ImportHandler\AbstractImportHandler;
+use App\ImportExport\Import\ImportHandler\CategoryHandler;
+use App\ImportExport\Import\ImportHandler\CategoryRelationHandler;
 use App\ImportExport\Import\ImportHandler\FormFieldHandler;
 use App\ImportExport\Import\ImportHandler\FossilHandler;
 use App\ImportExport\Import\ImportHandler\ImageHandler;
@@ -12,34 +16,26 @@ use App\ImportExport\Import\ImportHandler\SystemHandler;
 use App\ImportExport\Import\ImportHandler\TagHandler;
 use App\ImportExport\Import\ImportHandler\TagRelationHandler;
 use Doctrine\DBAL\Connection;
-use RuntimeException;
-use App\ImportExport\FileTypes;
-use App\ImportExport\Import\ImportHandler\AbstractImportHandler;
-use App\ImportExport\Import\ImportHandler\CategoryHandler;
-use App\ImportExport\Import\ImportHandler\CategoryRelationHandler;
 use Symfony\Component\Filesystem\Filesystem;
-use ZipArchive;
 
 class ImportService
 {
-    /**
-     * @var array<AbstractImportHandler>
-     */
+    /** @var array<AbstractImportHandler> */
     private array $handler;
 
     public function __construct(
-        private readonly Connection              $connection,
-        private readonly CategoryHandler         $categoryHandler,
+        private readonly Connection $connection,
+        private readonly CategoryHandler $categoryHandler,
         private readonly CategoryRelationHandler $categoryRelationHandler,
-        private readonly TagHandler              $tagHandler,
-        private readonly TagRelationHandler      $tagRelationHandler,
-        private readonly FormFieldHandler        $formFieldHandler,
-        private readonly FossilHandler           $fossilHandler,
-        private readonly ImageHandler            $imageHandler,
-        private readonly ImageRelationHandler    $imageRelationHandler,
-        private readonly SystemHandler           $systemHandler,
-        private readonly SeriesHandler           $seriesHandler,
-        private readonly StageHandler            $stageHandler,
+        private readonly TagHandler $tagHandler,
+        private readonly TagRelationHandler $tagRelationHandler,
+        private readonly FormFieldHandler $formFieldHandler,
+        private readonly FossilHandler $fossilHandler,
+        private readonly ImageHandler $imageHandler,
+        private readonly ImageRelationHandler $imageRelationHandler,
+        private readonly SystemHandler $systemHandler,
+        private readonly SeriesHandler $seriesHandler,
+        private readonly StageHandler $stageHandler,
     ) {
         $this->handler = [
             $this->categoryHandler,
@@ -88,7 +84,7 @@ class ImportService
                 $status[$ImportHandler->getKey()] = $ImportHandler->import()->toArray();
             }
         } catch (\Throwable $exception) {
-            throw new RuntimeException($exception->getMessage(), 0, $exception);
+            throw new \RuntimeException($exception->getMessage(), 0, $exception);
         } finally {
             $this->connection->executeQuery('SET FOREIGN_KEY_CHECKS=1');
         }
@@ -107,11 +103,11 @@ class ImportService
     {
         $extractTo = $this->createUnzipDirectory($filePath);
 
-        $zipArchive = new ZipArchive();
+        $zipArchive = new \ZipArchive();
         if ($zipArchive->open($filePath) !== true) {
             $this->deleteFile($filePath);
 
-            throw new RuntimeException('Cannot open backup file');
+            throw new \RuntimeException('Cannot open backup file');
         }
 
         $zipArchive->extractTo($extractTo);

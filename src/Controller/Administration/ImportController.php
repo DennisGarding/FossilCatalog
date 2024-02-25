@@ -3,12 +3,9 @@
 namespace App\Controller\Administration;
 
 use App\Defaults;
-use App\ImportExport\Import\CopyImageService;
-use App\ImportExport\Import\CopyImagesStatus;
 use App\ImportExport\Import\ImportFileUploadService;
 use App\ImportExport\Import\ImportService;
 use App\Repository\ImportRepository;
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,9 +17,9 @@ class ImportController extends AbstractController
 {
     public function __construct(
         private readonly ImportFileUploadService $importFileUploadService,
-        private readonly ImportRepository        $importRepository,
-        private readonly ImportService           $importService,
-        private readonly TranslatorInterface     $translator,
+        private readonly ImportRepository $importRepository,
+        private readonly ImportService $importService,
+        private readonly TranslatorInterface $translator,
     ) {}
 
     #[Route('/admin/import', name: 'app_admin_import')]
@@ -41,7 +38,7 @@ class ImportController extends AbstractController
         try {
             $directory = $this->importService->extractZipFile($zipFile);
             $status = $this->importService->analyzeData($directory);
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             return new JsonResponse(['message' => $exception->getMessage()], Response::HTTP_BAD_REQUEST);
         }
 
@@ -53,7 +50,7 @@ class ImportController extends AbstractController
     {
         try {
             $status = $this->importService->import();
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             return new JsonResponse(['message' => $exception->getMessage(), 'trace' => $exception->getTraceAsString()], Response::HTTP_BAD_REQUEST);
         }
 
@@ -102,6 +99,4 @@ class ImportController extends AbstractController
 
         return new JsonResponse(['message' => 'ok'], Response::HTTP_OK);
     }
-
-
 }

@@ -16,9 +16,9 @@ class ExportStatus
 
     public function __construct(
         string $type,
-        ?int   $inExportQueue = 0,
-        ?int   $exported = 0,
-        ?bool  $isFinished = false,
+        ?int $inExportQueue = 0,
+        ?int $exported = 0,
+        ?bool $isFinished = false,
     ) {
         $this->type = $type;
         $this->inExportQueue = $inExportQueue ?? 0;
@@ -40,7 +40,7 @@ class ExportStatus
     }
 
     /**
-     * @param array<string,mixed> $data
+     * @param array<string, mixed> $data
      */
     public function fromArray(array $data): ExportStatus
     {

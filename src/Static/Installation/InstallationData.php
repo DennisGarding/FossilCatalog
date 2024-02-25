@@ -102,7 +102,7 @@ class InstallationData
     }
 
     /**
-     * @return array<string,array<int,Constraint>>
+     * @return array<string, array<int, Constraint>>
      */
     public static function getValidation(): array
     {
@@ -138,6 +138,4 @@ class InstallationData
             'language' => $this->language,
         ];
     }
-
-
 }

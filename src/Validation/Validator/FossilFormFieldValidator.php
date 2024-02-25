@@ -13,7 +13,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class FossilFormFieldValidator implements ValidatorInterface
 {
     public function __construct(
-        private readonly IdConstraint        $idConstraint,
+        private readonly IdConstraint $idConstraint,
         private readonly TranslatorInterface $translator,
     ) {}
 
@@ -34,37 +34,37 @@ class FossilFormFieldValidator implements ValidatorInterface
         $constraints = [
             'fieldName' => [
                 new NotBlank(['message' => $this->translator->trans('admin.formFields.error.emptyName')]),
-                new Type(Validator::TYPE_STRING)
+                new Type(Validator::TYPE_STRING),
             ],
 
             'fieldLabel' => [
                 new NotBlank(['message' => $this->translator->trans('admin.formFields.error.emptyLabel')]),
-                new Type(Validator::TYPE_STRING)
+                new Type(Validator::TYPE_STRING),
             ],
 
             'fieldType' => [
                 new NotBlank(['message' => $this->translator->trans('admin.formFields.error.emptyType')]),
-                new Type(Validator::TYPE_STRING)
+                new Type(Validator::TYPE_STRING),
             ],
 
             'fieldGroup' => [
                 new NotBlank(['message' => $this->translator->trans('admin.formFields.error.emptyGroup')]),
-                new Type(Validator::TYPE_STRING)
+                new Type(Validator::TYPE_STRING),
             ],
 
             'showInOverview' => [
                 new NotBlank(['message' => $this->translator->trans('admin.formFields.error.emptyGroup')]),
-                new Type(Validator::TYPE_NUMERIC)
+                new Type(Validator::TYPE_NUMERIC),
             ],
 
             'active' => [
                 new NotBlank(['message' => $this->translator->trans('admin.formFields.error.emptyActive')]),
-                new Type(Validator::TYPE_NUMERIC)
+                new Type(Validator::TYPE_NUMERIC),
             ],
 
             'allowBlank' => [
                 new NotBlank(['message' => $this->translator->trans('admin.formFields.error.emptyAllowEmpty')]),
-                new Type(Validator::TYPE_NUMERIC)
+                new Type(Validator::TYPE_NUMERIC),
             ],
         ];
 
@@ -74,8 +74,9 @@ class FossilFormFieldValidator implements ValidatorInterface
     }
 
     /**
-     * @param array<string,mixed> $data
-     * @return array<string,mixed>
+     * @param array<string, mixed> $data
+     *
+     * @return array<string, mixed>
      */
     private function preValidate(array $data): array
     {
@@ -85,8 +86,9 @@ class FossilFormFieldValidator implements ValidatorInterface
     }
 
     /**
-     * @param array<string,mixed> $data
-     * @return array<string,mixed>
+     * @param array<string, mixed> $data
+     *
+     * @return array<string, mixed>
      */
     private function removeSpaces(array $data): array
     {
@@ -98,8 +100,9 @@ class FossilFormFieldValidator implements ValidatorInterface
     }
 
     /**
-     * @param array<string,mixed> $data
-     * @return array<string,mixed>
+     * @param array<string, mixed> $data
+     *
+     * @return array<string, mixed>
      */
     private function castIdToInt(array $data): array
     {

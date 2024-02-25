@@ -6,9 +6,7 @@ use App\Entity\EntityInterface;
 
 class EntityObjectOptions
 {
-    /**
-     * @var array<int, EntityInterface>
-     */
+    /** @var array<int, EntityInterface> */
     private array $entities;
 
     private int $length;

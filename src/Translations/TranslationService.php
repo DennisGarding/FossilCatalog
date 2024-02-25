@@ -4,7 +4,6 @@ namespace App\Translations;
 
 use App\Defaults;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use function yaml_parse_file;
 
 class TranslationService
 {
@@ -33,7 +32,6 @@ class TranslationService
             $this->language,
             self::TRANSLATION_FILE_EXTENSION
         );
-
 
         $targetFile = sprintf(
             self::TARGET_FILE_TEMPLATE,
@@ -101,7 +99,7 @@ class TranslationService
 
     private function create(string $source, string $target): void
     {
-        $parsed = yaml_parse_file($source);
+        $parsed = \yaml_parse_file($source);
         if (!is_array($parsed)) {
             throw new \RuntimeException('Could not parse translation YML file.');
         }

@@ -10,16 +10,14 @@ use App\DemoData\Handler\TagHandler;
 
 class DemoDataFactory
 {
-    /**
-     * @var array<string, HandlerInterface>
-     */
+    /** @var array<string, HandlerInterface> */
     private array $handlers = [];
 
     public function __construct(
-        private readonly TagHandler       $tagHandler,
-        private readonly CategoryHandler  $categoryHandler,
+        private readonly TagHandler $tagHandler,
+        private readonly CategoryHandler $categoryHandler,
         private readonly FormFieldHandler $formFieldHandler,
-        private readonly FossilHandler    $fossilHandler,
+        private readonly FossilHandler $fossilHandler,
     ) {
         $this->handlers = [
             $this->tagHandler->supports() => $this->tagHandler,

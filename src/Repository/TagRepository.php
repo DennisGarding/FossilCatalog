@@ -11,10 +11,10 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<Tag>
  *
- * @method Tag|null find($id, $lockMode = null, $lockVersion = null)
- * @method Tag|null findOneBy(array $criteria, array $orderBy = null)
- * @method Tag[]    findAll()
- * @method Tag[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Tag|null   find($id, $lockMode = null, $lockVersion = null)
+ * @method Tag|null   findOneBy(array $criteria, array $orderBy = null)
+ * @method array<Tag> findAll()
+ * @method array<Tag> findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class TagRepository extends ServiceEntityRepository
 {
@@ -40,6 +40,8 @@ class TagRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param ?string $searchTerm
+     *
      * @return array<int, Tag>
      */
     public function getSearchResult(int $offset, ?string $searchTerm = null): array

@@ -12,13 +12,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SeriesValidator implements ValidatorInterface
 {
-    /**
-     * @var array <mixed>
-     */
+    /** @var array <mixed> */
     private $options = [];
 
     public function __construct(
-        private readonly IdConstraint        $idConstraint,
+        private readonly IdConstraint $idConstraint,
         private readonly TranslatorInterface $translator,
     ) {}
 
@@ -40,14 +38,14 @@ class SeriesValidator implements ValidatorInterface
         $constraints = [
             'name' => [
                 new NotBlank(['message' => $this->translator->trans('admin.series.messages.noSeriesName')]),
-                new Type(Validator::TYPE_STRING)
+                new Type(Validator::TYPE_STRING),
             ],
         ];
 
         if ($this->options['custom']) {
             $constraints['system'] = [
                 new NotBlank(['message' => $this->translator->trans('admin.series.messages.noSystem')]),
-                new Type(Validator::TYPE_INT)
+                new Type(Validator::TYPE_INT),
             ];
         }
 
@@ -57,9 +55,9 @@ class SeriesValidator implements ValidatorInterface
     }
 
     /**
-     * @param array<string,mixed> $data
+     * @param array<string, mixed> $data
      *
-     * @return array<string,mixed>
+     * @return array<string, mixed>
      */
     private function preValidate(array $data): array
     {
@@ -71,9 +69,9 @@ class SeriesValidator implements ValidatorInterface
     }
 
     /**
-     * @param array<string,mixed> $data
+     * @param array<string, mixed> $data
      *
-     * @return array<string,mixed>
+     * @return array<string, mixed>
      */
     private function removeSpaces(array $data): array
     {
@@ -85,9 +83,9 @@ class SeriesValidator implements ValidatorInterface
     }
 
     /**
-     * @param array<string,mixed> $data
+     * @param array<string, mixed> $data
      *
-     * @return array<string,mixed>
+     * @return array<string, mixed>
      */
     private function castToInt(array $data, string $key): array
     {
@@ -105,9 +103,9 @@ class SeriesValidator implements ValidatorInterface
     }
 
     /**
-     * @param array<string,mixed> $data
+     * @param array<string, mixed> $data
      *
-     * @return array<string,mixed>
+     * @return array<string, mixed>
      */
     private function castToBool(array $data, string $key): array
     {

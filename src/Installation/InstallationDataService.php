@@ -18,7 +18,7 @@ class InstallationDataService
         $this->installationData = Installation::createInstallationData([
             'databaseName' => getenv('DB_DATABASE') ?: 'fossilCatalog',
             'databaseUsername' => getenv('DB_USER') ?: 'root',
-            'databasePassword' =>  getenv('DB_PASSWORD') ?: 'root',
+            'databasePassword' => getenv('DB_PASSWORD') ?: 'root',
             'databaseHost' => getenv('DB_HOST') ?: 'mysql',
             'databasePort' => getenv('DB_PORT') ?: '3306',
             'userEmail' => 'test@example.com',

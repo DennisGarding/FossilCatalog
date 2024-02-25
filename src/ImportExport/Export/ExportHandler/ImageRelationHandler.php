@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class ImageRelationHandler extends AbstractExportHandler
 {
     public function __construct(
-        private readonly RequestStack  $requestStack,
+        private readonly RequestStack $requestStack,
         private readonly ImageRepository $imageRepository,
     ) {
         parent::__construct($this->requestStack);

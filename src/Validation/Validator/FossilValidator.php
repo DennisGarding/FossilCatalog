@@ -14,14 +14,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class FossilValidator implements ValidatorInterface
 {
-/**
-     * @var array<FossilFormField>
-     */
+    /** @var array<FossilFormField> */
     private array $fossilFormFields = [];
 
     public function __construct(
-        private readonly IdConstraint              $idConstraint,
-        private readonly TranslatorInterface       $translator,
+        private readonly IdConstraint $idConstraint,
+        private readonly TranslatorInterface $translator,
         private readonly FossilFormFieldRepository $fossilRepository,
     ) {}
 
@@ -57,9 +55,9 @@ class FossilValidator implements ValidatorInterface
     }
 
     /**
-     * @param array<string,mixed> $data
+     * @param array<string, mixed> $data
      *
-     * @return array<string,mixed>
+     * @return array<string, mixed>
      */
     private function trim(array $data): array
     {

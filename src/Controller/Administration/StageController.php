@@ -17,10 +17,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class StageController extends AbstractController
 {
     public function __construct(
-        private readonly Validator                $validator,
+        private readonly Validator $validator,
         private readonly EarthAgeSeriesRepository $earthAgeSeriesRepository,
         private readonly EarthAgeStageRepository $earthAgeStageRepository,
-        private readonly TranslatorInterface      $translator,
+        private readonly TranslatorInterface $translator,
     ) {}
 
     #[Route('/admin/stage', name: 'app_admin_stage')]

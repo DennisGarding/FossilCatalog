@@ -11,15 +11,15 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<Fossil>
  *
- * @method Fossil|null find($id, $lockMode = null, $lockVersion = null)
- * @method Fossil|null findOneBy(array $criteria, array $orderBy = null)
- * @method Fossil[]    findAll()
- * @method Fossil[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Fossil|null   find($id, $lockMode = null, $lockVersion = null)
+ * @method Fossil|null   findOneBy(array $criteria, array $orderBy = null)
+ * @method array<Fossil> findAll()
+ * @method array<Fossil> findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class FossilRepository extends ServiceEntityRepository
 {
     public function __construct(
-        ManagerRegistry         $registry,
+        ManagerRegistry $registry,
         private readonly Filter $filter,
     ) {
         parent::__construct($registry, Fossil::class);

@@ -12,18 +12,17 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<EarthAgeStage>
  *
- * @method EarthAgeStage|null find($id, $lockMode = null, $lockVersion = null)
- * @method EarthAgeStage|null findOneBy(array $criteria, array $orderBy = null)
- * @method EarthAgeStage[]    findAll()
- * @method EarthAgeStage[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method EarthAgeStage|null   find($id, $lockMode = null, $lockVersion = null)
+ * @method EarthAgeStage|null   findOneBy(array $criteria, array $orderBy = null)
+ * @method array<EarthAgeStage> findAll()
+ * @method array<EarthAgeStage> findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class EarthAgeStageRepository extends ServiceEntityRepository
 {
     public function __construct(
         ManagerRegistry $registry,
         private readonly Filter $filter,
-    )
-    {
+    ) {
         parent::__construct($registry, EarthAgeStage::class);
     }
 

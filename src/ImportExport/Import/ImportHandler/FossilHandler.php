@@ -168,6 +168,5 @@ class FossilHandler extends AbstractImportHandler
             ->setParameter('earth_age_stage', $data['earth_age_stage'])
             ->setParameter('created_at', $data['created_at'])
             ->setParameter('updated_at', $data['updated_at']);
-
     }
 }

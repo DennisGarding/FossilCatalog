@@ -24,7 +24,7 @@ class IdConstraint
         if ($requiresId) {
             $constraints['id'] = [
                 new NotBlank(['message' => $this->translator->trans('admin.category.messages.errors.emptyId')]),
-                new Type(Validator::TYPE_INT)
+                new Type(Validator::TYPE_INT),
             ];
         }
 

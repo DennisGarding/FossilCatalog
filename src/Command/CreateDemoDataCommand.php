@@ -24,7 +24,7 @@ class CreateDemoDataCommand extends Command
 {
     public function __construct(
         private readonly DemoDataFactory $demoDataFactory,
-        private readonly Connection      $connection,
+        private readonly Connection $connection,
     ) {
         parent::__construct();
     }
