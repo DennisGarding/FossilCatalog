@@ -18,6 +18,9 @@ class CategoryRelationHandler extends AbstractImportHandler
         return 'fossil_category';
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     public function createQuery(array $data): ?QueryBuilder
     {
         if ($this->datasetExists($this->createConfig($data))) {
@@ -27,6 +30,9 @@ class CategoryRelationHandler extends AbstractImportHandler
         return $this->createInsertQuery($data);
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     private function createConfig(array $data): TableConfig
     {
         return new TableConfig(

@@ -18,6 +18,9 @@ abstract class AbstractExportHandler
 
     abstract public function getColumnCount(): int;
 
+    /**
+     * @return array<int, array<string, mixed>>
+     */
     abstract public function getData(ExportStatus $status): array;
 
     public function initialize(string $targetDirectory): void

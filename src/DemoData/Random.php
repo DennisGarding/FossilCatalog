@@ -11,8 +11,6 @@ use App\Entity\EntityInterface;
 
 class Random
 {
-    private const DIVIDER = '__';
-
     public static function name(NameOptions $nameOptions): string
     {
         $diff = array_diff($nameOptions->getNames(), $nameOptions->getAvoid());
@@ -71,14 +69,5 @@ class Random
         $randomTimestamp = mt_rand($start->getTimestamp(), $end->getTimestamp());
 
         return (new \DateTime())->setTimestamp($randomTimestamp);
-    }
-
-    private static function createAvoidList(array $avoid): array
-    {
-        return array_map(function ($string) {
-            $exploded = explode(self::DIVIDER, $string);
-
-            return $exploded[0];
-        }, $avoid);
     }
 }

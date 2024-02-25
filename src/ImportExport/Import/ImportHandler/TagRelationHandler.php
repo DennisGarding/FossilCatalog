@@ -27,6 +27,9 @@ class TagRelationHandler extends AbstractImportHandler
         return $this->createInsertQuery($data);
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     private function createConfig(array $data): TableConfig
     {
         return new TableConfig(
@@ -39,6 +42,9 @@ class TagRelationHandler extends AbstractImportHandler
         );
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     private function createInsertQuery(array $data): QueryBuilder
     {
         return $this->connection->createQueryBuilder()

@@ -18,6 +18,9 @@ class TagHandler extends AbstractImportHandler
         return 'tag';
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     public function createQuery(array $data): ?QueryBuilder
     {
         if ($this->datasetExists($this->createConfig($data))) {
@@ -27,6 +30,9 @@ class TagHandler extends AbstractImportHandler
         return $this->createInsertQuery($data);
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     private function createConfig(array $data): TableConfig
     {
         return new TableConfig(
@@ -36,6 +42,9 @@ class TagHandler extends AbstractImportHandler
         );
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     private function createInsertQuery(array $data): QueryBuilder
     {
         return $this->connection->createQueryBuilder()
@@ -48,6 +57,9 @@ class TagHandler extends AbstractImportHandler
             ->setParameter('name', $data['name']);
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     private function createUpdateQuery(array $data): QueryBuilder
     {
         return $this->connection->createQueryBuilder()

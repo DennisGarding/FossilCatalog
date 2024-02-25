@@ -33,7 +33,7 @@ class FossilHandler extends AbstractImportHandler
     /**
      * @param array<string, mixed> $data
      */
-    private function createConfig(array $data)
+    private function createConfig(array $data): TableConfig
     {
         return new TableConfig(
             TableConfig::TYPE_DATA,
@@ -45,7 +45,7 @@ class FossilHandler extends AbstractImportHandler
     /**
      * @param array<string, mixed> $data
      */
-    private function createInsertQuery(array $data): ?QueryBuilder
+    private function createInsertQuery(array $data): QueryBuilder
     {
         return $this->connection->createQueryBuilder()
             ->insert($this->getTableName())
@@ -107,7 +107,10 @@ class FossilHandler extends AbstractImportHandler
             ->setParameter('updated_at', $data['updated_at']);
     }
 
-    private function createUpdateQuery(array $data): ?QueryBuilder
+    /**
+     * @param array<string, mixed> $data
+     */
+    private function createUpdateQuery(array $data): QueryBuilder
     {
         return $this->connection->createQueryBuilder()
             ->update($this->getTableName())

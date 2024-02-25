@@ -12,6 +12,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class StageValidator implements ValidatorInterface
 {
+    /**
+     * @var array <mixed>
+     */
+    private array $options = [];
+
     public function __construct(
         private readonly IdConstraint        $idConstraint,
         private readonly TranslatorInterface $translator,
@@ -96,6 +101,11 @@ class StageValidator implements ValidatorInterface
         return $data;
     }
 
+    /**
+     * @param array<string,mixed> $data
+     *
+     * @return array<string,mixed>
+     */
     private function castToBool(array $data, string $key): array
     {
         if (!isset($data[$key])) {

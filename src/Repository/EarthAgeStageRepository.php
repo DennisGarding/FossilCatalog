@@ -27,6 +27,11 @@ class EarthAgeStageRepository extends ServiceEntityRepository
         parent::__construct($registry, EarthAgeStage::class);
     }
 
+    /**
+     * @param array<int> $ids
+     *
+     * @return array<int, array<string, mixed>>
+     */
     public function findNamesById(array $ids): array
     {
         $queryBuilder = $this->createQueryBuilder('earthAgeStage')
@@ -37,6 +42,9 @@ class EarthAgeStageRepository extends ServiceEntityRepository
         return $queryBuilder->getQuery()->getResult(AbstractQuery::HYDRATE_SCALAR_COLUMN);
     }
 
+    /**
+     * @return array<int, EarthAgeStage>
+     */
     public function findBySeriesId(int $seriesId): array
     {
         $queryBuilder = $this->createQueryBuilder('earthAgeStage')
@@ -46,6 +54,11 @@ class EarthAgeStageRepository extends ServiceEntityRepository
         return $queryBuilder->getQuery()->getResult();
     }
 
+    /**
+     * @param array<string, mixed> $filter
+     *
+     * @return array<int, EarthAgeStage>
+     */
     public function findByFilter(array $filter): array
     {
         $queryBuilder = $this->createQueryBuilder('earthAgeStage');
@@ -67,6 +80,7 @@ class EarthAgeStageRepository extends ServiceEntityRepository
             return $system;
         }
 
+        // @phpstan-ignore-next-line
         if ($id === null) {
             return null;
         }

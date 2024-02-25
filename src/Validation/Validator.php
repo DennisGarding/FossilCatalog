@@ -9,11 +9,15 @@ use App\Validation\Validator\FossilValidator;
 use App\Validation\Validator\SeriesValidator;
 use App\Validation\Validator\StageValidator;
 use App\Validation\Validator\TagValidator;
+use App\Validation\Validator\ValidatorInterface;
 
 class Validator
 {
     public const EXPECT_ID = true;
 
+    /**
+     * @var array<ValidatorInterface>
+     */
     private array $validators = [];
 
     public function __construct(
@@ -32,6 +36,10 @@ class Validator
         $this->validators[StageValidator::supports()] = $this->stageValidator;
     }
 
+    /**
+     * @param array<mixed> $data
+     * @param array<mixed> $options
+     */
     public function validate(string $type, array $data, ?bool $requiresId = false, array $options = []): ValidationResult
     {
         return $this->validators[$type]->validate($data, $requiresId, $options);

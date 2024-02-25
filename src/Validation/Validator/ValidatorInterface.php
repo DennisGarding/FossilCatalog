@@ -9,6 +9,7 @@ interface ValidatorInterface
 {
     /**
      * @param array<string, mixed> $data
+     * @param array<mixed> $options
      */
     public function validate(array $data, ?bool $requiresId = false, array $options = []): ValidationResult;
 

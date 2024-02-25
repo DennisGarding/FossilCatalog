@@ -33,7 +33,7 @@ class FormFieldHandler extends AbstractImportHandler
     /**
      * @param array<string, mixed> $data
      */
-    private function createConfig(array $data)
+    private function createConfig(array $data): TableConfig
     {
         return new TableConfig(
             TableConfig::TYPE_DATA,

@@ -25,6 +25,9 @@ class FossilRepository extends ServiceEntityRepository
         parent::__construct($registry, Fossil::class);
     }
 
+    /**
+     * @param array<string, mixed> $filters
+     */
     public function getColumnCount(array $filters = []): int
     {
         $queryBuilder = $this->createQueryBuilder('fossil')
@@ -35,6 +38,11 @@ class FossilRepository extends ServiceEntityRepository
         return (int) $queryBuilder->getQuery()->getSingleScalarResult();
     }
 
+    /**
+     * @param array<string, mixed> $filters
+     *
+     * @return array<int, Fossil>
+     */
     public function getSearchResult(int $offset, array $filters = []): array
     {
         $queryBuilder = $this->createQueryBuilder('fossil')
@@ -64,7 +72,7 @@ class FossilRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return array<int, array<string, mixed>>
+     * @return array<int, Fossil>
      */
     public function getLatestFossils(): array
     {
@@ -76,6 +84,9 @@ class FossilRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * @return array<int, Fossil>
+     */
     public function getLatestChangedFossils(): array
     {
         return $this->createQueryBuilder('fossil')

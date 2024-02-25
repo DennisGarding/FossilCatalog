@@ -81,6 +81,9 @@ class FossilFormFieldDefaults
         ];
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function getGroupsTranslated(): array
     {
         return [
