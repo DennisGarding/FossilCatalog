@@ -4,7 +4,6 @@ namespace App\Command;
 
 use App\Installation\InstallationDataService;
 use App\Static\Installation\DotEnvFile;
-use App\Static\Installation\Installation;
 use App\Static\Installation\PDOConnection;
 use PDO;
 use RuntimeException;

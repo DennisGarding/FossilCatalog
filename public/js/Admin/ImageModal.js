@@ -23,7 +23,6 @@ class ImageModal {
     }
 
     onThumbnailClick(event) {
-
         const thumbnail = event.target;
         const selector = `div[data-index="${thumbnail.dataset.index}"]`;
         const nextActive = this.modal.querySelector(selector);

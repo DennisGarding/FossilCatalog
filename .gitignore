@@ -18,3 +18,8 @@ install.lock
 
 /public/translations/messages.json
 /public/translations/messages_defaults.json
+
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
