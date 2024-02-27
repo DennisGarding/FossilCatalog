@@ -103,9 +103,14 @@
       "./vendor/bin/phpstan analyse"
     ],
     "setup": [
-      "php bin/console a:pd",
+      "php bin/console app:create-env-file",
+      "php bin/console app:create-database",
       "php bin/console doctrine:migrations:migrate -n",
-      "php bin/console a:cdd"
+      "php bin/console app:create-default-data",
+      "php bin/console app:create-demo-user",
+      "php bin/console app:install-translations",
+      "php bin/console app:create-lock-file",
+      "php bin/console app:prepare-test-database"
     ]
   },
   "conflict": {

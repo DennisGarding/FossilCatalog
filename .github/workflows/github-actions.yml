@@ -22,6 +22,8 @@ jobs:
                     distribution: "mariadb"
                     mysql-version: "10.5"
                     root-password: root
+                    my-cnf: |
+                        max_allowed_packet=999MB
 
             -   name: Install composer dependencies
                 run: composer install
