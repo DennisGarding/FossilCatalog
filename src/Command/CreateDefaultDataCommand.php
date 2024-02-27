@@ -2,15 +2,11 @@
 
 namespace App\Command;
 
-use App\Installation\CreateUserService;
 use App\Installation\EarthAges\Series;
 use App\Installation\EarthAges\Stage;
 use App\Installation\EarthAges\System;
 use App\Installation\InstallationDataService;
-use App\Static\Installation\InstallationData;
-use App\Static\Installation\LockFile;
 use App\Static\Installation\PDOConnection;
-use App\Translations\TranslationService;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -26,8 +22,6 @@ class CreateDefaultDataCommand extends Command
 {
     public function __construct(
         private readonly InstallationDataService $installationDataService,
-        private readonly CreateUserService $createUserService,
-        private readonly TranslationService $translationService,
         private readonly System $system,
         private readonly Series $series,
         private readonly Stage $stage,
@@ -39,10 +33,9 @@ class CreateDefaultDataCommand extends Command
     {
         $installationData = $this->installationDataService->getInstallationData();
 
-        $output->writeln('Establish Database Connection...');
+        $output->writeln('Install default data...');
         $connection = PDOConnection::createPDOConnection($installationData);
 
-        $output->writeln('Install default data...');
         $connection->exec(sprintf('USE %s;', $installationData->getDatabaseName()));
         $connection->exec($this->system->getSql());
         $connection->exec($this->series->getSql());
@@ -54,24 +47,6 @@ class CreateDefaultDataCommand extends Command
         }
         $connection->exec($sql);
 
-        $this->createUser($output, $installationData);
-
-        $output->writeln('Create translations...');
-        $this->translationService->moveToPublic();
-
-        $output->writeln('Create lock file...');
-        LockFile::createInstallationLockFile();
-
         return Command::SUCCESS;
-    }
-
-    public function createUser(OutputInterface $output, InstallationData $installationData): void
-    {
-        $output->writeln('Create demo user...');
-        $user = $this->createUserService->createUser($installationData->getUserEmail(), $installationData->getUserPassword());
-        $this->createUserService->saveUser($user);
-
-        $output->writeln('Email: test@example.com');
-        $output->writeln('Password: test1234');
     }
 }
