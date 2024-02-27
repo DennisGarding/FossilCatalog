@@ -1,0 +1,102 @@
+name: E2E
+
+on:
+    workflow_call:
+
+jobs:
+    Playwright-Tests:
+        timeout-minutes: 60
+        runs-on: ubuntu-latest
+        env:
+            DB_DATABASE: fossilCatalog
+            DB_USER: root
+            DB_PASSWORD: root
+            DB_HOST: "127.0.0.1"
+            DB_PORT: 3306
+
+        steps:
+            -   name: Install Apache
+                run: |
+                    sudo apt update
+                    sudo apt install apache2
+                    
+                    sudo adduser $(whoami) www-data
+                    sudo adduser $(whoami) root
+                    sudo adduser root www-data
+                    
+                    sudo chown -R www-data:www-data /etc/apache2/sites-available/
+                    sudo chmod -R 777 /etc/apache2/sites-available/
+                    sudo chown -R www-data:www-data /var/www/html/
+                    
+                    sudo a2enmod rewrite
+                    
+                    sudo chmod -R 777 /var/www/html/
+
+            -   name: Checkout repository
+                uses: actions/checkout@v4
+
+            -   name: Prepare Apache
+                run: |
+                    sudo apt install libapache2-mod-php8.1
+                    sudo a2enmod php8.1
+                    
+                    sudo chmod -R 777 ${{ github.workspace }}/.github/apache2.conf
+                    sudo mv ${{ github.workspace }}/.github/apache2.conf /etc/apache2/apache2.conf
+
+                    sudo chmod -R 777 ${{ github.workspace }}/.github/000-default.conf
+                    sudo mv ${{ github.workspace }}/.github/000-default.conf /etc/apache2/sites-available/000-default.conf
+
+                    sudo a2ensite 000-default.conf
+                    
+                    cp -r ${{ github.workspace }} /var/www/html/fossilCatalog
+                    
+                    sudo systemctl restart apache2
+
+            -   uses: shogo82148/actions-setup-mysql@v1
+                with:
+                    distribution: "mariadb"
+                    mysql-version: "10.5"
+                    root-password: root
+                    my-cnf: |
+                        max_allowed_packet=999MB
+
+            -   name: Install composer dependencies
+                run: |
+                    cd /var/www/html/fossilCatalog
+                    composer install
+
+            -   name: Setup environment
+                run: |
+                    cd /var/www/html/fossilCatalog
+                    composer setup
+
+            -   uses: actions/setup-node@v3
+                with:
+                    node-version: 18
+
+            -   name: Create e2e dotenv file
+                run: |
+                    cd /var/www/html/fossilCatalog
+                    php bin/console app:create-e2e-env-file
+
+            -   name: Install dependencies
+                run: |
+                    cd /var/www/html/fossilCatalog/tests/e2e
+                    npm ci
+
+            -   name: Install Playwright Browsers
+                run: |
+                    cd /var/www/html/fossilCatalog/tests/e2e
+                    npx playwright install --with-deps
+
+            -   name: Run Playwright tests
+                run: |
+                    cd /var/www/html/fossilCatalog/tests/e2e
+                    npx playwright test
+
+            -   uses: actions/upload-artifact@v3
+                if: always()
+                with:
+                    name: playwright-report
+                    path: cd /var/www/html/fossilCatalog/tests/e2e/playwright-report/
+                    retention-days: 1

@@ -1,11 +1,10 @@
-name: Run
-run-name: ${{ github.actor }} GitHub Actions 🚀
+name: PHP
+
 on:
-    pull_request:
-    workflow_dispatch:
+    workflow_call:
 
 jobs:
-    PHPUnitTests:
+    CodeStyle-PhpStan-UnitTests:
         runs-on: ubuntu-latest
         env:
             DB_DATABASE: fossilCatalog
