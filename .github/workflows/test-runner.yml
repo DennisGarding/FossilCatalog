@@ -1,0 +1,19 @@
+name: Run
+run-name: ${{ github.actor }} GitHub Actions 🚀
+on:
+    pull_request:
+    workflow_dispatch:
+
+concurrency:
+    group: ${{ github.head_ref || github.run_id }}
+    cancel-in-progress: true
+
+jobs:
+    php-tests:
+        name: PHP
+        uses: ./.github/workflows/php-tests.yml
+
+    e2e-tests:
+        name: E2E
+        uses: ./.github/workflows/e2e-tests.yml
+        needs: [ php-tests ]
