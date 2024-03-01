@@ -28,6 +28,7 @@ class Modal {
     okButtonSelector = '.okButton';
     cancelButtonSelector = '.cancelButton';
     confirmInputSelector = 'input[name="confirmInput"]';
+    modalIsOpenClass = 'modal-is-open';
 
     hiddenClass = 'visually-hidden';
 
@@ -45,6 +46,8 @@ class Modal {
         if (!this.modal) {
             throw new Error('Modal template not found');
         }
+
+        this.modal.classList.add(this.modalIsOpenClass);
 
         this._initializeModalElements();
         this._handleButtonVisibility();
@@ -156,6 +159,7 @@ class Modal {
 
     _onCloseButtonClick() {
         this._hideModal();
+        this.destroy();
     }
 
     _onConfirm() {

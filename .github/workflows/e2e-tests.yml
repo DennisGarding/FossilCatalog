@@ -92,11 +92,11 @@ jobs:
             -   name: Run Playwright tests
                 run: |
                     cd /var/www/html/fossilCatalog/tests/e2e
-                    npx playwright test
+                    npx playwright test --trace on
 
             -   uses: actions/upload-artifact@v3
                 if: always()
                 with:
                     name: playwright-report
-                    path: cd /var/www/html/fossilCatalog/tests/e2e/playwright-report/
-                    retention-days: 1
+                    path: /var/www/html/fossilCatalog/tests/e2e/test-results/
+                    retention-days: 7

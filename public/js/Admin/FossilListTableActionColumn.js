@@ -8,6 +8,10 @@ class FossilListTableActionColumn {
         this.actionColumn = this.table.querySelector(this.actionColumnSelector);
         this.actionColumnHeader = this.table.querySelector(this.actionColumnHeaderSelector);
 
+        if (!this.actionColumn || !this.actionColumnHeader) {
+            return;
+        }
+
         this._registerEvents();
         this._calculateActionColumnWidth();
     }

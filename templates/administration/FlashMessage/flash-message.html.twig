@@ -23,11 +23,13 @@
         {% if flashMessageValue is iterable %}
             <ul>
             {% for flashMessageValueItem in flashMessageValue %}
-                <li>{{ flashMessageValueItem }}</li>
+                <li class="toast-message-text">{{ flashMessageValueItem }}</li>
             {% endfor %}
             </ul>
         {% else %}
+            <span class="toast-message-text">
             {{ flashMessageValue }}
+            </span>
         {% endif %}
     </div>
 </div>

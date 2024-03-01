@@ -28,7 +28,7 @@ class CategoryEdit {
     }
 
     _createForm() {
-        this.form = document.querySelector(this.formSelector);
+        this.form = document.querySelector(this.formSelector)?.cloneNode(true);
         const idInput = this.form.querySelector(this.idFieldSelector),
             nameInput = this.form.querySelector(this.nameFieldSelector);
 
@@ -36,10 +36,6 @@ class CategoryEdit {
         nameInput.value = this.editButton.dataset.value;
 
         this.form.action = this.editButton.href;
-
-        // TODO: REMOVE AFTER DEBUG
-        console.log(this.form);
-        // TODO: REMOVE AFTER DEBUG
 
         return this.form;
     }

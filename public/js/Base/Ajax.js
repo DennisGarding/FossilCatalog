@@ -1,5 +1,5 @@
 class Ajax {
-    xhttp = new XMLHttpRequest();
+    xhttp;
 
     url;
 
@@ -8,6 +8,7 @@ class Ajax {
     errorCallback;
 
     constructor(url) {
+        this.xhttp = new XMLHttpRequest()
         this.url = url;
 
         return this;
@@ -57,10 +58,23 @@ class Ajax {
 
         this.xhttp.onreadystatechange = function () {
             if (this.readyState === XMLHttpRequest.DONE) {
+                let response;
+
+                try {
+                    response = JSON.parse(me.xhttp.response);
+                } catch (e) {
+                    throw new Error(me.url);
+                    // throw new Error(
+                    //     'Invalid response from server. Expected JSON.'
+                    //     `URL: ${me.url} MESSAGE: ${e.message} RESPONSE: ${me.xhttp.response}`,
+                    //     e.trace
+                    // );
+                }
+
                 if (this.status === 200) {
-                    me.successCallback(JSON.parse(this.responseText));
+                    me.successCallback(response);
                 } else {
-                    me.errorCallback(JSON.parse(this.responseText));
+                    me.errorCallback(response);
                 }
             }
         };
