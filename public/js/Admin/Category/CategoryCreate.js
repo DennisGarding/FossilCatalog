@@ -53,7 +53,7 @@ class CategoryCreate {
     }
 
     _createContent() {
-        this.form = document.querySelector(this.formSelector);
+        this.form = document.querySelector(this.formSelector)?.cloneNode(true);
 
         return this.form;
     }
