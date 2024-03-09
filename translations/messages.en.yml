@@ -406,9 +406,10 @@ admin:
         messages:
             noIdProvided: No System ID provided
             cannotFindSystem: Cannot find System with Id %s
-            systemSaved: System successfully saved
+            systemSaved: System saved
             systemDeleted: System %s successfully deleted
             deleteQuestion: Do you really want to delete the System?
+
     series:
         title: Series
         form:
@@ -418,7 +419,7 @@ admin:
             deleteQuestion: Do you really want to delete the Series?
             noIdProvided: No Series ID provided
             cannotFindSeries: Cannot find Series with Id %s
-            seriesSaved: Series successfully saved
+            seriesSaved: Series saved
             noSeriesName: Please provide a Series name
             noSystem: Please select a System
             seriesDeleted: Series %s successfully deleted
@@ -432,7 +433,7 @@ admin:
             deleteQuestion: Do you really want to delete the Stage?
             noIdProvided: No Stage ID provided
             cannotFindStage: Cannot find Stage with Id %s
-            stageSaved: Stage successfully saved
+            stageSaved: Stage saved
             noStageName: Please provide a Stage name
             noSeries: Please select a Series
             stageDeleted: Stage %s successfully deleted
@@ -461,8 +462,8 @@ admin:
         fossils: Fossils
         earlierExports: Earlier Exports
         couldNotFindExport: Could not find Export
-        exportDeleted: Backup successfully deleted
-        exportComplete: Export successfully complete
+        exportDeleted: Backup deleted
+        exportComplete: Export completed
         list:
             createdAt: Created at
             isComplete: Is complete

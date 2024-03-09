@@ -5,6 +5,6 @@ export default (() => {
         toastHaveText: async function (page, text) {
             let successText = await page.locator('.toast-container-lane .toast-container .toast-message-text').first();
             await expect(successText).toContainText(text);
-        }
+        },
     }
 })();

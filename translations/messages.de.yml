@@ -371,6 +371,48 @@ admin:
         tagColumnName: Name
         tagColumnAction: Aktion
 
+    system:
+        title: System
+        form:
+            title: System
+            systemName: System Name
+            active: Aktiv
+            create: Neues System erstellen
+        messages:
+            noIdProvided: Keine System-ID angegeben
+            cannotFindSystem: System mit ID %s konnte nicht gefunden werden
+            systemSaved: System gespeichert
+            systemDeleted: System %s gelöscht
+            deleteQuestion: Möchten Sie das System wirklich löschen?
+
+    series:
+        title: Serie
+        form:
+            seriesName: Serien Name
+            create: Neue Serie erstellen
+        messages:
+            deleteQuestion: Möchten Sie die Serie wirklich löschen?
+            noIdProvided: Keine Serie-ID angegeben
+            cannotFindSeries: Serie mit ID %s konnte nicht gefunden werden
+            seriesSaved: Serie gespeichert
+            noSeriesName: Bitte geben Sie einen Seriennamen an
+            noSystem: Bitte wählen Sie ein System aus
+            seriesDeleted: Serie %s gelöscht
+
+    stage:
+        title: Stufe
+        form:
+            stageName: Stufenname
+            create: Neue Stufe erstellen
+        messages:
+            deleteQuestion: Möchten Sie die Stufe wirklich löschen?
+            noIdProvided: Keine Stufen-ID angegeben
+            cannotFindStage: Stufe mit ID %s konnte nicht gefunden werden
+            stageSaved: Stufe gespeichert
+            noStageName: Bitte geben Sie einen Stufennamen an
+            noSeries: Bitte wählen Sie eine Serie aus
+            stageDeleted: Stufe %s gelöscht
+
     validator:
         messages:
             empty: Bitte geben Sie einen Wert für das Feld %s an
