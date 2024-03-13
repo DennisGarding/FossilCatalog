@@ -484,3 +484,7 @@ admin:
         importComplete: Import successfully complete
         list:
             fileName: File Name
+
+gallery:
+    nav:
+        login: Login

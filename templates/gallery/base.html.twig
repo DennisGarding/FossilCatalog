@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans %}admin.baseTitle{% endtrans %}|{% block title %}{% endblock %}</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{ asset('bootstrap/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('bootstrap/bootstrap-icons-1.10.5/font/bootstrap-icons.css') }}">
+    <script type="application/javascript" src="{{ asset('bootstrap/Bootstrap.js') }}"></script>
+
+    <link rel="stylesheet" href="{{ asset('css/Gallery/style.css') }}">
+    {% block stylesheets %}{% endblock %}
+
+    {% block javascripts %}{% endblock %}
+</head>
+<body class="bg-dark">
+    {% include 'gallery/nav.html.twig' %}
+    {% include 'gallery/banner.html.twig' %}
+
+    <div class="container mt-3">
+{#        <div class="accordion accordion-flush" id="accordionFlushExample">#}
+{#            <div class="accordion-item">#}
+{#                <h2 class="accordion-header">#}
+{#                    <button class="accordion-button collapsed bg-dark-subtle"#}
+{#                            type="button"#}
+{#                            data-bs-toggle="collapse"#}
+{#                            data-bs-target="#flush-collapseOne"#}
+{#                            aria-expanded="false"#}
+{#                            aria-controls="flush-collapseOne">#}
+{#                        {% trans %}base.filter{% endtrans %}#}
+{#                    </button>#}
+{#                </h2>#}
+{#                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">#}
+{#                    <div class="accordion-body"></div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+    </div>
+
+    <div class="container mt-3">
+        {% block content %}
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+                {% for fossil in fossils %}
+                    <div class="col">
+                        <div class="card gallery-fossil-card bg-dark border-0">
+                            <a href="#" class=" card-img-top">
+                                <img src="{% if fossil.images|length > 0 %}
+                                            {{ asset(fossil.images|first.thumbnailPath) }}
+                                        {% else %}
+                                            {{ asset('images/no-image.png') }}
+                                        {% endif %}"
+                                     class="card-img-top"
+                                     alt="">
+                            </a>
+                            <div class="card-body text-white-50 pt-1 ps-0">
+                                <figure class="mb-0">
+                                    <blockquote class="blockquote">
+                                        <p>{{ fossil.genius }}</p>
+                                    </blockquote>
+                                    <figcaption class="blockquote-footer text-white-50 mb-0">
+                                        {{ fossil.species }} {{ fossil.subspecies }}
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endblock %}
+    </div>
+</body>
+</html>

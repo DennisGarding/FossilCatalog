@@ -1,0 +1,21 @@
+.gallery-banner {
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gallery-fossil-card {
+  width: 18rem;
+  margin: 0 auto 15px auto;
+}
+
+.gallery-fossil-card img{
+    height: 12rem;
+    margin: 0 auto;
+    object-fit:cover;
+    object-position: center;
+
+}
