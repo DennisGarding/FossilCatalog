@@ -15,7 +15,7 @@
     {% include 'administration/js.html.twig' %}
     {% block javascripts %}{% endblock %}
 </head>
-<body>
+<body data-keep-session="true" data-url="{{ url('app_admin_keep_session') }}" data-logoutUrl="{{ url('administration_logout') }}">
     {% block navbar %}
         {% include 'administration/nav.html.twig' %}
     {% endblock %}

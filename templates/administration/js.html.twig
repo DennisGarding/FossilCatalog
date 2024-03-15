@@ -1,3 +1,4 @@
+<script type="application/javascript" src="{{ asset('js/Admin/KeepSessionAlive.js') }}"></script>
 <script type="application/javascript" src="{{ asset('js/Translations/Translation.js') }}"></script>
 <script type="application/javascript" src="{{ asset('js/Admin/LoadingIndicator.js') }}"></script>
 <script type="application/javascript" src="{{ asset('js/Admin/SetLoading.js') }}"></script>
@@ -56,6 +57,7 @@
                 window.translations = new Translation(response.translations, response.defaultTranslations);
 
                 // Initialize all classes
+                new KeepSessionAlive();
                 new FlashMessage();
                 new ClearSearchTerm();
                 new TagPage();

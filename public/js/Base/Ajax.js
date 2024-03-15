@@ -58,17 +58,21 @@ class Ajax {
 
         this.xhttp.onreadystatechange = function () {
             if (this.readyState === XMLHttpRequest.DONE) {
+                if (me.xhttp.status === 204) {
+                    return;
+                }
+
                 let response;
 
                 try {
                     response = JSON.parse(me.xhttp.response);
                 } catch (e) {
-                    throw new Error(me.url);
-                    // throw new Error(
-                    //     'Invalid response from server. Expected JSON.'
-                    //     `URL: ${me.url} MESSAGE: ${e.message} RESPONSE: ${me.xhttp.response}`,
-                    //     e.trace
-                    // );
+                    // throw new Error(me.url);
+                    throw new Error(
+                        'Invalid response from server. Expected JSON.',
+                        `URL: ${me.url} MESSAGE: ${e.message} RESPONSE: ${me.xhttp.response}`,
+                        e.trace
+                    );
                 }
 
                 if (this.status === 200) {
