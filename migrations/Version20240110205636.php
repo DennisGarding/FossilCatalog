@@ -38,8 +38,4 @@ final class Version20240110205636 extends AbstractMigration
         $this->addSql('ALTER TABLE fossil_image ADD CONSTRAINT FK_D6B37893EC5FAAEB FOREIGN KEY (fossil_id) REFERENCES fossil (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE fossil_image ADD CONSTRAINT FK_D6B378933DA5256D FOREIGN KEY (image_id) REFERENCES image (id) ON DELETE CASCADE');
     }
-
-    public function down(Schema $schema): void
-    {
-    }
 }

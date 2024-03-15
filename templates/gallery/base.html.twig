@@ -15,8 +15,8 @@
     {% block javascripts %}{% endblock %}
 </head>
 <body class="bg-dark">
-    {% include 'gallery/nav.html.twig' %}
-    {% include 'gallery/banner.html.twig' %}
+    {% include 'gallery/nav.html.twig' with {'settings': settings } %}
+    {% include 'gallery/banner.html.twig' with {'settings': settings } %}
 
     <div class="container mt-3">
 {#        <div class="accordion accordion-flush" id="accordionFlushExample">#}

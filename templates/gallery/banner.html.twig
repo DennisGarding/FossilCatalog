@@ -1,4 +1,4 @@
 <div class="container">
     <div class="card text-bg-dark border-0 gallery-banner"
-        style="background-image: url('{% if banner %}{{ asset(banner) }}{% else %}{{ asset('images/no-banner.png') }}{% endif %}')"></div>
+        style="background-image: url('{% if settings.banner %}{{ asset(settings.banner.path) }}{% else %}{{ asset('images/no-banner.png') }}{% endif %}')"></div>
 </div>

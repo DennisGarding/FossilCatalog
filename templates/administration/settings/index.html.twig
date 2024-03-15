@@ -1,0 +1,54 @@
+{% extends 'administration/base.html.twig' %}
+
+{% block title %}{% trans %}admin.settings.title{% endtrans %}{% endblock %}
+
+{% block content %}
+    <form method="post" action="{{ url('app_admin_settings_save') }}" enctype="multipart/form-data">
+        <div class="card mt-3">
+            <div class="card-header">
+                {% trans %}admin.settings.gallerySettings{% endtrans %}
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="brand"
+                           class="form-label">{% trans %}admin.settings.brand{% endtrans %}</label>
+                    <input type="text"
+                           class="form-control"
+                           id="brand"
+                           name="brand"
+                           value="{{ settings.brand }}"
+                           autocomplete="off"
+                    />
+                </div>
+                <div class="row mb-3 banner">
+                    <div class="col">
+                        <label for="banner" class="form-label">{% trans %}admin.settings.banner{% endtrans %}</label>
+                        <input name="banner" type="file" class="form-control">
+                        <div class="form-text">{% trans %}admin.settings.bannerDescription{% endtrans %}</div>
+                    </div>
+                    <div class="col banner-preview">
+                        {% if settings.banner %}
+                            <div>
+                                <label for="banner" class="form-label">{% trans %}admin.settings.bannerPreview{% endtrans %}</label>
+                            </div>
+                            <img src="{{ asset(settings.banner.thumbnailPath) }}"
+                                 class="banner-preview-image img-thumbnail"
+                                 width="300"
+                                 height="78"
+                                 alt="{{ settings.banner.name }}">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <input type="submit" class="btn btn-primary float-end"
+                       value="{% trans %}base.button.save{% endtrans %}">
+                <a class="btn btn-secondary float-end me-2"
+                   href="{{ url('app_admin_overview') }}">{% trans %}base.button.cancel{% endtrans %}</a>
+            </div>
+        </div>
+    </form>
+{% endblock %}
