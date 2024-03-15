@@ -6,6 +6,7 @@ use App\Entity\Image;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @extends ServiceEntityRepository<Image>
@@ -68,5 +69,14 @@ class ImageRepository extends ServiceEntityRepository
             ->setFirstResult($offset)
             ->executeQuery()
             ->fetchAllAssociative();
+    }
+
+    public function delete(Image $image): void
+    {
+        $filesystem = new Filesystem();
+        $filesystem->remove($image->getPath());
+        $filesystem->remove($image->getThumbnailPath());
+
+        $this->getEntityManager()->remove($image);
     }
 }

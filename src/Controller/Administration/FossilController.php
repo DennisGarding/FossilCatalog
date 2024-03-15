@@ -223,11 +223,7 @@ class FossilController extends AbstractController
         $fossil->apply($requestData);
 
         try {
-            $images = $imageUploadService->uploadFiles($fossil);
-
-            foreach ($images as $image) {
-                $fossil->addImage($image);
-            }
+            $imageUploadService->uploadFossilImages($fossil);
         } catch (\Exception $exception) {
             $this->addFlash(
                 Defaults::FLASH_TYPE_ERROR,

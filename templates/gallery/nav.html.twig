@@ -1,7 +1,13 @@
 <div class="container">
     <nav class="navbar sticky-top">
         <div class="container-fluid">
-            <a class="navbar-brand text-white-50" href="{{ url('gallery_index') }}">Fossils-Catalog</a>
+            <a class="navbar-brand text-white-50" href="{{ url('gallery_index') }}">
+                {% if settings.brand %}
+                    {{ settings.brand }}
+                {% else %}
+                    {% trans %}admin.baseTitle{% endtrans %}
+                {% endif %}
+            </a>
 
             <a class="nav-link text-white-50" aria-current="page" style="position: absolute; right: 10px"
                href="{{ url('administration_login') }}">{% trans %}gallery.nav.login{% endtrans %}</a>

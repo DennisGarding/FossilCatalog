@@ -4,7 +4,9 @@ namespace App\Images;
 
 use App\Entity\Fossil;
 use App\Entity\Image;
+use App\Entity\Settings;
 use App\Images\ThumbnailGenerator\ThumbnailGeneratorInterface;
+use App\Repository\ImageRepository;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -21,16 +23,17 @@ class ImageUploadService
         #[Autowire('%kernel.project_dir%')]
         private readonly string $rootDirectory,
         private readonly ThumbnailGeneratorInterface $thumbnailGenerator,
+        private readonly ImageRepository $imageRepository,
     ) {}
 
     /**
      * @return array<Image>
      */
-    public function uploadFiles(Fossil $fossil): array
+    public function uploadFossilImages(Fossil $fossil): array
     {
-        $uploadedFiles = $this->getUploadedFiles();
+        $uploadedFiles = $this->getFossilUploadedImages();
         $images = [];
-        foreach ($uploadedFiles as $index => $uploadedFile) {
+        foreach ($uploadedFiles as $uploadedFile) {
             $path = $this->createHashedPath($uploadedFile);
 
             $image = new Image();
@@ -51,6 +54,7 @@ class ImageUploadService
             );
 
             $images[] = $image;
+            $fossil->addImage($image);
 
             $this->thumbnailGenerator->generate(
                 $this->rootDirectory,
@@ -61,6 +65,42 @@ class ImageUploadService
         }
 
         return $images;
+    }
+
+    public function uploadSettingsBanner(Settings $settings): void
+    {
+        $uploadedFile = $this->getUploadedBanner();
+        if (!$uploadedFile instanceof UploadedFile) {
+            return;
+        }
+
+        $path = $this->createHashedPath($uploadedFile);
+
+        $image = new Image();
+        $image->setName($uploadedFile->getClientOriginalName());
+        $image->setPath(sprintf(self::PATH_TEMPLATE, $path, $image->getName()));
+        $image->setThumbnailPath(sprintf(self::PATH_TEMPLATE, $path, 'thumbnail_' . $image->getName()));
+        $image->setMimeType($uploadedFile->getMimeType());
+        $image->setShowInGallery(false);
+        $image->setIsMainImage(false);
+
+        $uploadedFile->move(
+            sprintf('%s/%s/%s', $this->rootDirectory, 'public', $path),
+            $image->getName()
+        );
+
+        if ($settings->getBanner() instanceof Image) {
+            $this->imageRepository->delete($settings->getBanner());
+        }
+
+        $settings->setBanner($image);
+
+        $this->thumbnailGenerator->generate(
+            $this->rootDirectory,
+            'public/' . $image->getPath(),
+            'public/' . $image->getThumbnailPath(),
+            $image->getMimeType()
+        );
     }
 
     private function createHashedPath(UploadedFile $uploadedFile): string
@@ -75,10 +115,25 @@ class ImageUploadService
         return sprintf(self::PATH_TEMPLATE, self::BASE_PATH, implode('/', $chunks));
     }
 
+    private function getUploadedBanner(): ?UploadedFile
+    {
+        $file = $_FILES['banner'] ?? [];
+        if ($file['error']) {
+            return null;
+        }
+
+        return new UploadedFile(
+            $file['tmp_name'],
+            $file['name'],
+            $file['type'],
+            $file['error']
+        );
+    }
+
     /**
      * @return array<UploadedFile>
      */
-    private function getUploadedFiles(): array
+    private function getFossilUploadedImages(): array
     {
         $files = $_FILES['images'] ?? [];
         $uploadedFiles = [];

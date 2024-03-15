@@ -236,6 +236,14 @@ admin:
     genericPropertyRequired:
     genericNoIdProvided: No ID provided.
 
+    settings:
+        title: Settings
+        gallerySettings: Gallery Settings
+        brand: Brand
+        banner: Banner
+        bannerPreview: Banner Preview
+        bannerDescription: The banner is displayed on each page in the header. The recommended size is 1300x300 pixels.
+
     overview:
         overviewTitle: Overview
         fossilCount: Amount of Fossils
@@ -357,6 +365,7 @@ admin:
         export: Export
         import: Import
         logOut: Log out
+        gallerySettings: Gallery Settings
     baseTitle: Fossil-Catalog
     overviewTitle: Overview
 
