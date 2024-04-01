@@ -2,7 +2,6 @@
 
 namespace App\Repository\FossilRepository\FilterHandler;
 
-use App\Repository\EarthAgeStageRepository;
 use App\Repository\FilterHandlerInterface;
 use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\ORM\QueryBuilder;
@@ -10,10 +9,6 @@ use Doctrine\ORM\QueryBuilder;
 class StageFilter implements FilterHandlerInterface
 {
     private const FILTER_NAME = 'stage';
-
-    public function __construct(
-        private readonly EarthAgeStageRepository $earthAgeStageRepository,
-    ) {}
 
     public function supports(): string
     {
@@ -34,12 +29,7 @@ class StageFilter implements FilterHandlerInterface
             return;
         }
 
-        $stages = $this->earthAgeStageRepository->findNamesById($filters[self::FILTER_NAME]);
-        if (empty($stages)) {
-            return;
-        }
-
-        $queryBuilder->andWhere('fossil.earthAgeStage IN (:stage)')
-            ->setParameter('stage', $stages, ArrayParameterType::STRING);
+        $queryBuilder->andWhere('fossil.eaStage IN (:stage)')
+            ->setParameter('stage', $filters[self::FILTER_NAME], ArrayParameterType::INTEGER);
     }
 }

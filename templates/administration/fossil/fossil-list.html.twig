@@ -36,7 +36,15 @@
                 {% for formField in formFieldList %}
                     {% if formField.showInOverview %}
                         <td{% if formField.fieldName not in ['number', 'species'] %} class="d-none d-lg-table-cell"{% endif %}>
-                            {{ fossil[formField.fieldName|mapField] }}
+                            {% if formField.fieldName == 'eaSystem' %}
+                                {{ fossil.eaSystem.name }}
+                             {% elseif formField.fieldName == 'eaSeries' %}
+                                 {{ fossil.eaSeries.name }}
+                             {% elseif formField.fieldName == 'eaStage' %}
+                                 {{ fossil.eaStage.name }}
+                             {% else %}
+                                {{ fossil[formField.fieldName|mapField] }}
+                             {% endif %}
                         </td>
                     {% endif %}
                 {% endfor %}

@@ -11,6 +11,7 @@ use App\ImportExport\Import\ImportHandler\FossilHandler;
 use App\ImportExport\Import\ImportHandler\ImageHandler;
 use App\ImportExport\Import\ImportHandler\ImageRelationHandler;
 use App\ImportExport\Import\ImportHandler\SeriesHandler;
+use App\ImportExport\Import\ImportHandler\SettingsHandler;
 use App\ImportExport\Import\ImportHandler\StageHandler;
 use App\ImportExport\Import\ImportHandler\SystemHandler;
 use App\ImportExport\Import\ImportHandler\TagHandler;
@@ -36,6 +37,7 @@ class ImportService
         private readonly SystemHandler $systemHandler,
         private readonly SeriesHandler $seriesHandler,
         private readonly StageHandler $stageHandler,
+        private readonly SettingsHandler $settingsHandler,
     ) {
         $this->handler = [
             $this->categoryHandler,
@@ -49,6 +51,7 @@ class ImportService
             $this->systemHandler,
             $this->seriesHandler,
             $this->stageHandler,
+            $this->settingsHandler,
         ];
     }
 

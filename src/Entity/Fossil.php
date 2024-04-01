@@ -92,17 +92,17 @@ class Fossil implements \ArrayAccess, EntityInterface
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $earthAgeSystem = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $earthAgeSeries = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $earthAgeStage = null;
-
     #[ORM\ManyToMany(targetEntity: Image::class, cascade: ['persist'])]
     private Collection $images;
+
+    #[ORM\ManyToOne]
+    private ?EarthAgeSystem $eaSystem = null;
+
+    #[ORM\ManyToOne]
+    private ?EarthAgeSeries $eaSeries = null;
+
+    #[ORM\ManyToOne]
+    private ?EarthAgeStage $eaStage = null;
 
     public function __construct()
     {
@@ -446,36 +446,6 @@ class Fossil implements \ArrayAccess, EntityInterface
         return $this;
     }
 
-    public function getEarthAgeSystem(): ?string
-    {
-        return $this->earthAgeSystem;
-    }
-
-    public function setEarthAgeSystem(?string $earthAgeSystem): void
-    {
-        $this->earthAgeSystem = $earthAgeSystem;
-    }
-
-    public function getEarthAgeSeries(): ?string
-    {
-        return $this->earthAgeSeries;
-    }
-
-    public function setEarthAgeSeries(?string $earthAgeSeries): void
-    {
-        $this->earthAgeSeries = $earthAgeSeries;
-    }
-
-    public function getEarthAgeStage(): ?string
-    {
-        return $this->earthAgeStage;
-    }
-
-    public function setEarthAgeStage(?string $earthAgeStage): void
-    {
-        $this->earthAgeStage = $earthAgeStage;
-    }
-
     /**
      * @param array<string, mixed> $fossilData
      */
@@ -547,6 +517,42 @@ class Fossil implements \ArrayAccess, EntityInterface
     public function removeImage(Image $image): static
     {
         $this->images->removeElement($image);
+
+        return $this;
+    }
+
+    public function getEaSystem(): ?EarthAgeSystem
+    {
+        return $this->eaSystem;
+    }
+
+    public function setEaSystem(?EarthAgeSystem $eaSystem): static
+    {
+        $this->eaSystem = $eaSystem;
+
+        return $this;
+    }
+
+    public function getEaSeries(): ?EarthAgeSeries
+    {
+        return $this->eaSeries;
+    }
+
+    public function setEaSeries(?EarthAgeSeries $eaSeries): static
+    {
+        $this->eaSeries = $eaSeries;
+
+        return $this;
+    }
+
+    public function getEaStage(): ?EarthAgeStage
+    {
+        return $this->eaStage;
+    }
+
+    public function setEaStage(?EarthAgeStage $eaStage): static
+    {
+        $this->eaStage = $eaStage;
 
         return $this;
     }

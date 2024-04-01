@@ -2,7 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% trans %}admin.baseTitle{% endtrans %}|{% block title %}{% endblock %}</title>
+    <title>
+        {% if settings.brand %}
+            {{ settings.brand }}
+        {% else %}
+            {% trans %}admin.baseTitle{% endtrans %}
+        {% endif %}
+    </title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ asset('bootstrap/bootstrap.css') }}">
@@ -12,38 +18,39 @@
     <link rel="stylesheet" href="{{ asset('css/Gallery/style.css') }}">
     {% block stylesheets %}{% endblock %}
 
+    <script type="application/javascript" src="{{ asset('js/Admin/MultiSelectField.js') }}"></script>
+    <script type="application/javascript" src="{{ asset('js/Admin/Pagination.js') }}"></script>
     {% block javascripts %}{% endblock %}
 </head>
-<body class="bg-dark">
+<body>
     {% include 'gallery/nav.html.twig' with {'settings': settings } %}
     {% include 'gallery/banner.html.twig' with {'settings': settings } %}
 
     <div class="container mt-3">
-{#        <div class="accordion accordion-flush" id="accordionFlushExample">#}
-{#            <div class="accordion-item">#}
-{#                <h2 class="accordion-header">#}
-{#                    <button class="accordion-button collapsed bg-dark-subtle"#}
-{#                            type="button"#}
-{#                            data-bs-toggle="collapse"#}
-{#                            data-bs-target="#flush-collapseOne"#}
-{#                            aria-expanded="false"#}
-{#                            aria-controls="flush-collapseOne">#}
-{#                        {% trans %}base.filter{% endtrans %}#}
-{#                    </button>#}
-{#                </h2>#}
-{#                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">#}
-{#                    <div class="accordion-body"></div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
+        <div class="accordion " id="accordionFlushExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        {% trans %}base.filter{% endtrans %}
+                    </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse m-3" data-bs-parent="#accordionFlushExample">
+                    {% include "gallery/filter.html.twig" %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-3">
+        {% include 'pagination.html.twig' with {'settings': settings } %}
     </div>
 
     <div class="container mt-3">
         {% block content %}
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-                {% for fossil in fossils %}
+                {% for fossil in fossilList %}
                     <div class="col">
-                        <div class="card gallery-fossil-card bg-dark border-0">
+                        <div class="card gallery-fossil-card">
                             <a href="#" class=" card-img-top">
                                 <img src="{% if fossil.images|length > 0 %}
                                             {{ asset(fossil.images|first.thumbnailPath) }}
@@ -53,12 +60,12 @@
                                      class="card-img-top"
                                      alt="">
                             </a>
-                            <div class="card-body text-white-50 pt-1 ps-0">
+                            <div class="card-body">
                                 <figure class="mb-0">
                                     <blockquote class="blockquote">
                                         <p>{{ fossil.genius }}</p>
                                     </blockquote>
-                                    <figcaption class="blockquote-footer text-white-50 mb-0">
+                                    <figcaption class="blockquote-footer mb-0">
                                         {{ fossil.species }} {{ fossil.subspecies }}
                                     </figcaption>
                                 </figure>
@@ -69,5 +76,19 @@
             </div>
         {% endblock %}
     </div>
+
+    <div class="container mt-3">
+        {% include 'pagination.html.twig' with {'settings': settings } %}
+    </div>
+
+    <script>
+        const multiSelectFields = document.querySelectorAll('select[data-multi-select-plugin="true"]');
+
+        multiSelectFields.forEach(function (field) {
+            new MultiSelectField(field, true);
+        });
+
+        new Pagination();
+    </script>
 </body>
 </html>

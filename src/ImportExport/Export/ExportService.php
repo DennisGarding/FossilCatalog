@@ -11,6 +11,7 @@ use App\ImportExport\Export\ExportHandler\FossilHandler;
 use App\ImportExport\Export\ExportHandler\ImageHandler;
 use App\ImportExport\Export\ExportHandler\ImageRelationHandler;
 use App\ImportExport\Export\ExportHandler\SeriesHandler;
+use App\ImportExport\Export\ExportHandler\SettingsHandler;
 use App\ImportExport\Export\ExportHandler\StageHandler;
 use App\ImportExport\Export\ExportHandler\SystemHandler;
 use App\ImportExport\Export\ExportHandler\TagHandler;
@@ -49,6 +50,7 @@ class ExportService implements ExportServiceInterface
         private readonly ImageHandler $imageHandler,
         private readonly ImageRelationHandler $imageRelationHandler,
         private readonly FossilHandler $fossilHandler,
+        private readonly SettingsHandler $settingsHandler,
     ) {
         $this->handler = [
             $this->categoryHandler,
@@ -62,6 +64,7 @@ class ExportService implements ExportServiceInterface
             $this->imageHandler,
             $this->imageRelationHandler,
             $this->fossilHandler,
+            $this->settingsHandler,
         ];
     }
 

@@ -69,9 +69,9 @@ class FossilHandler implements HandlerInterface
         $fossil->setFindingPlace($this->createFindingPlaceName());
         $fossil->setCoordinates($this->createCoordinates());
         $fossil->setFindingNotes(Random::loremIpsum());
-        $fossil->setEarthAgeSystem($systemSeriesStage->getSystem()->getName());
-        $fossil->setEarthAgeSeries($systemSeriesStage->getSeries()->getName());
-        $fossil->setEarthAgeStage($systemSeriesStage->getStage()->getName());
+        $fossil->setEaSystem($systemSeriesStage->getSystem());
+        $fossil->setEaSeries($systemSeriesStage->getSeries());
+        $fossil->setEaStage($systemSeriesStage->getStage());
         $fossil->setFormation($this->createFormationName());
         $fossil->setStratigraphicMember($this->createFormationName());
         $fossil->setStratigraphicNotes(Random::loremIpsum());

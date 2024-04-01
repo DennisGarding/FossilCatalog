@@ -36,6 +36,7 @@ abstract class AbstractExportHandler
         }
 
         $this->targetFile = sprintf('%s/%s', $targetDirectory, $this->getFileName());
+        \file_put_contents($this->targetFile, '');
 
         $session->set($sessionFileNameKey, $this->targetFile);
     }
@@ -44,11 +45,11 @@ abstract class AbstractExportHandler
     {
         $inExportQueue = $this->getColumnCount();
 
-        $categoryStatus = new ExportStatus($this->getKey(), $inExportQueue);
+        $exportStatus = new ExportStatus($this->getKey(), $inExportQueue);
 
-        $this->saveSession($categoryStatus);
+        $this->saveSession($exportStatus);
 
-        return $categoryStatus;
+        return $exportStatus;
     }
 
     public function export(): ExportStatus

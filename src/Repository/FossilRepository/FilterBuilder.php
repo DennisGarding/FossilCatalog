@@ -7,7 +7,8 @@ use Symfony\Component\Cache\CacheItem;
 
 class FilterBuilder
 {
-    private const CACHE_KEY = 'fossil_filter';
+    public const ADMIN_CACHE_KEY = 'admin_fossil_filter';
+    public const GALLERY_CACHE_KEY = 'gallery_fossil_filter';
 
     /** @var array<string, mixed> */
     private array $filters = [];
@@ -16,13 +17,18 @@ class FilterBuilder
 
     private CacheItem $cacheItem;
 
+    private string $cacheKey;
+
     /**
+     * @param ?string $cacheKey
+     *
      * @return static
      */
-    public function __construct()
+    public function __construct(?string $cacheKey = self::ADMIN_CACHE_KEY)
     {
+        $this->cacheKey = $cacheKey;
         $this->cacheAdapter = new FilesystemAdapter();
-        $cachedValues = $this->cacheAdapter->getItem(self::CACHE_KEY);
+        $cachedValues = $this->cacheAdapter->getItem($this->cacheKey);
         $this->cacheItem = $cachedValues;
 
         if ($cachedValues->isHit()) {
@@ -78,6 +84,7 @@ class FilterBuilder
             'system' => null,
             'series' => null,
             'stage' => null,
+            'showInGallery' => $this->cacheKey === self::GALLERY_CACHE_KEY,
         ];
 
         $this->save();

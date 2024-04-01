@@ -93,6 +93,8 @@
                         <label>{% trans %}admin.export.imagesRelations{% endtrans %}</label>
                     {% elseif status.type == 'fossil' %}
                         <label>{% trans %}admin.export.fossils{% endtrans %}</label>
+                    {% elseif status.type == 'settings' %}
+                        <label>{% trans %}admin.export.settings{% endtrans %}</label>
                     {% endif %}
 
                     <div class="progress mt-1" role="progressbar" aria-label="{{ status.type }} status"

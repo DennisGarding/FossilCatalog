@@ -15,9 +15,9 @@ class FossilFieldMapper
         'findingPlace' => 'getFindingPlace',
         'coordinates' => 'getCoordinates',
         'findingNotes' => 'getFindingNotes',
-        'earthAgeSystem' => 'getEarthAgeSystem',
-        'earthAgeSeries' => 'getEarthAgeSeries',
-        'earthAgeStage' => 'getEarthAgeStage',
+        'eaSystem' => 'getEaSystem',
+        'eaSeries' => 'getEaSeries',
+        'eaStage' => 'getEaStage',
         'formation' => 'getFormation',
         'member' => 'getStratigraphicMember',
         'stratigraphicNotes' => 'getStratigraphicNotes',
@@ -41,9 +41,9 @@ class FossilFieldMapper
         'findingPlace' => 'findingPlace',
         'coordinates' => 'coordinates',
         'findingNotes' => 'findingNotes',
-        'earthAgeSystem' => 'earthAgeSystem',
-        'earthAgeSeries' => 'earthAgeSeries',
-        'earthAgeStage' => 'earthAgeStage',
+        'eaSystem' => 'eaSystem',
+        'eaSeries' => 'eaSeries',
+        'eaStage' => 'eaStage',
         'formation' => 'formation',
         'member' => 'stratigraphicMember',
         'stratigraphicNotes' => 'stratigraphicNotes',
@@ -68,6 +68,11 @@ class FossilFieldMapper
     {
         foreach ($fossilFormFields as $formField) {
             if ($formField->isIsRequiredDefault() && array_key_exists($formField->getFieldName(), self::GETTER_MAPPING)) {
+                if (\in_array($formField->getFieldName(), ['eaSystem', 'eaSeries', 'eaStage'], true)) {
+                    $formField->setFieldValue($fossil->{self::GETTER_MAPPING[$formField->getFieldName()]}()->getId());
+                    continue;
+                }
+
                 $formField->setFieldValue($fossil->{self::GETTER_MAPPING[$formField->getFieldName()]}());
 
                 continue;

@@ -15,6 +15,7 @@ use App\Repository\FossilRepository;
 use App\Repository\FossilRepository\FilterBuilder;
 use App\Repository\TagRepository;
 use App\Static\Pagination\Pagination;
+use App\SystemSeriesStage\SystemSeriesStageService;
 use App\Validation\Validator;
 use Doctrine\ORM\EntityManagerInterface;
 use Dompdf\Dompdf;
@@ -40,6 +41,7 @@ class FossilController extends AbstractController
         private readonly EarthAgeStageRepository $earthAgeStageRepository,
         private readonly TranslatorInterface $translator,
         private readonly FossilFieldMapper $fieldMapper,
+        private readonly SystemSeriesStageService $systemSeriesStageService,
     ) {}
 
     #[Route('/admin/fossil/list', name: 'app_admin_fossil_list')]
@@ -60,6 +62,8 @@ class FossilController extends AbstractController
 
         $fossilList = $this->fossilRepository->getSearchResult($paginationResult->getOffset(), $filterBuilder->build());
 
+        $systemSeriesStage = $this->systemSeriesStageService->findAllActive();
+
         return $this->render('administration/fossil/index.html.twig',
             array_merge(
                 [
@@ -67,9 +71,9 @@ class FossilController extends AbstractController
                     'fossilList' => $fossilList,
                     'categories' => $this->categoryRepository->findAll(),
                     'tags' => $this->tagRepository->findAll(),
-                    'systems' => $this->earthAgeSystemRepository->findAllActive(),
-                    'series' => $this->earthAgeSeriesRepository->findAll(),
-                    'stages' => $this->earthAgeStageRepository->findAll(),
+                    'systems' => $systemSeriesStage->getActiveSystems(),
+                    'series' => $systemSeriesStage->getActiveSeries(),
+                    'stages' => $systemSeriesStage->getActiveStages(),
                     'filterSelection' => $filterBuilder->build(),
                 ],
                 $paginationResult->toArray()
@@ -106,15 +110,17 @@ class FossilController extends AbstractController
     #[Route('/admin/fossil/create/form', name: 'app_admin_fossil_create_form')]
     public function create(): Response
     {
+        $systemSeriesStage = $this->systemSeriesStageService->findAllActive();
+
         return $this->render('administration/fossil/form.html.twig', [
             'fossil' => new Fossil(),
             'errorRoute' => $this->router->generate('app_admin_fossil_form_field_create_form'),
             'fossilFormFields' => $this->fossilFormFieldRepository->findActive(),
             'categories' => $this->categoryRepository->findAll(),
             'tags' => $this->tagRepository->findAll(),
-            'systems' => $this->earthAgeSystemRepository->findAllActive(),
-            'series' => $this->earthAgeSeriesRepository->findAll(),
-            'stages' => $this->earthAgeStageRepository->findAll(),
+            'systems' => $systemSeriesStage->getActiveSystems(),
+            'series' => $systemSeriesStage->getActiveSeries(),
+            'stages' => $systemSeriesStage->getActiveStages(),
         ]);
     }
 
@@ -138,15 +144,17 @@ class FossilController extends AbstractController
         $fossilFormFields = $this->fossilFormFieldRepository->findActive();
         $this->fieldMapper->mapGetter($fossilFormFields, $fossil);
 
+        $systemSeriesStage = $this->systemSeriesStageService->findAllActive();
+
         return $this->render('administration/fossil/form.html.twig', [
             'fossil' => $fossil,
             'errorRoute' => $this->router->generate('app_admin_fossil_edit_form'),
             'fossilFormFields' => $fossilFormFields,
             'categories' => $this->categoryRepository->findAll(),
             'tags' => $this->tagRepository->findAll(),
-            'systems' => $this->earthAgeSystemRepository->findAllActive(),
-            'series' => $this->earthAgeSeriesRepository->findAll(),
-            'stages' => $this->earthAgeStageRepository->findAll(),
+            'systems' => $systemSeriesStage->getActiveSystems(),
+            'series' => $systemSeriesStage->getActiveSeries(),
+            'stages' => $systemSeriesStage->getActiveStages(),
         ]);
     }
 
@@ -207,6 +215,9 @@ class FossilController extends AbstractController
 
         $requestData['tags'] = $this->tagRepository->findBy(['id' => $tagIds]);
         $requestData['categories'] = $this->categoryRepository->findBy(['id' => $categoryIds]);
+        $requestData['eaSystem'] = $this->earthAgeSystemRepository->find($requestData['eaSystem']);
+        $requestData['eaSeries'] = $this->earthAgeSeriesRepository->find($requestData['eaSeries']);
+        $requestData['eaStage'] = $this->earthAgeStageRepository->find($requestData['eaStage']);
 
         try {
             $requestData['dateOfDiscovery'] = new \DateTime($requestData['dateOfDiscovery']);

@@ -50,6 +50,26 @@ class EarthAgeSystemRepository extends ServiceEntityRepository
         return $queryBuilder->getQuery()->getResult();
     }
 
+    /**
+     * @return array<int, EarthAgeSystem>
+     */
+    public function findUsed(): array
+    {
+        $ids = $this->getEntityManager()->getConnection()->createQueryBuilder()
+            ->select('DISTINCT systems.id')
+            ->from('earth_age_system', 'systems')
+            ->join('systems', 'fossil', 'fossil', 'fossil.ea_system_id = systems.id')
+            ->where('fossil.ea_system_id IS NOT NULL')
+            ->executeQuery()
+            ->fetchFirstColumn();
+
+        return $this->createQueryBuilder('earthAgeSystem')
+            ->where('earthAgeSystem.id IN (:ids)')
+            ->setParameter('ids', $ids, ArrayParameterType::INTEGER)
+            ->getQuery()
+            ->getResult();
+    }
+
     public function getSystem(bool $isCreate, ?string $id): ?EarthAgeSystem
     {
         if ($isCreate === false && $id === null) {

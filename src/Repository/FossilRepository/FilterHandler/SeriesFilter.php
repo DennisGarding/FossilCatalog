@@ -2,7 +2,6 @@
 
 namespace App\Repository\FossilRepository\FilterHandler;
 
-use App\Repository\EarthAgeSeriesRepository;
 use App\Repository\FilterHandlerInterface;
 use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\ORM\QueryBuilder;
@@ -10,10 +9,6 @@ use Doctrine\ORM\QueryBuilder;
 class SeriesFilter implements FilterHandlerInterface
 {
     private const FILTER_NAME = 'series';
-
-    public function __construct(
-        private readonly EarthAgeSeriesRepository $earthAgeSeriesRepository,
-    ) {}
 
     public function supports(): string
     {
@@ -34,12 +29,7 @@ class SeriesFilter implements FilterHandlerInterface
             return;
         }
 
-        $series = $this->earthAgeSeriesRepository->findNamesById($filters[self::FILTER_NAME]);
-        if (empty($series)) {
-            return;
-        }
-
-        $queryBuilder->andWhere('fossil.earthAgeSeries IN (:series)')
-            ->setParameter('series', $series, ArrayParameterType::STRING);
+        $queryBuilder->andWhere('fossil.eaSeries IN (:series)')
+            ->setParameter('series', $filters[self::FILTER_NAME], ArrayParameterType::INTEGER);
     }
 }

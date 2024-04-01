@@ -9,8 +9,8 @@ class TranslationServiceTest extends TestCase
 {
     public function testMoveToPublic(): void
     {
-        $file = __DIR__ . '/../../../public/translations/messages.json';
-        $defaultsFile = __DIR__ . '/../../../public/translations/messages_defaults.json';
+        $file = __DIR__ . '/../../../javascript/src/translations/messages.json';
+        $defaultsFile = __DIR__ . '/../../../javascript/src/translations/messages_defaults.json';
         if (file_exists($file)) {
             unlink($file);
         }

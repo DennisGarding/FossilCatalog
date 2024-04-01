@@ -24,8 +24,8 @@ also make sure you have the following PHP extensions installed:
 
 ## For developers
 ### Command line interface
-1. Installation : `bin/console app:install` Create also a User with the credentials:
+1. Installation : `composer setup` Create also a User with the credentials:
     - Email: test@example.com
     - Password: test1234
-2. Demo data: `bin/console app:demo-data:create`
-3. When you create a new snippet which is used with the Js Translator, you need to update the translations with `bin/console app:translate`
+2. Demo data: `composer demo`
+3. When you create a new snippet which is used with the Js Translator, you need to update the translations with `composer translate`
