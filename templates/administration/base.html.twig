@@ -12,7 +12,7 @@
     {% include 'administration/css.html.twig' %}
     {% block stylesheets %}{% endblock %}
 
-    {% include 'administration/js.html.twig' %}
+    <script type="application/javascript" src="{{ asset('js/main.js') }}"></script>
     {% block javascripts %}{% endblock %}
 </head>
 <body data-keep-session="true" data-url="{{ url('app_admin_keep_session') }}" data-logoutUrl="{{ url('administration_logout') }}">

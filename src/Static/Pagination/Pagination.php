@@ -8,6 +8,10 @@ class Pagination
 {
     public static function calculate(int $tableColumnCount, ?int $page = 1): PaginationResult
     {
+        if ($page < 1) {
+            $page = 1;
+        }
+
         $offset = 0;
         if ($page > 1) {
             $offset = ($page - 1) * Defaults::QUERY_LIMIT;

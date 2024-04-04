@@ -73,9 +73,13 @@ abstract class AbstractImportHandler
                 throw new \UnexpectedValueException('Expect array got ' . gettype($array));
             }
 
-            $query = $this->createQuery($array);
-            if ($query !== null) {
-                $query->executeQuery();
+            try {
+                $query = $this->createQuery($array);
+                if ($query !== null) {
+                    $query->executeQuery();
+                }
+            } catch (\Throwable $exception) {
+                throw new \RuntimeException($exception->getMessage() . ' SQL: ' . $query?->getSQL(), 0, $exception);
             }
 
             if ($this instanceof AdditionalWorkerInterface) {

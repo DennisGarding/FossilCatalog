@@ -30,6 +30,27 @@ class SearchTermFilter implements FilterHandlerInterface
         $formFields = $this->fossilFormFieldRepository->findFilterableFields();
 
         foreach ($formFields as $formField) {
+            if ($formField->getFieldName() === 'eaSystem') {
+                $queryBuilder->join('fossil.eaSystem', 'eaSystem');
+                $queryBuilder->orWhere('eaSystem.name LIKE :searchTerm')
+                    ->setParameter('searchTerm', '%' . $filters[self::FILTER_NAME] . '%');
+                continue;
+            }
+
+            if ($formField->getFieldName() === 'eaSeries') {
+                $queryBuilder->join('fossil.eaSeries', 'eaSeries');
+                $queryBuilder->orWhere('eaSeries.name LIKE :searchTerm')
+                    ->setParameter('searchTerm', '%' . $filters[self::FILTER_NAME] . '%');
+                continue;
+            }
+
+            if ($formField->getFieldName() === 'eaStage') {
+                $queryBuilder->join('fossil.eaStage', 'eaStage');
+                $queryBuilder->orWhere('eaStage.name LIKE :searchTerm')
+                    ->setParameter('searchTerm', '%' . $filters[self::FILTER_NAME] . '%');
+                continue;
+            }
+
             $queryBuilder->orWhere(sprintf('fossil.%s LIKE :searchTerm', $this->fossilFieldMapper->mapProperty($formField->getFieldName())))
                 ->setParameter('searchTerm', '%' . $filters[self::FILTER_NAME] . '%');
         }

@@ -1,8 +1,8 @@
-{% if formField.fieldName == 'earthAgeSystem' %}
+{% if formField.fieldName == 'eaSystem' %}
     {% include 'administration/base/system-series-stage-select.html.twig' with { 'formField': formField, 'choiceList': systems } %}
-{% elseif formField.fieldName == 'earthAgeSeries' %}
+{% elseif formField.fieldName == 'eaSeries' %}
     {% include 'administration/base/system-series-stage-select.html.twig' with { 'formField': formField, 'choiceList': series, 'parentIdKey': 'earthAgeSystemId' } %}
-{% elseif formField.fieldName == 'earthAgeStage' %}
+{% elseif formField.fieldName == 'eaStage' %}
     {% include 'administration/base/system-series-stage-select.html.twig' with { 'formField': formField, 'choiceList': stages, 'parentIdKey': 'earthAgeSeriesId' } %}
 {% elseif formField.fieldType == 'TEXT' %}
     <div class="mb-3">
@@ -53,7 +53,7 @@
         >
     </div>
 {% elseif formField.fieldType == 'BOOL' %}
-    {% include 'administration/base/booleanField.html.twig' with { 'fieldLabel': formField.fieldLabel, 'fieldName': formField.fieldName } %}
+    {% include 'administration/base/booleanField.html.twig' with { 'fieldLabel': formField.fieldLabel, 'fieldName': formField.fieldName, 'fieldValue': formField.fieldValue } %}
 {% else %}
     <b>Form field type: "{{ type }}" not found</b>
 {% endif %}

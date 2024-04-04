@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Defaults;
 use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -109,5 +110,31 @@ class TagRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
 
         return $tag;
+    }
+
+    /**
+     * @return array<int, Tag>
+     */
+    public function getGalleryList(): array
+    {
+        $tagsIdsWithFossil = $this->getEntityManager()->getConnection()->createQueryBuilder()
+            ->select(['DISTINCT tag_id'])
+            ->from('fossil_tag')
+            ->executeQuery()
+            ->fetchFirstColumn();
+
+        $result = $this->createQueryBuilder('tag')
+            ->select(['tag'])
+            ->where('tag.id IN (:tagIds)')
+            ->setParameter('tagIds', $tagsIdsWithFossil, ArrayParameterType::INTEGER)
+            ->orderBy('tag.name')
+            ->getQuery()
+            ->getResult();
+
+        if (!is_array($result)) {
+            return [];
+        }
+
+        return $result;
     }
 }

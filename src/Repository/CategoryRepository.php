@@ -4,8 +4,8 @@ namespace App\Repository;
 
 use App\Defaults;
 use App\Entity\Category;
-use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -43,7 +43,7 @@ class CategoryRepository extends ServiceEntityRepository
     /**
      * @param ?string $searchTerm
      *
-     * @return array<int, Tag>
+     * @return array<int, Category>
      */
     public function getSearchResult(int $offset, ?string $searchTerm = null): array
     {
@@ -102,5 +102,31 @@ class CategoryRepository extends ServiceEntityRepository
             ->from('fossil_category')
             ->executeQuery()
             ->fetchOne();
+    }
+
+    /**
+     * @return array<int, Category>
+     */
+    public function getGalleryList(): array
+    {
+        $categoryIdsWithFossil = $this->getEntityManager()->getConnection()->createQueryBuilder()
+            ->select(['DISTINCT category_id'])
+            ->from('fossil_category')
+            ->executeQuery()
+            ->fetchFirstColumn();
+
+        $result = $this->createQueryBuilder('category')
+            ->select(['category'])
+            ->where('category.id IN (:categoryIds)')
+            ->setParameter('categoryIds', $categoryIdsWithFossil, ArrayParameterType::INTEGER)
+            ->orderBy('category.name')
+            ->getQuery()
+            ->getResult();
+
+        if (!is_array($result)) {
+            return [];
+        }
+
+        return $result;
     }
 }

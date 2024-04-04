@@ -54,6 +54,40 @@ class EarthAgeStageRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param array<int> $seriesIds
+     *
+     * @return array<int, EarthAgeStage>
+     */
+    public function findBySeriesIds(array $seriesIds): array
+    {
+        $queryBuilder = $this->createQueryBuilder('earthAgeStage')
+            ->where('earthAgeStage.earthAgeSeriesId IN (:seriesIds)')
+            ->setParameter('seriesIds', $seriesIds, ArrayParameterType::INTEGER);
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
+     * @return array<int, EarthAgeStage>
+     */
+    public function findUsed(): array
+    {
+        $ids = $this->getEntityManager()->getConnection()->createQueryBuilder()
+            ->select('DISTINCT stage.id')
+            ->from('earth_age_stage', 'stage')
+            ->join('stage', 'fossil', 'fossil', 'fossil.ea_stage_id = stage.id')
+            ->where('fossil.ea_stage_id IS NOT NULL')
+            ->executeQuery()
+            ->fetchFirstColumn();
+
+        return $this->createQueryBuilder('earthAgeStage')
+            ->where('earthAgeStage.id IN (:ids)')
+            ->setParameter('ids', $ids, ArrayParameterType::INTEGER)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * @param array<string, mixed> $filter
      *
      * @return array<int, EarthAgeStage>

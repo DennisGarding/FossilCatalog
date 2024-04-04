@@ -15,4 +15,5 @@ final class Types
     public const TYPE_SYSTEM = 'system';
     public const TYPE_TAG = 'tag';
     public const TYPE_TAG_RELATION = 'tag_relation';
+    public const TYPE_SETTINGS = 'settings';
 }

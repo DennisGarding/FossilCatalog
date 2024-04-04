@@ -27,6 +27,12 @@
                     </span>
                 {% elseif formField.fieldType == 'DATE' %}
                     {{ formField.fieldValue|date('Y-m-d') }}
+                {% elseif formField.fieldType == 'SYSTEM' %}
+                    {{ fossil.eaSystem.name }}
+                {% elseif formField.fieldType == 'SERIES' %}
+                    {{ fossil.eaSeries.name }}
+                {% elseif formField.fieldType == 'STAGE' %}
+                    {{ fossil.eaStage.name }}
                 {% endif %}
             </div>
         {% endif %}

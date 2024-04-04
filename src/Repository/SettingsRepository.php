@@ -24,18 +24,47 @@ class SettingsRepository extends ServiceEntityRepository
     public function getSettings(): Settings
     {
         $settings = $this->find(1) ?? new Settings();
-        if ($settings->getId() === null) {
-            $reflectionProperty = (new \ReflectionClass(Settings::class))->getProperty('id');
-            $reflectionProperty->setAccessible(true);
-            $reflectionProperty->setValue($settings, 1);
-        }
+        $this->ensureSingleSettingsRow($settings);
 
         return $settings;
     }
 
     public function save(Settings $settings): void
     {
+        $this->ensureSingleSettingsRow($settings);
         $this->_em->persist($settings);
         $this->_em->flush();
+    }
+
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    public function getExportList(): array
+    {
+        return $this->getEntityManager()->getConnection()->createQueryBuilder()
+            ->select(['*'])
+            ->from('settings')
+            ->where('id = 1')
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
+
+    public function getColumnCount(): int
+    {
+        $result = $this->getExportList();
+        if (empty($result)) {
+            return 0;
+        }
+
+        return 1;
+    }
+
+    private function ensureSingleSettingsRow(Settings $settings): void
+    {
+        if ($settings->getId() !== 1) {
+            $reflectionProperty = (new \ReflectionClass(Settings::class))->getProperty('id');
+            $reflectionProperty->setAccessible(true);
+            $reflectionProperty->setValue($settings, 1);
+        }
     }
 }

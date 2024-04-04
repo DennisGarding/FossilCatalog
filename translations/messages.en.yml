@@ -469,6 +469,7 @@ admin:
         images: Images
         imagesRelations: Images Relations
         fossils: Fossils
+        settings: Settings
         earlierExports: Earlier Exports
         couldNotFindExport: Could not find Export
         exportDeleted: Backup deleted

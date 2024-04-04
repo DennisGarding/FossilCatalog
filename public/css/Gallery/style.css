@@ -18,3 +18,42 @@
     object-fit:cover;
     object-position: center;
 }
+
+.accordion-button:after {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='gray'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+}
+
+.accordion-button:not(.collapsed) {
+    box-shadow: none !important;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(0,0,0,.125);
+}
+
+/** Multi Select **/
+.multi-select-wrapper .list-group {
+    position: absolute;
+    max-height: 350px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 0;
+    border-radius: 0;
+    z-index: 999;
+}
+
+.multi-select-wrapper .search-field .field-list {
+    border-bottom: 1px;
+}
+
+.multi-select-wrapper .search-field {
+    position: relative;
+}
+
+.multi-select-wrapper .search-field .multi-select-chevron-down {
+    position: absolute;
+    right: 10px;
+    top: 8px;
+}
+/** Multi Select end **/

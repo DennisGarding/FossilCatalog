@@ -11,7 +11,7 @@ class TranslationService
     private const TRANSLATION_FILE_EXTENSION = 'yml';
     private const TRANSLATION_DIRECTORY = __DIR__ . '/../../translations';
 
-    private const TARGET_DIRECTORY = __DIR__ . '/../../public/translations';
+    private const TARGET_DIRECTORY = __DIR__ . '/../../javascript/src/translations';
     private const TARGET_FILE = 'messages.json';
     private const TARGET_FILE_DEFAULT = 'messages_defaults.json';
 

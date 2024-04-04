@@ -72,9 +72,9 @@ class FossilHandler extends AbstractImportHandler
                 'size' => ':size',
                 'taxonomy_notes' => ':taxonomy_notes',
                 'extra_fields' => ':extra_fields',
-                'earth_age_system' => ':earth_age_system',
-                'earth_age_series' => ':earth_age_series',
-                'earth_age_stage' => ':earth_age_stage',
+                'ea_system_id' => ':ea_system_id',
+                'ea_series_id' => ':ea_series_id',
+                'ea_stage_id' => ':ea_stage_id',
                 'created_at' => ':created_at',
                 'updated_at' => ':updated_at',
             ])
@@ -100,9 +100,9 @@ class FossilHandler extends AbstractImportHandler
             ->setParameter('size', $data['size'])
             ->setParameter('taxonomy_notes', $data['taxonomy_notes'])
             ->setParameter('extra_fields', $data['extra_fields'])
-            ->setParameter('earth_age_system', $data['earth_age_system'])
-            ->setParameter('earth_age_series', $data['earth_age_series'])
-            ->setParameter('earth_age_stage', $data['earth_age_stage'])
+            ->setParameter('ea_system_id', $data['ea_system_id'])
+            ->setParameter('ea_series_id', $data['ea_series_id'])
+            ->setParameter('ea_stage_id', $data['ea_stage_id'])
             ->setParameter('created_at', $data['created_at'])
             ->setParameter('updated_at', $data['updated_at']);
     }
@@ -135,9 +135,9 @@ class FossilHandler extends AbstractImportHandler
             ->set('size', ':size')
             ->set('taxonomy_notes', ':taxonomy_notes')
             ->set('extra_fields', ':extra_fields')
-            ->set('earth_age_system', ':earth_age_system')
-            ->set('earth_age_series', ':earth_age_series')
-            ->set('earth_age_stage', ':earth_age_stage')
+            ->set('ea_system_id', ':ea_system_id')
+            ->set('ea_series_id', ':ea_series_id')
+            ->set('ea_stage_id', ':ea_stage_id')
             ->set('created_at', ':created_at')
             ->set('updated_at', ':updated_at')
             ->where('id = :id')
@@ -163,9 +163,9 @@ class FossilHandler extends AbstractImportHandler
             ->setParameter('size', $data['size'])
             ->setParameter('taxonomy_notes', $data['taxonomy_notes'])
             ->setParameter('extra_fields', $data['extra_fields'])
-            ->setParameter('earth_age_system', $data['earth_age_system'])
-            ->setParameter('earth_age_series', $data['earth_age_series'])
-            ->setParameter('earth_age_stage', $data['earth_age_stage'])
+            ->setParameter('ea_system_id', $data['ea_system_id'])
+            ->setParameter('ea_series_id', $data['ea_series_id'])
+            ->setParameter('ea_stage_id', $data['ea_stage_id'])
             ->setParameter('created_at', $data['created_at'])
             ->setParameter('updated_at', $data['updated_at']);
     }

@@ -11,6 +11,9 @@ class FossilFormFieldDefaults
     public const TYPE_NUMBER = 'NUMBER';
     public const TYPE_DATE = 'DATE';
     public const TYPE_BOOL = 'BOOLEAN';
+    public const TYPE_SYSTEM = 'SYSTEM';
+    public const TYPE_SERIES = 'SERIES';
+    public const TYPE_STAGE = 'STAGE';
 
     public const GROUP_GENERAL = 'GENERAL';
     public const GROUP_DISCOVERY = 'DISCOVERY';
@@ -51,6 +54,9 @@ class FossilFormFieldDefaults
             self::TYPE_TEXT,
             self::TYPE_TEXT_AREA,
             self::TYPE_NUMBER,
+            self::TYPE_SYSTEM,
+            self::TYPE_SERIES,
+            self::TYPE_STAGE,
         ];
     }
 

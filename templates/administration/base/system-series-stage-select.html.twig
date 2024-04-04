@@ -4,8 +4,8 @@
         <option data-parent-id="0" value="0" disabled>{% trans %}base.pleaseSelect{% endtrans %}</option>
         {% for value in choiceList %}
             <option
-                    value="{{ value.name }}"
-                    {% if value.name == formField.fieldValue %} selected="selected"{% endif %}
+                    value="{{ value.id }}"
+                    {% if value.id == formField.fieldValue %} selected="selected"{% endif %}
                     data-id="{{ value.id }}"
                     {% if parentIdKey is defined %}data-parent-id="{{ value[parentIdKey] }}"{% endif %}
             >{{ value.name }}</option>
