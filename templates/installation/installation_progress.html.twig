@@ -2,15 +2,11 @@
 
 {% block stylesheets %}
     {{ parent() }}
-<link rel="stylesheet" href="{{ asset('css/installation.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/installation.css') }}">
 {% endblock %}
 
 {% block javascripts %}
-    <script type="application/javascript" src="{{ asset('js/Base/Ajax.js') }}"></script>
-    <script type="application/javascript" src="{{ asset('js/Base/ProgressBar.js') }}"></script>
-    <script type="application/javascript" src="{{ asset('js/Base/TextLog.js') }}"></script>
-
-    <script type="application/javascript" src="{{ asset('js/Installation/Installation.js') }}"></script>
+    <script type="application/javascript" src="{{ asset('js/installation.main.js') }}"></script>
 {% endblock %}
 
 {% block title %}{% trans %}installation.title{% endtrans %}{% endblock %}
@@ -33,22 +29,26 @@
     >
         <div class="card shadow centered position-absolute top-50 start-50 translate-middle">
             <div class="card-header">
-                <h1>{% trans %}installation.installationInProgress{% endtrans %}</h1>
+                <h3>{% trans %}installation.installationInProgress{% endtrans %}</h3>
             </div>
             <div class="card-body">
                 <div id="installation-progress-text mb-3">
                     <div data-logField="true" class="log-container form-control" style="height: 400px"></div>
                 </div>
 
-                <div class="progress mt-3" role="progressbar" aria-label="Default striped example" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-                    <div id="installation-progress"  class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%"></div>
+                <div class="progress mt-3" role="progressbar" aria-label="Default striped example" aria-valuenow="10"
+                     aria-valuemin="0" aria-valuemax="100">
+                    <div id="installation-progress" class="progress-bar progress-bar-striped progress-bar-animated"
+                         style="width: 0%"></div>
                 </div>
             </div>
 
             <div class="card-footer">
-                <a type="submit" href="{{url('administration_login') }}"
-                       class="btn btn-primary"
-                   disabled="disabled">{% trans %}installation.toLogin{% endtrans %}</a>
+                <a href="{{ url('administration_login') }}"
+                   id="toLoginButton"
+                   class="btn btn-primary disabled">
+                    {% trans %}installation.toLogin{% endtrans %}
+                </a>
             </div>
         </div>
     </div>

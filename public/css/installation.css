@@ -4,3 +4,8 @@
 @media (min-width: 992px) {
     .installation-container .card { min-width: 550px;}
 }
+
+a#toLoginButton.disabled {
+    pointer-events: none;
+    cursor: default;
+}
