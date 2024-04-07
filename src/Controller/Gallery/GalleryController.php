@@ -51,9 +51,9 @@ class GalleryController extends AbstractController
                 'fossilList' => $this->fossilRepository->getSearchResult($paginationResult->getOffset(), $filterBuilder->build()),
                 'categories' => $this->categoryRepository->getGalleryList(),
                 'tags' => $this->tagRepository->getGalleryList(),
-                'systems' => $this->earthAgeSystemRepository->findAllActive(),
-                'series' => $this->earthAgeSeriesRepository->findAll(),
-                'stages' => $this->earthAgeStageRepository->findAll(),
+                'systems' => $this->earthAgeSystemRepository->findUsed(),
+                'series' => $this->earthAgeSeriesRepository->findUsed(),
+                'stages' => $this->earthAgeStageRepository->findUsed(),
                 'filterSelection' => $filterBuilder->build(),
             ], $paginationResult->toArray())
         );

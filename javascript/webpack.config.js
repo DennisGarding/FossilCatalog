@@ -1,11 +1,15 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: {
+        'admin': './src/Admin/index.js',
+        'gallery': './src/Gallery/index.js'
+    },
     output: {
-        filename: 'main.js',
+        filename: '[name].main.js',
         path: path.resolve(`${__dirname}/../public`, 'js'),
     },
 
-    watch: true,
+    // Uncomment the following line if you want to edit the JS files (Enable watch mode)
+    // watch: true,
 };
