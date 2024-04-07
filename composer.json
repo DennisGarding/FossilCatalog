@@ -109,6 +109,7 @@
       "php bin/console app:create-default-data",
       "php bin/console app:create-demo-user",
       "php bin/console app:install-translations",
+      "cd javascript; npm run build",
       "php bin/console app:create-lock-file",
       "php bin/console app:prepare-test-database"
     ],
@@ -117,6 +118,9 @@
     ],
     "translate": [
       "php bin/console app:translate"
+    ],
+    "buildjs": [
+      "cd javascript; npm run build"
     ]
   },
   "conflict": {
