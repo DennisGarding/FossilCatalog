@@ -1,7 +1,11 @@
-class Installation {
+import Ajax from "../Admin/Ajax";
+import ProgressBar from "../Admin/ProgressBar";
+import TextLog from "./TextLog";
+
+export default class Installation {
     installationContainerSelector = '.installation-data';
 
-    toLoginButtonSelector = 'input[type="submit"]';
+    toLoginButtonSelector = '#toLoginButton';
 
     progressBar;
 
@@ -138,7 +142,7 @@ class Installation {
     }
 
     _enableToLoginButton() {
-        document.querySelector(this.toLoginButtonSelector).removeAttribute('disabled')
+        document.querySelector(this.toLoginButtonSelector).classList.remove('disabled')
     }
 }
 

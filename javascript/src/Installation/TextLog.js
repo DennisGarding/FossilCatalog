@@ -1,4 +1,4 @@
-class TextLog {
+export default class TextLog {
     logContainerSelector = 'div[data-logField="true"]';
 
     logField;
