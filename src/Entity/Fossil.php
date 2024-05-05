@@ -62,7 +62,7 @@ class Fossil implements \ArrayAccess, EntityInterface
     private ?string $family = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $genius = null;
+    private ?string $genus = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $species = null;
@@ -92,7 +92,7 @@ class Fossil implements \ArrayAccess, EntityInterface
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\ManyToMany(targetEntity: Image::class, cascade: ['persist'])]
+    #[ORM\ManyToMany(targetEntity: Image::class, cascade: ['merge', 'persist'], orphanRemoval: true)]
     private Collection $images;
 
     #[ORM\ManyToOne]
@@ -320,14 +320,14 @@ class Fossil implements \ArrayAccess, EntityInterface
         return $this;
     }
 
-    public function getGenius(): ?string
+    public function getGenus(): ?string
     {
-        return $this->genius;
+        return $this->genus;
     }
 
-    public function setGenius(?string $genius): static
+    public function setGenus(?string $genus): static
     {
-        $this->genius = $genius;
+        $this->genus = $genus;
 
         return $this;
     }

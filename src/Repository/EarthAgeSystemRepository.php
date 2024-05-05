@@ -5,12 +5,11 @@ namespace App\Repository;
 use App\Entity\EarthAgeSystem;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\ArrayParameterType;
+use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<EarthAgeSystem>
- *
  * @method EarthAgeSystem|null   find($id, $lockMode = null, $lockVersion = null)
  * @method EarthAgeSystem|null   findOneBy(array $criteria, array $orderBy = null)
  * @method array<EarthAgeSystem> findAll()
@@ -24,24 +23,9 @@ class EarthAgeSystemRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param array<int> $ids
-     *
-     * @return array<int, array<string, mixed>>
-     */
-    public function findNamesById(array $ids): array
-    {
-        $queryBuilder = $this->createQueryBuilder('earthAgeSystem')
-            ->select('earthAgeSystem.name')
-            ->where('earthAgeSystem.id IN (:ids)')
-            ->setParameter('ids', $ids, ArrayParameterType::INTEGER);
-
-        return $queryBuilder->getQuery()->getResult(AbstractQuery::HYDRATE_SCALAR_COLUMN);
-    }
-
-    /**
      * @return array<int, EarthAgeSystem>
      */
-    public function findAllActive()
+    public function findAllActive(): array
     {
         $queryBuilder = $this->createQueryBuilder('earthAgeSystem')
             ->select('earthAgeSystem')
@@ -53,21 +37,14 @@ class EarthAgeSystemRepository extends ServiceEntityRepository
     /**
      * @return array<int, EarthAgeSystem>
      */
-    public function findUsed(): array
+    public function findAllActiveUsed(): array
     {
-        $ids = $this->getEntityManager()->getConnection()->createQueryBuilder()
-            ->select('DISTINCT systems.id')
-            ->from('earth_age_system', 'systems')
-            ->join('systems', 'fossil', 'fossil', 'fossil.ea_system_id = systems.id')
-            ->where('fossil.ea_system_id IS NOT NULL')
+        $ids = $this->getUsedQueryBuilder()
+            ->andWhere('earthAgeSystem.active = true')
             ->executeQuery()
             ->fetchFirstColumn();
 
-        return $this->createQueryBuilder('earthAgeSystem')
-            ->where('earthAgeSystem.id IN (:ids)')
-            ->setParameter('ids', $ids, ArrayParameterType::INTEGER)
-            ->getQuery()
-            ->getResult();
+        return $this->findByIds($ids);
     }
 
     public function getSystem(bool $isCreate, ?string $id): ?EarthAgeSystem
@@ -126,5 +103,28 @@ class EarthAgeSystemRepository extends ServiceEntityRepository
             ->setFirstResult($offset)
             ->executeQuery()
             ->fetchAllAssociative();
+    }
+
+    /**
+     * @param array<int, int> $ids
+     *
+     * @return array<int, EarthAgeSystem>
+     */
+    private function findByIds(array $ids): array
+    {
+        return $this->createQueryBuilder('earthAgeSystem')
+            ->where('earthAgeSystem.id IN (:ids)')
+            ->setParameter('ids', $ids, ArrayParameterType::INTEGER)
+            ->getQuery()
+            ->getResult();
+    }
+
+    private function getUsedQueryBuilder(): QueryBuilder
+    {
+        return $this->getEntityManager()->getConnection()->createQueryBuilder()
+            ->select('DISTINCT earthAgeSystem.id')
+            ->from('earth_age_system', 'earthAgeSystem')
+            ->join('earthAgeSystem', 'fossil', 'fossil', 'fossil.ea_system_id = earthAgeSystem.id')
+            ->where('fossil.ea_system_id IS NOT NULL');
     }
 }

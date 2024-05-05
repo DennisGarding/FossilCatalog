@@ -4,6 +4,7 @@ namespace App\Controller\Administration;
 
 use App\Defaults;
 use App\Entity\Fossil;
+use App\Entity\Image;
 use App\FossilFormField\FossilFieldMapper;
 use App\Images\ImageUploadService;
 use App\Repository\CategoryRepository;
@@ -13,6 +14,7 @@ use App\Repository\EarthAgeSystemRepository;
 use App\Repository\FossilFormFieldRepository;
 use App\Repository\FossilRepository;
 use App\Repository\FossilRepository\FilterBuilder;
+use App\Repository\ImageRepository;
 use App\Repository\TagRepository;
 use App\Static\Pagination\Pagination;
 use App\SystemSeriesStage\SystemSeriesStageService;
@@ -42,6 +44,7 @@ class FossilController extends AbstractController
         private readonly TranslatorInterface $translator,
         private readonly FossilFieldMapper $fieldMapper,
         private readonly SystemSeriesStageService $systemSeriesStageService,
+        private readonly ImageRepository $imageRepository,
     ) {}
 
     #[Route('/admin/fossil/list', name: 'app_admin_fossil_list')]
@@ -62,7 +65,7 @@ class FossilController extends AbstractController
 
         $fossilList = $this->fossilRepository->getSearchResult($paginationResult->getOffset(), $filterBuilder->build());
 
-        $systemSeriesStage = $this->systemSeriesStageService->findAllActive();
+        $systemSeriesStage = $this->systemSeriesStageService->findAllActiveUsed();
 
         return $this->render('administration/fossil/index.html.twig',
             array_merge(
@@ -169,13 +172,13 @@ class FossilController extends AbstractController
         if (!$fossil instanceof Fossil) {
             $this->addFlash(Defaults::FLASH_TYPE_ERROR, sprintf($this->translator->trans('admin.fossil.error.couldNotFindFossilWithId'), $id));
 
-            return new JsonResponse(Response::HTTP_BAD_REQUEST);
+            return new JsonResponse('', Response::HTTP_BAD_REQUEST);
         }
 
         if ($fossil->getNumber() !== $number) {
             $this->addFlash(Defaults::FLASH_TYPE_ERROR, sprintf($this->translator->trans('admin.fossil.error.numberDoesNotMatch'), $id));
 
-            return new JsonResponse(Response::HTTP_BAD_REQUEST);
+            return new JsonResponse('', Response::HTTP_BAD_REQUEST);
         }
 
         $this->addFlash(Defaults::FLASH_TYPE_SUCCESS, sprintf($this->translator->trans('admin.fossil.deletedMessage'), $number));
@@ -215,17 +218,16 @@ class FossilController extends AbstractController
 
         $requestData['tags'] = $this->tagRepository->findBy(['id' => $tagIds]);
         $requestData['categories'] = $this->categoryRepository->findBy(['id' => $categoryIds]);
-        $requestData['eaSystem'] = $this->earthAgeSystemRepository->find($requestData['eaSystem']);
-        $requestData['eaSeries'] = $this->earthAgeSeriesRepository->find($requestData['eaSeries']);
-        $requestData['eaStage'] = $this->earthAgeStageRepository->find($requestData['eaStage']);
+        $requestData['eaSystem'] = $this->earthAgeSystemRepository->find($requestData['eaSystem'] ?? 0);
+        $requestData['eaSeries'] = $this->earthAgeSeriesRepository->find($requestData['eaSeries'] ?? 0);
+        $requestData['eaStage'] = $this->earthAgeStageRepository->find($requestData['eaStage'] ?? 0);
 
         try {
             $requestData['dateOfDiscovery'] = new \DateTime($requestData['dateOfDiscovery']);
         } catch (\Exception $exception) {
-            // TODO: Add correct error message
             $this->addFlash(
                 Defaults::FLASH_TYPE_ERROR,
-                $this->translator->trans('admin.fossil.error.couldNotUploadImages') . '<br/>' . $exception->getMessage()
+                $this->translator->trans('admin.fossil.error.couldNotCreateDate')
             );
 
             return $this->redirect($request->get('errorRoute'));
@@ -316,5 +318,19 @@ class FossilController extends AbstractController
             Response::HTTP_OK,
             ['Content-Type' => 'application/pdf']
         );
+    }
+
+    #[Route('/admin/fossil/image/delete', name: 'app_admin_fossil_image_delete')]
+    public function deleteImage(Request $request): Response
+    {
+        $imageId = (int) $request->get('id');
+        $image = $this->imageRepository->find($imageId);
+        if (!$image instanceof Image) {
+            return new JsonResponse(null, Response::HTTP_BAD_REQUEST);
+        }
+
+        $this->imageRepository->delete($image);
+
+        return new JsonResponse();
     }
 }

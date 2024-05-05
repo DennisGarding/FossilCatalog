@@ -27,33 +27,6 @@ class EarthAgeStageRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param array<int> $ids
-     *
-     * @return array<int, array<string, mixed>>
-     */
-    public function findNamesById(array $ids): array
-    {
-        $queryBuilder = $this->createQueryBuilder('earthAgeStage')
-            ->select('earthAgeStage.name')
-            ->where('earthAgeStage.id IN (:ids)')
-            ->setParameter('ids', $ids, ArrayParameterType::INTEGER);
-
-        return $queryBuilder->getQuery()->getResult(AbstractQuery::HYDRATE_SCALAR_COLUMN);
-    }
-
-    /**
-     * @return array<int, EarthAgeStage>
-     */
-    public function findBySeriesId(int $seriesId): array
-    {
-        $queryBuilder = $this->createQueryBuilder('earthAgeStage')
-            ->where('earthAgeStage.earthAgeSeriesId = :seriesId')
-            ->setParameter('seriesId', $seriesId);
-
-        return $queryBuilder->getQuery()->getResult();
-    }
-
-    /**
      * @param array<int> $seriesIds
      *
      * @return array<int, EarthAgeStage>
@@ -72,11 +45,13 @@ class EarthAgeStageRepository extends ServiceEntityRepository
      */
     public function findUsed(): array
     {
-        $ids = $this->getEntityManager()->getConnection()->createQueryBuilder()
+        $queryBuilder = $this->getEntityManager()->getConnection()->createQueryBuilder()
             ->select('DISTINCT stage.id')
             ->from('earth_age_stage', 'stage')
             ->join('stage', 'fossil', 'fossil', 'fossil.ea_stage_id = stage.id')
-            ->where('fossil.ea_stage_id IS NOT NULL')
+            ->where('fossil.ea_stage_id IS NOT NULL');
+
+        $ids = $queryBuilder
             ->executeQuery()
             ->fetchFirstColumn();
 

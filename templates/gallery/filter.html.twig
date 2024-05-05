@@ -3,21 +3,21 @@
         <div class="mt-3">
             <div class="mt-3 row-cols-1 row-cols-lg-2 row">
                 <div class="col">
-                    {% include 'administration/base/multi-select.html.twig' with { 'fieldName': 'category', 'fieldLabel': 'admin.fossil.form.category'|trans, 'choiceList': categories, 'fieldValues': filterSelection.category } %}
+                    {% include 'administration/base/multiSelectField.html.twig' with { 'fieldName': 'category', 'fieldLabel': 'admin.fossil.form.category'|trans, 'choiceList': categories, 'fieldValues': filterSelection.category } %}
                 </div>
                 <div class="col">
-                    {% include 'administration/base/multi-select.html.twig' with { 'fieldName': 'tag', 'fieldLabel': 'admin.fossil.form.tags'|trans, 'choiceList': tags, 'fieldValues': filterSelection.tag } %}
+                    {% include 'administration/base/multiSelectField.html.twig' with { 'fieldName': 'tag', 'fieldLabel': 'admin.fossil.form.tags'|trans, 'choiceList': tags, 'fieldValues': filterSelection.tag } %}
                 </div>
             </div>
             <div class="mt-3 row-cols-1 row-cols-lg-3 row">
                 <div class="col">
-                    {% include 'administration/base/multi-select.html.twig' with { 'fieldName': 'system', 'fieldLabel': 'admin.formFields.system'|trans, 'choiceList': systems, 'fieldValues': filterSelection.system } %}
+                    {% include 'administration/base/multiSelectField.html.twig' with { 'fieldName': 'system', 'fieldLabel': 'admin.formFields.system'|trans, 'choiceList': systems, 'fieldValues': filterSelection.system } %}
                 </div>
                 <div class="col">
-                    {% include 'administration/base/multi-select.html.twig' with { 'fieldName': 'series', 'fieldLabel': 'admin.formFields.series'|trans, 'choiceList': series, 'fieldValues': filterSelection.series } %}
+                    {% include 'administration/base/multiSelectField.html.twig' with { 'fieldName': 'series', 'fieldLabel': 'admin.formFields.series'|trans, 'choiceList': series, 'fieldValues': filterSelection.series } %}
                 </div>
                 <div class="col">
-                    {% include 'administration/base/multi-select.html.twig' with { 'fieldName': 'stage', 'fieldLabel': 'admin.formFields.stage'|trans, 'choiceList': stages, 'fieldValues': filterSelection.stage } %}
+                    {% include 'administration/base/multiSelectField.html.twig' with { 'fieldName': 'stage', 'fieldLabel': 'admin.formFields.stage'|trans, 'choiceList': stages, 'fieldValues': filterSelection.stage } %}
                 </div>
             </div>
             <div class="mt-3">

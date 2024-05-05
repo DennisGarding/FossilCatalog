@@ -21,7 +21,7 @@ jobs:
 
             -   name: Install composer dependencies
                 run: |
-                    composer install -o --no-dev
+                    composer install -o
 
             -   uses: actions/setup-node@v3
                 with:

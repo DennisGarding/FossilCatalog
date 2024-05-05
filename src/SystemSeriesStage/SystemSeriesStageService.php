@@ -26,4 +26,15 @@ class SystemSeriesStageService
 
         return new ActiveSystemSeriesStageResult($activeSystems, $activeSeries, $activeStages);
     }
+
+    public function findAllActiveUsed(): ActiveSystemSeriesStageResult
+    {
+        $activeSystems = $this->systemRepository->findAllActiveUsed();
+
+        $activeSeries = $this->seriesRepository->findUsed();
+
+        $activeStages = $this->stageRepository->findUsed();
+
+        return new ActiveSystemSeriesStageResult($activeSystems, $activeSeries, $activeStages);
+    }
 }

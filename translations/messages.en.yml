@@ -206,6 +206,13 @@ installation:
     translationFileCreated: The translation files was successfully created
 
 base:
+    loadingIndicator:
+        loading: Loading...
+    modal:
+        yes: Yes
+        no: No
+        ok: Ok
+        cancel: Cancel
     delete: Delete
     edit: Edit
     filter: Filter
@@ -235,6 +242,7 @@ admin:
     genericDeleted: Deleted successfully.
     genericPropertyRequired:
     genericNoIdProvided: No ID provided.
+    genericErrorText: Something went wrong!
 
     settings:
         title: Settings
@@ -251,6 +259,16 @@ admin:
         tagCount: Amount of Tags
         latestFossils: Latest Fossils
         latestEditedFossils: Latest edited Fossils
+        updateTitle: Update available
+        updateAvailable: There is a new update available.
+        executeUpdate: Execute Update
+        currentVersion: Current Version
+        latestVersion: Latest Version
+        updateStep: Update Step
+        update: Update
+        updateQuestion: Are you sure you want to update?
+        updateComplete: Update completed
+        updateCompleteMessage: The update was successful. Press Ok for reload the page.
 
     fossil:
         title: Fossils
@@ -260,6 +278,10 @@ admin:
         deleteFossilTitle: Delete Fossil
         deleteFossilMessage: Do you really want to delete the Fossil? To confirm, please type the Fossil number <b>(%s)</b> in the input field below.
         deletedMessage: Fossil with number %s successfully deleted
+
+        image:
+            deleteModalTitle: Delete
+            deleteModalText: Do you really want to delete the Image?
 
         groups:
             general: General
@@ -278,6 +300,7 @@ admin:
             couldNotInstanceFossil: Could not instance Fossil. If you try to update a Fossil, please check if the ID is correct.
             couldNotSaveFossil: Could not save Fossil.
             couldNotUploadImages: Could not upload provided Images.
+            couldNotCreateDate: The given date is not correct. Please provide a date in a correct format.
             couldNotFindFossilWithEmptyId: Could not find Fossil with empty ID. Please provide a valid ID.
             couldNotFindFossilWithId: Could not find Fossil with ID %s
             numberDoesNotMatch: The provided Fossil number does not match the Fossil number of the Fossil you want to delete.
@@ -349,7 +372,7 @@ admin:
         class: Class
         order: Order
         family: Family
-        genius: Genius
+        genus: Genus
         species: Species
         subspecies: Subspecies
         size: Size
@@ -496,5 +519,11 @@ admin:
             fileName: File Name
 
 gallery:
+    consent:
+        title: This website uses cookies
+        text: This website uses a few cookies. Technically necessary or functional cookies. These ensure an error-free display and the best possible usability of the site. We do not use any other cookies. Click on Accept to allow these cookies, or on Leave page if you do not agree.
+        technical: Technical required
+        accept: Accept
+        leavePage: Leave page
     nav:
         login: Login

@@ -18,7 +18,7 @@ VALUES (0, 'showInGallery', 'admin.formFields.showInGallery', 'BOOL', true, true
        (140, 'class', 'admin.formFields.class', 'TEXT', true, true, false, false, 'TAXONOMY', false),
        (150, 'order', 'admin.formFields.order', 'TEXT', true, true, false, false, 'TAXONOMY', false),
        (160, 'family', 'admin.formFields.family', 'TEXT', true, true, false, false, 'TAXONOMY', false),
-       (170, 'genius', 'admin.formFields.genius', 'TEXT', true, true, true, false, 'TAXONOMY', false),
+       (170, 'genus', 'admin.formFields.genus', 'TEXT', true, true, true, false, 'TAXONOMY', false),
        (180, 'species', 'admin.formFields.species', 'TEXT', true, true, true, false, 'TAXONOMY', true),
        (190, 'subspecies', 'admin.formFields.subspecies', 'TEXT', true, true, true, false, 'TAXONOMY', true),
        (200, 'size', 'admin.formFields.size', 'TEXT', true, true, true, false, 'TAXONOMY', false),

@@ -26,7 +26,7 @@ class FossilFieldMapper
         'class' => 'getClass',
         'order' => 'getTaxonomicOrder',
         'family' => 'getFamily',
-        'genius' => 'getGenius',
+        'genus' => 'getGenus',
         'species' => 'getSpecies',
         'subspecies' => 'getSubspecies',
         'size' => 'getSize',
@@ -52,7 +52,7 @@ class FossilFieldMapper
         'class' => 'class',
         'order' => 'taxonomicOrder',
         'family' => 'family',
-        'genius' => 'genius',
+        'genus' => 'genus',
         'species' => 'species',
         'subspecies' => 'subspecies',
         'size' => 'size',
@@ -69,7 +69,7 @@ class FossilFieldMapper
         foreach ($fossilFormFields as $formField) {
             if ($formField->isIsRequiredDefault() && array_key_exists($formField->getFieldName(), self::GETTER_MAPPING)) {
                 if (\in_array($formField->getFieldName(), ['eaSystem', 'eaSeries', 'eaStage'], true)) {
-                    $formField->setFieldValue($fossil->{self::GETTER_MAPPING[$formField->getFieldName()]}()->getId());
+                    $formField->setFieldValue($fossil->{self::GETTER_MAPPING[$formField->getFieldName()]}()?->getId());
                     continue;
                 }
 

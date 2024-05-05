@@ -67,6 +67,8 @@ SQL
         } catch (\Throwable $th) {
             $output->writeln($th->getMessage());
             $output->writeln($th->getTraceAsString());
+
+            return Command::FAILURE;
         }
 
         $output->writeln('Done!');

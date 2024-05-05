@@ -1,4 +1,4 @@
-{% if list is not defined  %}
+{% if list is not defined %}
     <div class="text-bg-warning">
         <p>Expect "fossilList" to be defined</p>
     </div>
@@ -37,14 +37,20 @@
                     {% if formField.showInOverview %}
                         <td{% if formField.fieldName not in ['number', 'species'] %} class="d-none d-lg-table-cell"{% endif %}>
                             {% if formField.fieldName == 'eaSystem' %}
-                                {{ fossil.eaSystem.name }}
-                             {% elseif formField.fieldName == 'eaSeries' %}
-                                 {{ fossil.eaSeries.name }}
-                             {% elseif formField.fieldName == 'eaStage' %}
-                                 {{ fossil.eaStage.name }}
-                             {% else %}
+                                {% if fossil.eaSystem %}
+                                    {{ fossil.eaSystem.name }}
+                                {% endif %}
+                            {% elseif formField.fieldName == 'eaSeries' %}
+                                {% if fossil.eaSeries %}
+                                    {{ fossil.eaSeries.name }}
+                                {% endif %}
+                            {% elseif formField.fieldName == 'eaStage' %}
+                                {% if fossil.eaStage %}
+                                    {{ fossil.eaStage.name }}
+                                {% endif %}
+                            {% else %}
                                 {{ fossil[formField.fieldName|mapField] }}
-                             {% endif %}
+                            {% endif %}
                         </td>
                     {% endif %}
                 {% endfor %}

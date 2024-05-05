@@ -3,14 +3,12 @@
 namespace App\Controller\Gallery;
 
 use App\Repository\CategoryRepository;
-use App\Repository\EarthAgeSeriesRepository;
-use App\Repository\EarthAgeStageRepository;
-use App\Repository\EarthAgeSystemRepository;
 use App\Repository\FossilRepository;
 use App\Repository\FossilRepository\FilterBuilder;
 use App\Repository\SettingsRepository;
 use App\Repository\TagRepository;
 use App\Static\Pagination\Pagination;
+use App\SystemSeriesStage\SystemSeriesStageService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,9 +21,7 @@ class GalleryController extends AbstractController
         private readonly FossilRepository $fossilRepository,
         private readonly CategoryRepository $categoryRepository,
         private readonly TagRepository $tagRepository,
-        private readonly EarthAgeSystemRepository $earthAgeSystemRepository,
-        private readonly EarthAgeSeriesRepository $earthAgeSeriesRepository,
-        private readonly EarthAgeStageRepository $earthAgeStageRepository,
+        private readonly SystemSeriesStageService $systemSeriesStageService,
     ) {}
 
     #[Route('/', name: 'gallery_index')]
@@ -44,6 +40,7 @@ class GalleryController extends AbstractController
 
         $columnCount = $this->fossilRepository->getColumnCount($filterBuilder->build());
         $paginationResult = Pagination::calculate($columnCount, $page);
+        $systemSeriesStageResult = $this->systemSeriesStageService->findAllActiveUsed();
 
         return $this->render('gallery/base.html.twig',
             \array_merge([
@@ -51,9 +48,9 @@ class GalleryController extends AbstractController
                 'fossilList' => $this->fossilRepository->getSearchResult($paginationResult->getOffset(), $filterBuilder->build()),
                 'categories' => $this->categoryRepository->getGalleryList(),
                 'tags' => $this->tagRepository->getGalleryList(),
-                'systems' => $this->earthAgeSystemRepository->findUsed(),
-                'series' => $this->earthAgeSeriesRepository->findUsed(),
-                'stages' => $this->earthAgeStageRepository->findUsed(),
+                'systems' => $systemSeriesStageResult->getActiveSystems(),
+                'series' => $systemSeriesStageResult->getActiveSeries(),
+                'stages' => $systemSeriesStageResult->getActiveStages(),
                 'filterSelection' => $filterBuilder->build(),
             ], $paginationResult->toArray())
         );

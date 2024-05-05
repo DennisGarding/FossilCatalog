@@ -204,6 +204,11 @@ installation:
     translationFileCreated: Die Übersetzungsdateien wurden erfolgreich erstellt
 
 base:
+    modal:
+        yes: Ja
+        no: Nein
+        ok: Ok
+        cancel: Abbrechen
     delete: Löschen
     edit: Bearbeiten
     filter: Filter
@@ -322,7 +327,7 @@ admin:
         class: Klasse
         order: Ordnung
         family: Familie
-        genius: Gattung
+        genus: Gattung
         species: Art
         subspecies: Unterart
         size: Größe
@@ -416,3 +421,13 @@ admin:
     validator:
         messages:
             empty: Bitte geben Sie einen Wert für das Feld %s an
+
+gallery:
+    consent:
+        title: Diese Webseite verwendet Cookies
+        text: Diese Website verwendet wenige Cookies. Technisch notwendig bzw. Funktionale Cookies. Diese sorgen für eine fehlerfreie Darstellung und bestmögliche Nutzbarkeit der Seite. Darüber hinaus nutzen wir keine Cookies. Klicken Sie auf Akzeptieren, um diese Cookies zuzulassen oder auf Seite Verlassen, wenn Sie damit nicht einverstanden sind.
+        technical: Technisch erforderlich
+        accept: Akzeptieren
+        leavePage: Seite verlassen
+    nav:
+        login: Login
