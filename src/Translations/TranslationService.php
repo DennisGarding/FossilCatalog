@@ -23,13 +23,17 @@ class TranslationService
         private readonly string $language
     ) {}
 
-    public function moveToPublic(): void
+    public function moveToPublic(?string $language = null): void
     {
+        if ($language === null) {
+            $language = $this->language;
+        }
+
         $source = sprintf(
             self::SOURCE_FILE_TEMPLATE,
             realpath(self::TRANSLATION_DIRECTORY),
             self::TRANSLATION_FILE_NAME,
-            $this->language,
+            $language,
             self::TRANSLATION_FILE_EXTENSION
         );
 
@@ -41,37 +45,6 @@ class TranslationService
 
         $this->create($source, $targetFile);
         $this->createDefault();
-    }
-
-    /**
-     * @return array<string, array<string, string>>
-     */
-    public function getTranslations(): array
-    {
-        $translationFile = sprintf(
-            self::TARGET_FILE_TEMPLATE,
-            realpath(self::TARGET_DIRECTORY),
-            self::TARGET_FILE
-        );
-
-        if (!file_exists($translationFile)) {
-            throw new \RuntimeException('Translation file does not exist.');
-        }
-
-        $defaultTranslationFile = sprintf(
-            self::TARGET_FILE_TEMPLATE,
-            realpath(self::TARGET_DIRECTORY),
-            self::TARGET_FILE_DEFAULT
-        );
-
-        if (!file_exists($defaultTranslationFile)) {
-            $defaultTranslationFile = $translationFile;
-        }
-
-        return [
-            'translations' => json_decode(file_get_contents($translationFile), true),
-            'defaultTranslations' => json_decode(file_get_contents($defaultTranslationFile), true),
-        ];
     }
 
     private function createDefault(): void
@@ -99,7 +72,13 @@ class TranslationService
 
     private function create(string $source, string $target): void
     {
-        $parsed = \yaml_parse_file($source);
+        $content = \file_get_contents($source);
+        try {
+            $parsed = \yaml_parse($content);
+        } catch (\Exception $e) {
+            throw new \RuntimeException('Could not parse translation YML file. Error message: ' . $e->getMessage());
+        }
+
         if (!is_array($parsed)) {
             throw new \RuntimeException('Could not parse translation YML file.');
         }

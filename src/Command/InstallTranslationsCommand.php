@@ -26,7 +26,7 @@ class InstallTranslationsCommand extends Command
     {
         $output->writeln('Create translations...');
 
-        $this->translationService->moveToPublic();
+        $this->translationService->moveToPublic('en');
 
         return Command::SUCCESS;
     }
