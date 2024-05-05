@@ -18,6 +18,7 @@ import TagPage from "./Tag/TagPage";
 import Translation from "../translations/Translation";
 import translation from "../translations/messages.json";
 import defaultTranslation from "../translations/messages_defaults.json";
+import MultiSelect from "./MultiSelectField"
 
 document.addEventListener("DOMContentLoaded", function () {
     document.loadingIndicator = new LoadingIndicator();
