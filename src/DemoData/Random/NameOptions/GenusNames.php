@@ -2,7 +2,7 @@
 
 namespace App\DemoData\Random\NameOptions;
 
-class GeniusNames
+class GenusNames
 {
     /**
      * @return array<int, string>

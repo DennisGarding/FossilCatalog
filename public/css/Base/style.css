@@ -41,6 +41,11 @@ div.show-loading-indicator .spinner-border {
     height: 90px;
 }
 
+.modal-content .modal-header #closeButton {
+    position: absolute;
+    right: 5px;
+}
+
 /** Multi Select **/
 .multi-select-wrapper .list-group {
     position: absolute;
@@ -107,3 +112,18 @@ body.modal-is-open {
     object-fit:cover;
     object-position: center;
 }
+
+/** Gallery overlay end **/
+
+/** Detail page image **/
+.image-container {
+    position: relative;
+    display: inline-block;
+
+    .image-delete-button {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+    }
+}
+/** Detail page image end **/

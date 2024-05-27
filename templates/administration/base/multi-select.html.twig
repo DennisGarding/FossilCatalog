@@ -5,6 +5,7 @@
             <option value="{{ value.id }}" {% if value.id in fieldValues %} selected="selected"{% endif %}>{{ value.name }}</option>
         {% endfor %}
     </select>
+
     {% if helpText|default(null) %}
         <div class="form-text">
             {{ helptext }}

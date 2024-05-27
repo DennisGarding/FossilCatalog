@@ -117,22 +117,31 @@
             </div>
         </div>
 
-        <div class="row mt-3">
-            <div class="col">
-                <div class="card h-100">
-                    <div class="card-header">
-                        {% trans %}admin.fossil.groups.other{% endtrans %}
-                    </div>
-                    <div class="card-body">
-                        {% for formField in fossilFormFields %}
-                            {% if formField.fieldGroup == 'OTHER' %}
-                                {% include 'administration/fossil/field-switch.html.twig' with { 'formField': formField } %}
-                            {% endif %}
-                        {% endfor %}
+        {% set showOther = 0 %}
+        {% for formField in fossilFormFields %}
+            {% if formField.fieldGroup == 'OTHER' %}
+                {% set showOther = 1 %}
+            {% endif %}
+        {% endfor %}
+
+        {% if showOther %}
+            <div class="row mt-3">
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            {% trans %}admin.fossil.groups.other{% endtrans %}
+                        </div>
+                        <div class="card-body">
+                            {% for formField in fossilFormFields %}
+                                {% if formField.fieldGroup == 'OTHER' %}
+                                    {% include 'administration/fossil/field-switch.html.twig' with { 'formField': formField } %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        {% endif %}
 
         <div class="row mt-3">
             <div class="col">

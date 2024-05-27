@@ -66,7 +66,7 @@ class FossilHandler extends AbstractImportHandler
                 'class' => ':class',
                 'taxonomic_order' => ':taxonomic_order',
                 'family' => ':family',
-                'genius' => ':genius',
+                'genus' => ':genus',
                 'species' => ':species',
                 'subspecies' => ':subspecies',
                 'size' => ':size',
@@ -94,7 +94,7 @@ class FossilHandler extends AbstractImportHandler
             ->setParameter('class', $data['class'])
             ->setParameter('taxonomic_order', $data['taxonomic_order'])
             ->setParameter('family', $data['family'])
-            ->setParameter('genius', $data['genius'])
+            ->setParameter('genus', $data['genus'])
             ->setParameter('species', $data['species'])
             ->setParameter('subspecies', $data['subspecies'])
             ->setParameter('size', $data['size'])
@@ -129,7 +129,7 @@ class FossilHandler extends AbstractImportHandler
             ->set('class', ':class')
             ->set('taxonomic_order', ':taxonomic_order')
             ->set('family', ':family')
-            ->set('genius', ':genius')
+            ->set('genus', ':genus')
             ->set('species', ':species')
             ->set('subspecies', ':subspecies')
             ->set('size', ':size')
@@ -157,7 +157,7 @@ class FossilHandler extends AbstractImportHandler
             ->setParameter('class', $data['class'])
             ->setParameter('taxonomic_order', $data['taxonomic_order'])
             ->setParameter('family', $data['family'])
-            ->setParameter('genius', $data['genius'])
+            ->setParameter('genus', $data['genus'])
             ->setParameter('species', $data['species'])
             ->setParameter('subspecies', $data['subspecies'])
             ->setParameter('size', $data['size'])

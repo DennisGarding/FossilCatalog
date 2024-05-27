@@ -27,33 +27,6 @@ class EarthAgeSeriesRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param array<int> $ids
-     *
-     * @return array<int, array<string, mixed>>
-     */
-    public function findNamesById(array $ids): array
-    {
-        $queryBuilder = $this->createQueryBuilder('earthAgeSeries')
-            ->select('earthAgeSeries.name')
-            ->where('earthAgeSeries.id IN (:ids)')
-            ->setParameter('ids', $ids, ArrayParameterType::INTEGER);
-
-        return $queryBuilder->getQuery()->getResult(AbstractQuery::HYDRATE_SCALAR_COLUMN);
-    }
-
-    /**
-     * @return array<int, EarthAgeSeries>
-     */
-    public function findBySystemId(int $systemId): array
-    {
-        $queryBuilder = $this->createQueryBuilder('earthAgeSeries')
-            ->where('earthAgeSeries.earthAgeSystemId = :systemId')
-            ->setParameter('systemId', $systemId);
-
-        return $queryBuilder->getQuery()->getResult();
-    }
-
-    /**
      * @param array<int> $systemIds
      *
      * @return array<int, EarthAgeSeries>
@@ -85,11 +58,13 @@ class EarthAgeSeriesRepository extends ServiceEntityRepository
      */
     public function findUsed(): array
     {
-        $ids = $this->getEntityManager()->getConnection()->createQueryBuilder()
+        $queryBuilder = $this->getEntityManager()->getConnection()->createQueryBuilder()
             ->select('DISTINCT series.id')
             ->from('earth_age_series', 'series')
             ->join('series', 'fossil', 'fossil', 'fossil.ea_series_id = series.id')
-            ->where('fossil.ea_series_id IS NOT NULL')
+            ->where('fossil.ea_series_id IS NOT NULL');
+
+        $ids = $queryBuilder
             ->executeQuery()
             ->fetchFirstColumn();
 

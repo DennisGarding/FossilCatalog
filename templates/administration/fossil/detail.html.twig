@@ -95,13 +95,18 @@
                 </div>
                 <div class="card-body">
                     {% for image in fossil.images %}
-                        <img src="{{ asset(image.thumbnailPath) }}"
-                             data-image-thumbnail="true"
-                             data-index="{{ loop.index }}"
-                             class="img-thumbnail"
-                             alt="{{ image.name }}"
-                             width="200"
-                             height="200">
+                        <div class="image-container">
+                            <img src="{{ asset(image.thumbnailPath) }}"
+                                 data-image-thumbnail="true"
+                                 data-index="{{ loop.index }}"
+                                 class="img-thumbnail"
+                                 alt="{{ image.name }}"
+                                 width="200"
+                                 height="200">
+                            <span class="image-delete-button btn btn-sm btn-danger"
+                                  data-fossilImageDeleteButton="true"
+                                  data-url="{{ url('app_admin_fossil_image_delete', { id: image.id }) }}"><i class="bi bi-trash"></i></span>
+                        </div>
                     {% endfor %}
                     {% include 'administration/fossil/detail/renderer.html.twig' with { 'fossilFormFields': fossilFormFields, 'groupName': 'IMAGE' } %}
                 </div>

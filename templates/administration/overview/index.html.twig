@@ -3,6 +3,38 @@
 {% block title %}{% trans %}admin.overviewTitle{% endtrans %}{% endblock %}
 
 {% block content %}
+    <div class="card mt-3 visually-hidden"
+         data-updater="true"
+         data-checkUrl="{{ url('admin_update_check') }}"
+         data-downloadUrl="{{ url('admin_update_download') }}"
+         data-extractUrl="{{ url('admin_update_extract') }}"
+         data-executeUrl="{{ url('admin_update_execute') }}"
+         data-cleanupUrl="{{ url('admin_update_cleanup') }}">
+        <div class="card-header">
+            {% trans %}admin.overview.updateTitle{% endtrans %}
+        </div>
+        <div class="card-body">
+            <figure class="text-center">
+                <blockquote class="blockquote">
+                    <p>{% trans %}admin.overview.updateAvailable{% endtrans %}</p>
+                </blockquote>
+                <figcaption class="blockquote-footer">
+                    <span>{% trans %}admin.overview.currentVersion{% endtrans %}</span> - <span class="old-version"></span>
+                </figcaption>
+                <figcaption class="blockquote-footer">
+                    <span>{% trans %}admin.overview.latestVersion{% endtrans %}</span> - <span class="new-version"></span>
+                </figcaption>
+                <div class="progress-bar-container visually-hidden">
+                    <p>{% trans %}admin.overview.updateStep{% endtrans %}</p>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="5"></div>
+                    </div>
+                </div>
+                <button class="mt-3 btn btn-warning update-button">{% trans %}admin.overview.executeUpdate{% endtrans %}</button>
+            </figure>
+        </div>
+    </div>
+
     <div class="card mt-3">
         <div class="card-header">
             {% trans %}admin.overview.overviewTitle{% endtrans %}

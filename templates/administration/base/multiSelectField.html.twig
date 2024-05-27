@@ -1,0 +1,22 @@
+<div class="mb-3">
+    <label for="{{ fieldName }}" class="form-label">{{ fieldLabel }}</label>
+
+    {% set data = [] %}
+    {% for value in choiceList %}
+        {% set data = data|merge({(loop.index0) : {'id': value.id, 'name':  value.name}})  %}
+    {% endfor %}
+
+    <multi-select
+            name="{{ fieldName }}"
+            json-data='{{ data|json_encode }}'
+            value='{{ fieldValues|json_encode }}'
+            display-field="name"
+            value-field="id">
+    </multi-select>
+
+    {% if helpText|default(null) %}
+        <div class="form-text">
+            {{ helptext }}
+        </div>
+    {% endif %}
+</div>

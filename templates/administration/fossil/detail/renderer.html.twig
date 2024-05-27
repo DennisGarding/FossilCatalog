@@ -28,11 +28,17 @@
                 {% elseif formField.fieldType == 'DATE' %}
                     {{ formField.fieldValue|date('Y-m-d') }}
                 {% elseif formField.fieldType == 'SYSTEM' %}
-                    {{ fossil.eaSystem.name }}
+                    {% if fossil.eaSystem %}
+                        {{ fossil.eaSystem.name }}
+                    {% endif %}
                 {% elseif formField.fieldType == 'SERIES' %}
-                    {{ fossil.eaSeries.name }}
+                    {% if fossil.eaSeries %}
+                        {{ fossil.eaSeries.name }}
+                    {% endif %}
                 {% elseif formField.fieldType == 'STAGE' %}
-                    {{ fossil.eaStage.name }}
+                    {% if fossil.eaStage %}
+                        {{ fossil.eaStage.name }}
+                    {% endif %}
                 {% endif %}
             </div>
         {% endif %}

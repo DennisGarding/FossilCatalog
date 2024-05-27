@@ -14,7 +14,6 @@ use App\Static\Installation\PDOConnection;
 use App\Static\Validation\ValidationResult;
 use App\Translations\TranslationService;
 use Doctrine\DBAL\Connection;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -96,7 +95,7 @@ class InstallationController extends AbstractController
     }
 
     #[Route('/installation/create/tables', name: 'installation_create_tables', methods: 'post')]
-    public function createDatabaseTables(KernelInterface $kernel, EntityManagerInterface $entityManager): JsonResponse
+    public function createDatabaseTables(KernelInterface $kernel): JsonResponse
     {
         try {
             $application = new Application($kernel);

@@ -2,12 +2,12 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>{{ fossil.number }} | {{ fossil.genius }} {{ fossil.species }} {{ fossil.subspecies }}</title>
+    <title>{{ fossil.number }} | {{ fossil.genus }} {{ fossil.species }} {{ fossil.subspecies }}</title>
 </head>
 <body>
     {% block pdf_content %}
         <h1>{{ fossil.number }}</h1>
-        <h2>{{ fossil.genius }} {{ fossil.species }} {{ fossil.subspecies }}</h2>
+        <h2>{{ fossil.genus }} {{ fossil.species }} {{ fossil.subspecies }}</h2>
 
         <h3>{% trans %}admin.fossil.groups.general{% endtrans %}</h3>
         {% include 'administration/fossil/detail/renderer.html.twig' with { 'fossilFormFields': fossilFormFields, 'groupName': 'GENERAL' } %}

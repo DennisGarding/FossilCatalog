@@ -77,6 +77,8 @@ class ImageRepository extends ServiceEntityRepository
         $filesystem->remove($image->getPath());
         $filesystem->remove($image->getThumbnailPath());
 
-        $this->getEntityManager()->remove($image);
+        $entityManager = $this->getEntityManager();
+        $entityManager->remove($image);
+        $entityManager->flush();
     }
 }

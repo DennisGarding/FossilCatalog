@@ -10,7 +10,7 @@ use App\DemoData\Random\NameOptions\AmmoniteNames;
 use App\DemoData\Random\NameOptions\CountryNames;
 use App\DemoData\Random\NameOptions\FindingPlaceNames;
 use App\DemoData\Random\NameOptions\FormationNames;
-use App\DemoData\Random\NameOptions\GeniusNames;
+use App\DemoData\Random\NameOptions\GenusNames;
 use App\DemoData\Random\StringOptions;
 use App\DemoData\Random\StringOptions\Numbers;
 use App\DemoData\Random\StringOptions\UpperCaseLetters;
@@ -75,7 +75,7 @@ class FossilHandler implements HandlerInterface
         $fossil->setFormation($this->createFormationName());
         $fossil->setStratigraphicMember($this->createFormationName());
         $fossil->setStratigraphicNotes(Random::loremIpsum());
-        $fossil->setGenius($this->createGeniusName());
+        $fossil->setGenus($this->createGenusName());
         $fossil->setSpecies($this->createSpeciesName());
         $fossil->setSize(Random::string(new StringOptions(mt_rand(1, 3), [new Numbers()])) . ' cm');
         $fossil->setTaxonomyNotes(Random::loremIpsum());
@@ -137,11 +137,11 @@ class FossilHandler implements HandlerInterface
         );
     }
 
-    private function createGeniusName(): string
+    private function createGenusName(): string
     {
         return Random::name(
             new NameOptions(
-                names: GeniusNames::getNames(),
+                names: GenusNames::getNames(),
                 divider: '',
                 stringOptions: new StringOptions(0, []),
             )

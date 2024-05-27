@@ -1,3 +1,8 @@
+body.modal-is-open {
+    overflow: hidden;
+    height: 90%;
+}
+
 .gallery-banner {
   background-size: cover;
   background-position: center;
@@ -57,3 +62,72 @@
     top: 8px;
 }
 /** Multi Select end **/
+
+/** Gallery overlay start **/
+.gallery-carousel-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #ffffff;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0 10px 0 0;
+}
+
+.gallery-carousel-close:hover {
+    color: #adb5bd;
+}
+
+.gallery-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.9);
+    z-index: 9999;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.gallery-overlay:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em;
+}
+
+#gallery-carousel {
+    cursor: auto;
+    display: inline-block;
+    vertical-align: middle;
+    width: 90%;
+    max-height: 90%;
+    max-width: 1800px;
+}
+
+#gallery-carousel .carousel-inner .carousel-item {
+    text-align: center;
+    white-space: nowrap;
+}
+
+#gallery-carousel .carousel-inner .carousel-item:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em;
+}
+
+#gallery-carousel .carousel-inner .carousel-item img{
+    width: 80%;
+    height: 80%;
+    max-height: 1200px;
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 1600px;
+}

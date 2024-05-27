@@ -13,12 +13,13 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ asset('bootstrap/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('bootstrap/bootstrap-icons-1.10.5/font/bootstrap-icons.css') }}">
-    <script type="application/javascript" src="{{ asset('bootstrap/Bootstrap.js') }}"></script>
+    <script type="application/javascript" src="{{ asset('bootstrap/Bootstrap.js') }}" defer></script>
 
     <link rel="stylesheet" href="{{ asset('css/Gallery/style.css') }}">
     {% block stylesheets %}{% endblock %}
 
-    <script type="application/javascript" src="{{ asset('js/gallery.main.js') }}"></script>
+    <script type="application/javascript" src="{{ asset('js/gallery.main.js') }}" defer></script>
+    <script type="application/javascript" src="{{ asset('js/CustomElements.js') }}" defer></script>
     {% block javascripts %}{% endblock %}
 </head>
 <body>
@@ -41,28 +42,32 @@
     </div>
 
     <div class="container mt-3">
-        {% include 'pagination.html.twig' with {'settings': settings } %}
-    </div>
-
-    <div class="container mt-3">
         {% block content %}
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
                 {% for fossil in fossilList %}
                     <div class="col">
                         <div class="card gallery-fossil-card">
-                            <a href="#" class=" card-img-top">
-                                <img src="{% if fossil.images|length > 0 %}
-                                            {{ asset(fossil.images|first.thumbnailPath) }}
-                                        {% else %}
-                                            {{ asset('images/no-image.png') }}
-                                        {% endif %}"
-                                     class="card-img-top"
-                                     alt="">
+                            <a href="#" class="card-img-top">
+                                {% if fossil.images|length > 0 %}
+                                    {% set imageList = [] %}
+                                    {% for image in fossil.images %}
+                                        {% set imageList = imageList|merge([image.path]) %}
+                                    {% endfor %}
+
+                                    <img src="{{ asset(fossil.images|first.thumbnailPath) }}"
+                                         class="card-img-top gallery-fossil-thumbnail"
+                                         data-imageList="{{ imageList|json_encode }}"
+                                         alt="">
+                                {% else %}
+                                    <img src="{{ asset('images/no-image.png') }}"
+                                         class="card-img-top"
+                                         alt="">
+                                {% endif %}
                             </a>
                             <div class="card-body">
                                 <figure class="mb-0">
                                     <blockquote class="blockquote">
-                                        <p>{{ fossil.genius }}</p>
+                                        <p>{{ fossil.genus }}&nbsp;</p>
                                     </blockquote>
                                     <figcaption class="blockquote-footer mb-0">
                                         {{ fossil.species }} {{ fossil.subspecies }}
@@ -80,14 +85,32 @@
         {% include 'pagination.html.twig' with {'settings': settings } %}
     </div>
 
-    <script>
-        const multiSelectFields = document.querySelectorAll('select[data-multi-select-plugin="true"]');
-
-        multiSelectFields.forEach(function (field) {
-            new MultiSelectField(field, true);
-        });
-
-        new Pagination();
-    </script>
+    <div class="gallery-overlay visually-hidden">
+        <a href="#" class="gallery-carousel-close">
+            <i class="bi bi-x-lg"></i>
+        </a>
+        <div id="gallery-carousel" class="carousel slide">
+            <div class="carousel-inner"></div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#gallery-carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#gallery-carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <cookie-consent
+            consent-title="{% trans %}gallery.consent.title{% endtrans %}"
+            consent-text="{% trans %}gallery.consent.text{% endtrans %}"
+            checkbox-config='[
+                    {"name": "technicalRequired", "label": "{% trans %}gallery.consent.technical{% endtrans %}", "required": true}
+                ]'
+            accept-all-button-text="{% trans %}gallery.consent.accept{% endtrans %}"
+            leave-page-button-text="{% trans %}gallery.consent.leavePage{% endtrans %}"
+            data-counter-url="{{ url('gallery_count') }}"
+    >
+    </cookie-consent>
 </body>
 </html>

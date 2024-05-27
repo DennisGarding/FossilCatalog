@@ -7,12 +7,13 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ asset('bootstrap/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('bootstrap/bootstrap-icons-1.10.5/font/bootstrap-icons.css') }}">
-    <script type="application/javascript" src="{{ asset('bootstrap/Bootstrap.js') }}"></script>
+    <script type="application/javascript" src="{{ asset('bootstrap/Bootstrap.js') }}" defer></script>
 
     {% include 'administration/css.html.twig' %}
     {% block stylesheets %}{% endblock %}
 
-    <script type="application/javascript" src="{{ asset('js/admin.main.js') }}"></script>
+    <script type="application/javascript" src="{{ asset('js/admin.main.js') }}" defer></script>
+    <script type="application/javascript" src="{{ asset('js/CustomElements.js') }}" defer></script>
     {% block javascripts %}{% endblock %}
 </head>
 <body data-keep-session="true" data-url="{{ url('app_admin_keep_session') }}" data-logoutUrl="{{ url('administration_logout') }}">
@@ -32,7 +33,9 @@
                 <div class="modal-header">
                     <h5 class="modal-title"></h5>
                     <button id="closeButton" type="button" class="close btn" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">
+                            <i class="bi bi-x-lg"></i>
+                        </span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -40,10 +43,17 @@
                     <input type="text" name="confirmInput" class="form-control visually-hidden"/>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="yesButton btn btn-primary visually-hidden">Ja</button>
-                    <button type="button" class="noButton btn btn-secondary visually-hidden" data-dismiss="modal">Nein</button>
-                    <button type="button" class="okButton btn btn-primary visually-hidden" data-dismiss="modal">OK</button>
-                    <button type="button" class="cancelButton btn btn-secondary visually-hidden" data-dismiss="modal">Abbrechen
+                    <button type="button" class="yesButton btn btn-primary visually-hidden">
+                        {% trans %}base.modal.yes{% endtrans %}
+                    </button>
+                    <button type="button" class="noButton btn btn-secondary visually-hidden" data-dismiss="modal">
+                        {% trans %}base.modal.no{% endtrans %}
+                    </button>
+                    <button type="button" class="okButton btn btn-primary visually-hidden" data-dismiss="modal">
+                        {% trans %}base.modal.ok{% endtrans %}
+                    </button>
+                    <button type="button" class="cancelButton btn btn-secondary visually-hidden" data-dismiss="modal">
+                        {% trans %}base.modal.cancel{% endtrans %}
                     </button>
                 </div>
             </div>
@@ -53,7 +63,7 @@
     <div class="page-loading-indicator">
         <div class="d-flex justify-content-center">
             <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
+                <span class="visually-hidden">{% trans %}base.loadingIndicator.loading{% endtrans %}</span>
             </div>
         </div>
     </div>
