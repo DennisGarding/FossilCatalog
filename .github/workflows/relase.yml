@@ -1,0 +1,46 @@
+name: Release
+
+on:
+    push:
+        tags:
+            - '*'
+
+jobs:
+    release:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout repository
+                uses: actions/checkout@v4
+
+            -   name: Setup PHP
+                id: setup-php
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: '8.3'
+                    extensions: mbstring, intl, pdo_mysql, ctype, gd, iconv, yaml, zip
+
+            -   name: Install composer dependencies
+                run: |
+                    composer install -o --no-dev
+
+            -   uses: actions/setup-node@v3
+                with:
+                    node-version: 18
+
+            -   name: Install translations
+                run: |
+                    php bin/console app:install-translations
+
+            -   name: Install and build js dependencies
+                run: composer buildjs
+
+            -   name: Create Release
+                id: create_release
+                uses: actions/create-release@v1
+                env:
+                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                with:
+                    tag_name: ${{ github.ref }}
+                    release_name: Release ${{ github.ref }}
+                    draft: false
+                    prerelease: false
