@@ -21,14 +21,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const consent = document.querySelector('cookie-consent');
     new Counter(consent);
-    // TODO: REMOVE AFTER DEBUG
-    console.log('bla');
-    // TODO: REMOVE AFTER DEBUG
-    // consent.addEventListener('close', function (om, er, dsd) {
-    //     // TODO: REMOVE AFTER DEBUG
-    //     console.log(om);
-    //     console.log(er);
-    //     console.log(dsd);
-    //     // TODO: REMOVE AFTER DEBUG
-    // });
 });

@@ -63,7 +63,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const updateCard = document.querySelector('div[data-updater="true"]');
     if (updateCard !== null) {
-        console.log('updateCard');
         new Updater(updateCard);
     }
 
