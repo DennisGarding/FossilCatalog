@@ -80,9 +80,9 @@ export default class SystemSeriesStageSelect {
 
     _addSeriesAndStageOptions() {
         const initialSeriesSet = this._findOptionSet(this.systemSelect.item(this.systemSelect.selectedIndex).dataset.id, this.allSeriesOptions);
-        this._addOptions(this.seriesSelect, Object.values(initialSeriesSet));
+        this._addOptions(this.seriesSelect, initialSeriesSet ? Object.values(initialSeriesSet) : []);
         const initialStageSet = this._findOptionSet(this.seriesSelect.item(this.seriesSelect.selectedIndex).dataset.id, this.allStageOptions);
-        this._addOptions(this.stageSelect, Object.values(initialStageSet));
+        this._addOptions(this.stageSelect, initialStageSet ? Object.values(initialStageSet) : []);
     }
 
     _addPlaceholderOption(select) {
