@@ -6,7 +6,7 @@ on:
 jobs:
     Playwright-Tests:
         timeout-minutes: 60
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-22.04
         env:
             DB_DATABASE: fossilCatalog
             DB_USER: root
