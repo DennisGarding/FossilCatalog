@@ -48,7 +48,7 @@
                class="form-control"
                id="{{ formField.fieldName }}"
                name="{{ formField.fieldName }}"
-               value="{{ formField.fieldValue|date('Y-m-d') }}"
+               value="{{ formField.fieldValue ? formField.fieldValue|date('Y-m-d') : '' }}"
                {% if not formField.allowBlank %}required="required"{% endif %}
         >
     </div>

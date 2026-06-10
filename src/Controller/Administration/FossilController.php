@@ -223,7 +223,11 @@ class FossilController extends AbstractController
         $requestData['eaStage'] = $this->earthAgeStageRepository->find($requestData['eaStage'] ?? 0);
 
         try {
-            $requestData['dateOfDiscovery'] = new \DateTime($requestData['dateOfDiscovery']);
+            if (empty($requestData['dateOfDiscovery'])) {
+                $requestData['dateOfDiscovery'] = null;
+            } else {
+                $requestData['dateOfDiscovery'] = new \DateTime($requestData['dateOfDiscovery']);
+            }
         } catch (\Exception $exception) {
             $this->addFlash(
                 Defaults::FLASH_TYPE_ERROR,
