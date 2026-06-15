@@ -93,7 +93,9 @@ class StageController extends AbstractController
         try {
             $this->earthAgeStageRepository->delete($stage);
         } catch (\Exception $exception) {
-            $this->addFlash(Defaults::FLASH_TYPE_SUCCESS, $this->translator->trans('admin.genericError') . $exception->getMessage());
+            $this->addFlash(Defaults::FLASH_TYPE_ERROR, $this->translator->trans('admin.genericError') . $exception->getMessage());
+
+            return $this->redirectToRoute('app_admin_series');
         }
 
         $this->addFlash(Defaults::FLASH_TYPE_SUCCESS, sprintf($this->translator->trans('admin.stage.messages.stageDeleted'), $stage->getName()));
