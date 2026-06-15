@@ -54,7 +54,7 @@ class SeriesController extends AbstractController
 
         $series = $this->earthAgeSeriesRepository->getSeries($isCreate, $request->get('id'));
         if (!$series instanceof EarthAgeSeries) {
-            $this->addFlash(Defaults::FLASH_TYPE_ERROR, sprintf($this->translator->trans('admin.series.messages.cannotFindSystem'), $request->get('id')));
+            $this->addFlash(Defaults::FLASH_TYPE_ERROR, sprintf($this->translator->trans('admin.series.messages.cannotFindSeries'), $request->get('id')));
 
             return $this->redirectToRoute('app_admin_series');
         }
