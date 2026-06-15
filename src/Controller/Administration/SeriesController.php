@@ -93,7 +93,9 @@ class SeriesController extends AbstractController
         try {
             $this->earthAgeSeriesRepository->delete($series);
         } catch (\Exception $exception) {
-            $this->addFlash(Defaults::FLASH_TYPE_SUCCESS, $this->translator->trans('admin.genericError') . $exception->getMessage());
+            $this->addFlash(Defaults::FLASH_TYPE_ERROR, $this->translator->trans('admin.genericError') . $exception->getMessage());
+
+            return $this->redirectToRoute('app_admin_series');
         }
 
         $this->addFlash(Defaults::FLASH_TYPE_SUCCESS, sprintf($this->translator->trans('admin.series.messages.seriesDeleted'), $series->getName()));
