@@ -6,6 +6,7 @@ use App\Entity\Image;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -18,8 +19,11 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class ImageRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
+    public function __construct(
+        ManagerRegistry $registry,
+        #[Autowire('%kernel.project_dir%')]
+        private readonly string $rootDirectory
+    ) {
         parent::__construct($registry, Image::class);
     }
 
@@ -74,8 +78,8 @@ class ImageRepository extends ServiceEntityRepository
     public function delete(Image $image): void
     {
         $filesystem = new Filesystem();
-        $filesystem->remove($image->getPath());
-        $filesystem->remove($image->getThumbnailPath());
+        $filesystem->remove(sprintf('%s/public/%s', $this->rootDirectory, $image->getPath()));
+        $filesystem->remove(sprintf('%s/public/%s', $this->rootDirectory, $image->getThumbnailPath()));
 
         $entityManager = $this->getEntityManager();
         $entityManager->remove($image);
