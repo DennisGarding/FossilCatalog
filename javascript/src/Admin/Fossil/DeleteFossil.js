@@ -60,7 +60,26 @@ export default class DeleteFossil {
 
     _createModalContent(number) {
         const div = document.createElement('div');
-        div.innerHTML = window.translations.trans('admin.fossil.deleteFossilMessage').replace('%s', number);
+        const message = window.translations.trans('admin.fossil.deleteFossilMessage');
+        const placeholderIndex = message.indexOf('%s');
+
+        if (placeholderIndex === -1) {
+            // No placeholder in the translation: render the message markup as-is
+            // without interpolating any user-controlled value.
+            div.innerHTML = message;
+        } else {
+            const before = document.createElement('span');
+            before.innerHTML = message.slice(0, placeholderIndex);
+
+            const after = document.createElement('span');
+            after.innerHTML = message.slice(placeholderIndex + 2);
+
+            // Insert the fossil number as text so it cannot be interpreted as HTML.
+            div.appendChild(before);
+            div.appendChild(document.createTextNode(number));
+            div.appendChild(after);
+        }
+
         this.confirmInput = this.createConfirmInput();
 
         const innerDiv = document.createElement('div');
