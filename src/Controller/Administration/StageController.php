@@ -80,14 +80,14 @@ class StageController extends AbstractController
         if ($id === null) {
             $this->addFlash(Defaults::FLASH_TYPE_ERROR, $this->translator->trans('admin.stage.messages.noIdProvided'));
 
-            return $this->redirectToRoute('app_admin_series');
+            return $this->redirectToRoute('app_admin_stage');
         }
 
         $stage = $this->earthAgeStageRepository->find($id);
         if (!$stage instanceof EarthAgeStage) {
             $this->addFlash(Defaults::FLASH_TYPE_ERROR, sprintf($this->translator->trans('admin.stage.messages.cannotFindStage'), $id));
 
-            return $this->redirectToRoute('app_admin_series');
+            return $this->redirectToRoute('app_admin_stage');
         }
 
         try {
@@ -95,12 +95,12 @@ class StageController extends AbstractController
         } catch (\Exception $exception) {
             $this->addFlash(Defaults::FLASH_TYPE_ERROR, $this->translator->trans('admin.genericError') . $exception->getMessage());
 
-            return $this->redirectToRoute('app_admin_series');
+            return $this->redirectToRoute('app_admin_stage');
         }
 
         $this->addFlash(Defaults::FLASH_TYPE_SUCCESS, sprintf($this->translator->trans('admin.stage.messages.stageDeleted'), $stage->getName()));
 
-        return $this->redirectToRoute('app_admin_series');
+        return $this->redirectToRoute('app_admin_stage');
     }
 
     #[Route('/admin/stage/clear/filter', name: 'app_admin_stage_clear_filter')]
