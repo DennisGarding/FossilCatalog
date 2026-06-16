@@ -212,7 +212,7 @@ export default class Import {
         label.innerText = this._getTranslation(status.type);
 
         const progressBarContainer = document.createElement('div');
-        progressBarContainer.classList.add('mb3');
+        progressBarContainer.classList.add('mb-3');
         progressBarContainer.append(label);
         progressBarContainer.append(progressBarWrapper);
 
