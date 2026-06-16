@@ -103,7 +103,7 @@ class StageController extends AbstractController
         return $this->redirectToRoute('app_admin_series');
     }
 
-    #[Route('/admin/srage/clear/filter', name: 'app_admin_stage_clear_filter')]
+    #[Route('/admin/stage/clear/filter', name: 'app_admin_stage_clear_filter')]
     public function clearFilter(): Response
     {
         (new FilterBuilder())->clear();
