@@ -11,6 +11,9 @@ jobs:
     build-fossil-catalog:
         timeout-minutes: 36
         runs-on: ubuntu-latest
+        env:
+            APP_SECRET: build-workflow-secret
+            LANGUAGE: de
 
         steps:
             -   name: Checkout repository
@@ -27,6 +30,10 @@ jobs:
                 run: |
                     composer install
 
+            -   name: Install translations
+                run: |
+                    php bin/console app:install-translations
+
             -   uses: actions/setup-node@v3
                 with:
                     node-version: 18
@@ -40,7 +47,3 @@ jobs:
                 run: |
                     cd javascript
                     npm run build
-
-            -   name: Install translations
-                run: |
-                    php bin/console app:install-translations

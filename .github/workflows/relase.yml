@@ -9,6 +9,9 @@ on:
 jobs:
     release:
         runs-on: ubuntu-latest
+        env:
+            APP_SECRET: build-workflow-secret
+            LANGUAGE: de
         steps:
             -   name: Checkout repository
                 uses: actions/checkout@v4
